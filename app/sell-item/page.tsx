@@ -564,17 +564,13 @@ export default function SellItemPage() {
                     />
                     <div>
                       <Label htmlFor="terms" className="font-medium">
-                        I agree to the terms and conditions <span className="text-red-500">*</span>
+                        I agree to the Privacy Policy <span className="text-red-500">*</span>
                       </Label>
                       <p className="text-sm text-gray-500">
                         By submitting this form, you agree to our{" "}
-                        <a href="#" className="text-[#3B82F6] underline">
-                          Terms of Service
-                        </a>{" "}
-                        and{" "}
-                        <a href="#" className="text-[#8A4FFF] underline">
+                        <Link href="/privacy-policy" className="text-[#3B82F6] underline">
                           Privacy Policy
-                        </a>
+                        </Link>
                         .
                       </p>
                       {formErrors.terms && <ErrorMessage message={formErrors.terms} />}
