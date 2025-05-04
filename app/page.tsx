@@ -20,16 +20,16 @@ export default function Home() {
       </section>
 
       {/* Process Section */}
-      <section className="apple-section bg-white">
+      <section className="apple-section bg-black text-white">
         <div className="container mx-auto px-4">
-          <h2 className="apple-heading mb-16">How It Works</h2>
+          <h2 className="apple-heading mb-16 text-white">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-16">
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-[#3B82F6] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-center">Submit Your Item</h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-gray-300 text-center">
                 Complete our simple form with your item details. No complex listings required.
               </p>
             </div>
@@ -38,7 +38,7 @@ export default function Home() {
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-center">We Pick It Up</h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-gray-300 text-center">
                 Schedule a convenient time, and our team will collect the item from your location.
               </p>
             </div>
@@ -47,7 +47,7 @@ export default function Home() {
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-center">Get Paid Instantly</h3>
-              <p className="text-gray-600 text-center">
+              <p className="text-gray-300 text-center">
                 Receive your payment immediately upon pickup. No waiting, no complications.
               </p>
             </div>
@@ -56,34 +56,34 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="apple-section bg-black text-white">
+      <section className="apple-section bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="apple-heading mb-4">Why Choose BluBerry</h2>
-          <p className="apple-subheading text-gray-300 mb-16">The simplest way to sell your unused items</p>
+          <h2 className="apple-heading mb-4 text-[#3B82F6]">Why Choose BluBerry</h2>
+          <p className="apple-subheading text-gray-600 mb-16">The simplest way to sell your unused items</p>
 
           <div className="grid md:grid-cols-2 gap-16 max-w-4xl mx-auto">
             <div className="text-center">
               <h3 className="text-xl font-semibold mb-3 text-[#3B82F6]">Simplified Process</h3>
-              <p className="text-gray-300">
+              <p className="text-gray-600">
                 Our streamlined form takes minutes to complete, eliminating the need for detailed descriptions or
                 photos.
               </p>
             </div>
             <div className="text-center">
               <h3 className="text-xl font-semibold mb-3 text-[#8A4FFF]">Professional Service</h3>
-              <p className="text-gray-300">
+              <p className="text-gray-600">
                 Our vetted team handles pickup, ensuring security and peace of mind throughout the process.
               </p>
             </div>
             <div className="text-center">
               <h3 className="text-xl font-semibold mb-3 text-[#3B82F6]">Market-Based Pricing</h3>
-              <p className="text-gray-300">
+              <p className="text-gray-600">
                 We offer competitive rates based on current market value and item condition.
               </p>
             </div>
             <div className="text-center">
               <h3 className="text-xl font-semibold mb-3 text-[#8A4FFF]">Immediate Payment</h3>
-              <p className="text-gray-300">
+              <p className="text-gray-600">
                 Receive payment at the time of pickup, eliminating waiting periods for transactions to process.
               </p>
             </div>
