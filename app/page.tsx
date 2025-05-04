@@ -13,7 +13,7 @@ export default function Home() {
                 BluBerry
               </span>
             </h1>
-            <p className="apple-subheading mb-8 text-black">Selling made simpler.</p>
+            <p className="apple-subheading mb-8 text-black text-3d">Selling made simpler.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/sell-item" className="apple-button apple-button-primary">
                 Sell Your Item

@@ -87,6 +87,19 @@ body {
   letter-spacing: -0.02em;
 }
 
+.text-3d {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.05), 0 4px 4px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.text-3d:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 3px 3px rgba(0, 0, 0, 0.1), 0 5px 5px rgba(0, 0, 0, 0.05);
+}
+
 @layer components {
   .apple-button {
     @apply rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 transform;
