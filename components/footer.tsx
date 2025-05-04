@@ -55,7 +55,7 @@ export default function Footer() {
               <p>123 Main Street</p>
               <p>Suite 456</p>
               <p>Anytown, USA 12345</p>
-              <p className="mt-2">Email: support@bluberry.com</p>
+              <p className="mt-2">Email: alecgold808@gmail.com</p>
               <p>Phone: (555) 123-4567</p>
             </address>
           </div>

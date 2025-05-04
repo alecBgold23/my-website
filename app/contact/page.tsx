@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { Mail, Phone, MapPin, Clock, AlertCircle, CheckCircle } from "lucide-react"
+import { Mail, Phone, MapPin, Clock, AlertCircle, CheckCircle, Loader2 } from "lucide-react"
+import { sendContactFormEmail } from "@/app/actions/email-actions"
 
 export default function ContactPage() {
   const [name, setName] = useState("")
@@ -16,6 +17,8 @@ export default function ContactPage() {
   const [formErrors, setFormErrors] = useState({})
   const [isFormValid, setIsFormValid] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitResult, setSubmitResult] = useState(null)
 
   useEffect(() => {
     setIsFormValid(name.trim() !== "" && email.trim() !== "" && inquiryType !== "" && message.trim() !== "")
@@ -33,10 +36,40 @@ export default function ContactPage() {
     return Object.keys(errors).length === 0
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (validateForm()) {
-      setIsSubmitted(true)
+      setIsSubmitting(true)
+
+      try {
+        // Create FormData object
+        const formData = new FormData()
+        formData.append("name", name)
+        formData.append("email", email)
+        formData.append("inquiryType", inquiryType)
+        formData.append("message", message)
+
+        // Send the form data to the server action
+        const result = await sendContactFormEmail(formData)
+
+        setSubmitResult(result)
+        if (result.success) {
+          setIsSubmitted(true)
+          // Reset form
+          setName("")
+          setEmail("")
+          setInquiryType("")
+          setMessage("")
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error)
+        setSubmitResult({
+          success: false,
+          message: "An unexpected error occurred. Please try again later.",
+        })
+      } finally {
+        setIsSubmitting(false)
+      }
     }
   }
 
@@ -73,7 +106,7 @@ export default function ContactPage() {
                 <Mail className="w-5 h-5 mr-3 text-[#8A4FFF] mt-1" />
                 <div>
                   <h3 className="font-medium">Email</h3>
-                  <p>support@bluberry.com</p>
+                  <p>alecgold808@gmail.com</p>
                   <p className="text-sm text-gray-500 mt-1">Response within 24 hours</p>
                 </div>
               </div>
@@ -104,6 +137,11 @@ export default function ContactPage() {
             {!isSubmitted ? (
               <>
                 <h2 className="text-2xl font-semibold mb-6 text-[#3B82F6]">Send a Message</h2>
+                {submitResult && !submitResult.success && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+                    {submitResult.message}
+                  </div>
+                )}
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <Label htmlFor="name">
@@ -172,14 +210,21 @@ export default function ContactPage() {
 
                   <Button
                     type="submit"
-                    disabled={!isFormValid}
+                    disabled={!isFormValid || isSubmitting}
                     className={`w-full ${
-                      isFormValid
+                      isFormValid && !isSubmitting
                         ? "bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3]"
                         : "bg-gray-300 cursor-not-allowed"
                     } text-white rounded-lg`}
                   >
-                    Send Message
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      "Send Message"
+                    )}
                   </Button>
                   {!isFormValid && (
                     <p className="text-center text-amber-600 text-sm">Please complete all required fields to submit</p>
@@ -193,7 +238,8 @@ export default function ContactPage() {
                 </div>
                 <h2 className="text-2xl font-bold mb-4 text-[#3B82F6]">Message Sent</h2>
                 <p className="text-lg mb-6">
-                  Thank you for contacting us. We've received your message and will respond within 24 hours.
+                  Thank you for contacting us. Your message has been sent to alecgold808@gmail.com. We'll respond within
+                  24 hours.
                 </p>
                 <Button
                   onClick={() => setIsSubmitted(false)}

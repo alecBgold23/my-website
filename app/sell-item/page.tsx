@@ -9,12 +9,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
-import { CheckCircle2, AlertCircle, Camera, Upload, X, ImageIcon } from "lucide-react"
+import { CheckCircle2, AlertCircle, Camera, Upload, X, ImageIcon, Loader2 } from "lucide-react"
+import { sendItemSubmissionEmail } from "@/app/actions/email-actions"
 
 export default function SellItemPage() {
   const [formStep, setFormStep] = useState(1)
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [formErrors, setFormErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitResult, setSubmitResult] = useState(null)
 
   // Form field states
   const [itemCategory, setItemCategory] = useState("")
@@ -106,11 +109,45 @@ export default function SellItemPage() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (validateStep3()) {
-      setFormSubmitted(true)
-      setFormErrors({})
+      setIsSubmitting(true)
+
+      try {
+        // Create FormData object
+        const formData = new FormData()
+        formData.append("itemCategory", itemCategory)
+        formData.append("itemName", itemName)
+        formData.append("itemDescription", itemDescription)
+        formData.append("itemCondition", itemCondition)
+        formData.append("itemIssues", itemIssues)
+        formData.append("fullName", fullName)
+        formData.append("email", email)
+        formData.append("phone", phone)
+        formData.append("zipCode", zipCode)
+
+        // Add photos to FormData
+        itemPhotos.forEach((photo, index) => {
+          formData.append("photos", photo.file)
+        })
+
+        // Send the form data to the server action
+        const result = await sendItemSubmissionEmail(formData)
+
+        setSubmitResult(result)
+        if (result.success) {
+          setFormSubmitted(true)
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error)
+        setSubmitResult({
+          success: false,
+          message: "An unexpected error occurred. Please try again later.",
+        })
+      } finally {
+        setIsSubmitting(false)
+      }
     }
   }
 
@@ -200,6 +237,12 @@ export default function SellItemPage() {
                 ></div>
               </div>
             </div>
+
+            {submitResult && !submitResult.success && (
+              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+                {submitResult.message}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
               {formStep === 1 && (
@@ -558,14 +601,21 @@ export default function SellItemPage() {
                     </Button>
                     <Button
                       type="submit"
-                      disabled={!step3Valid}
+                      disabled={!step3Valid || isSubmitting}
                       className={`${
-                        step3Valid
+                        step3Valid && !isSubmitting
                           ? "bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3]"
                           : "bg-gray-300 cursor-not-allowed"
                       } text-white rounded-lg`}
                     >
-                      Submit
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        "Submit"
+                      )}
                     </Button>
                   </div>
                   {!step3Valid && (
@@ -582,8 +632,8 @@ export default function SellItemPage() {
             </div>
             <h2 className="text-3xl font-bold mb-4 text-[#3B82F6]">Thank You</h2>
             <p className="text-xl mb-8">
-              We've received your submission and will review your item details. You can expect to hear from us within 24
-              hours with a price offer.
+              We've received your submission and will review your item details. Your information has been sent to
+              alecgold808@gmail.com. You can expect to hear from us within 24 hours with a price offer.
             </p>
             <div className="bg-[#EBF5FF] p-6 rounded-lg inline-block text-left">
               <h3 className="font-semibold text-lg mb-2 text-[#3B82F6]">Next Steps</h3>
