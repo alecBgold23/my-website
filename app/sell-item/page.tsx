@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
-import { CheckCircle2, AlertCircle } from "lucide-react"
+import { CheckCircle2, AlertCircle, Camera, Upload, X, ImageIcon } from "lucide-react"
 
 export default function SellItemPage() {
   const [formStep, setFormStep] = useState(1)
@@ -20,7 +20,7 @@ export default function SellItemPage() {
   const [itemCategory, setItemCategory] = useState("")
   const [itemName, setItemName] = useState("")
   const [itemDescription, setItemDescription] = useState("")
-  const [itemAge, setItemAge] = useState("")
+  const [itemPhotos, setItemPhotos] = useState([])
   const [itemCondition, setItemCondition] = useState("good")
   const [itemIssues, setItemIssues] = useState("")
   const [fullName, setFullName] = useState("")
@@ -34,10 +34,16 @@ export default function SellItemPage() {
   const [step2Valid, setStep2Valid] = useState(false)
   const [step3Valid, setStep3Valid] = useState(false)
 
+  // Refs
+  const fileInputRef = useRef(null)
+  const cameraInputRef = useRef(null)
+
   // Validate step 1
   useEffect(() => {
-    setStep1Valid(itemCategory !== "" && itemName.trim() !== "" && itemDescription.trim() !== "" && itemAge !== "")
-  }, [itemCategory, itemName, itemDescription, itemAge])
+    setStep1Valid(
+      itemCategory !== "" && itemName.trim() !== "" && itemDescription.trim() !== "" && itemPhotos.length >= 3,
+    )
+  }, [itemCategory, itemName, itemDescription, itemPhotos])
 
   // Validate step 2
   useEffect(() => {
@@ -57,7 +63,7 @@ export default function SellItemPage() {
     if (!itemCategory) errors.itemCategory = "Please select a category"
     if (!itemName.trim()) errors.itemName = "Please enter the item name"
     if (!itemDescription.trim()) errors.itemDescription = "Please provide a description"
-    if (!itemAge) errors.itemAge = "Please select the item age"
+    if (itemPhotos.length < 3) errors.itemPhotos = "Please upload at least 3 photos"
 
     setFormErrors(errors)
     return Object.keys(errors).length === 0
@@ -106,6 +112,38 @@ export default function SellItemPage() {
       setFormSubmitted(true)
       setFormErrors({})
     }
+  }
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files)
+    if (files.length > 0) {
+      const newPhotos = files.map((file) => ({
+        file,
+        preview: URL.createObjectURL(file),
+        name: file.name,
+      }))
+      setItemPhotos((prev) => [...prev, ...newPhotos])
+    }
+  }
+
+  const handleCameraCapture = (e) => {
+    const files = Array.from(e.target.files)
+    if (files.length > 0) {
+      const newPhotos = files.map((file) => ({
+        file,
+        preview: URL.createObjectURL(file),
+        name: `Camera_${new Date().toISOString()}.jpg`,
+      }))
+      setItemPhotos((prev) => [...prev, ...newPhotos])
+    }
+  }
+
+  const removePhoto = (index) => {
+    const newPhotos = [...itemPhotos]
+    // Revoke the object URL to avoid memory leaks
+    URL.revokeObjectURL(newPhotos[index].preview)
+    newPhotos.splice(index, 1)
+    setItemPhotos(newPhotos)
   }
 
   const ErrorMessage = ({ message }) => (
@@ -223,23 +261,90 @@ export default function SellItemPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="item-age" className="text-lg">
-                      How old is the item? <span className="text-red-500">*</span>
+                    <Label className="text-lg">
+                      Item Photos <span className="text-red-500">*</span>{" "}
+                      <span className="text-sm font-normal">(at least 3)</span>
                     </Label>
-                    <Select value={itemAge} onValueChange={setItemAge} required>
-                      <SelectTrigger id="item-age" className={`mt-2 ${formErrors.itemAge ? "border-red-500" : ""}`}>
-                        <SelectValue placeholder="Select age" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="less-than-1">Less than 1 year</SelectItem>
-                        <SelectItem value="1-3">1-3 years</SelectItem>
-                        <SelectItem value="3-5">3-5 years</SelectItem>
-                        <SelectItem value="5-10">5-10 years</SelectItem>
-                        <SelectItem value="10+">More than 10 years</SelectItem>
-                        <SelectItem value="unknown">I don't know</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    {formErrors.itemAge && <ErrorMessage message={formErrors.itemAge} />}
+                    <div
+                      className={`mt-2 p-4 border-2 border-dashed rounded-lg ${formErrors.itemPhotos ? "border-red-500" : "border-gray-300"}`}
+                    >
+                      <div className="flex flex-col items-center justify-center gap-3">
+                        <div className="flex flex-wrap gap-2 w-full mb-4">
+                          {itemPhotos.map((photo, index) => (
+                            <div
+                              key={index}
+                              className="relative w-24 h-24 rounded-md overflow-hidden border border-gray-200"
+                            >
+                              <img
+                                src={photo.preview || "/placeholder.svg"}
+                                alt={`Item photo ${index + 1}`}
+                                className="w-full h-full object-cover"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => removePhoto(index)}
+                                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 w-5 h-5 flex items-center justify-center"
+                                aria-label="Remove photo"
+                              >
+                                <X className="w-3 h-3" />
+                              </button>
+                            </div>
+                          ))}
+                          {itemPhotos.length === 0 && (
+                            <div className="w-full text-center text-gray-500 py-4">
+                              <ImageIcon className="w-12 h-12 mx-auto mb-2 text-gray-400" />
+                              <p>No photos uploaded yet</p>
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="flex flex-wrap gap-3 justify-center">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="flex items-center gap-2"
+                          >
+                            <Upload className="w-4 h-4" />
+                            <span>Upload Photos</span>
+                          </Button>
+
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => cameraInputRef.current?.click()}
+                            className="flex items-center gap-2"
+                          >
+                            <Camera className="w-4 h-4" />
+                            <span>Take Photo</span>
+                          </Button>
+
+                          <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={handleFileChange}
+                            className="hidden"
+                          />
+
+                          <input
+                            ref={cameraInputRef}
+                            type="file"
+                            accept="image/*"
+                            capture="environment"
+                            onChange={handleCameraCapture}
+                            className="hidden"
+                          />
+                        </div>
+
+                        <p className={`text-sm ${itemPhotos.length >= 3 ? "text-green-600" : "text-gray-500"}`}>
+                          {itemPhotos.length} of 3 required photos uploaded
+                          {itemPhotos.length >= 3 && " ✓"}
+                        </p>
+                      </div>
+                    </div>
+                    {formErrors.itemPhotos && <ErrorMessage message={formErrors.itemPhotos} />}
                   </div>
 
                   <Button
