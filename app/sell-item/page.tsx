@@ -41,6 +41,7 @@ export default function SellItemPage() {
   const fileInputRef = useRef(null)
   const cameraInputRef = useRef(null)
   const formContainerRef = useRef(null)
+  const formTopRef = useRef(null)
 
   // Validate step 1
   useEffect(() => {
@@ -96,20 +97,13 @@ export default function SellItemPage() {
     return Object.keys(errors).length === 0
   }
 
-  // Scroll to top function
+  // Enhanced scroll to top function - scroll to the very top of the page
   const scrollToTop = () => {
+    // Scroll to the absolute top of the page
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
-
-    // Alternative approach using the form container ref
-    if (formContainerRef.current) {
-      formContainerRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
-    }
   }
 
   const handleContinueStep1 = () => {
@@ -117,7 +111,7 @@ export default function SellItemPage() {
       setFormStep(2)
       setFormErrors({})
       // Scroll to top after changing step
-      scrollToTop()
+      setTimeout(scrollToTop, 50) // Small timeout to ensure state has updated
     }
   }
 
@@ -126,7 +120,7 @@ export default function SellItemPage() {
       setFormStep(3)
       setFormErrors({})
       // Scroll to top after changing step
-      scrollToTop()
+      setTimeout(scrollToTop, 50) // Small timeout to ensure state has updated
     }
   }
 
@@ -163,7 +157,7 @@ export default function SellItemPage() {
         if (result.success) {
           setFormSubmitted(true)
           // Scroll to top after submission is successful
-          scrollToTop()
+          setTimeout(scrollToTop, 50)
         }
       } catch (error) {
         console.error("Error submitting form:", error)
@@ -219,6 +213,9 @@ export default function SellItemPage() {
   // Update the return statement to use more vibrant colors and styling
   return (
     <div className="container mx-auto py-12 px-4" ref={formContainerRef}>
+      {/* Add a ref at the top of the form for scrolling */}
+      <div ref={formTopRef} className="scroll-target"></div>
+
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-6">
           <span className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
@@ -552,7 +549,7 @@ export default function SellItemPage() {
                       type="button"
                       onClick={() => {
                         setFormStep(1)
-                        scrollToTop()
+                        setTimeout(scrollToTop, 50)
                       }}
                       className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-md shadow-sm outline-button transition-all duration-300"
                     >
@@ -664,7 +661,7 @@ export default function SellItemPage() {
                       type="button"
                       onClick={() => {
                         setFormStep(2)
-                        scrollToTop()
+                        setTimeout(scrollToTop, 50)
                       }}
                       className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-md shadow-sm outline-button transition-all duration-300"
                     >
