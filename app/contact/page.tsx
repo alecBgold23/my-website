@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { Mail, Phone, MapPin, Clock, AlertCircle, CheckCircle, Loader2 } from "lucide-react"
+import { Mail, Phone, Clock, AlertCircle, CheckCircle, Loader2 } from "lucide-react"
 import { sendContactFormEmail } from "@/app/actions/email-actions"
 
 export default function ContactPage() {
@@ -81,211 +81,203 @@ export default function ContactPage() {
   )
 
   return (
-    <div className="container mx-auto py-12 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6 text-[#3B82F6]">Contact Us</h1>
-        <p className="text-lg mb-12">
-          Have questions about our services? Our team is available to assist you with any inquiries regarding the
-          selling process.
-        </p>
+    <div>
+      {/* Hero Section */}
+      <section className="apple-section bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto px-4">
+          <h1 className="apple-heading">Contact Us</h1>
+          <p className="apple-subheading mb-8">
+            Have questions about our services? Our team is available to assist you.
+          </p>
+        </div>
+      </section>
 
-        <div className="grid md:grid-cols-2 gap-12 mb-12">
-          <div>
-            <h2 className="text-2xl font-semibold mb-6 text-[#8A4FFF]">Contact Information</h2>
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <Phone className="w-5 h-5 mr-3 text-[#3B82F6] mt-1" />
-                <div>
-                  <h3 className="font-medium">Phone</h3>
-                  <p>(555) 123-4567</p>
-                  <p className="text-sm text-gray-500 mt-1">Monday-Friday, 9am-5pm EST</p>
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-2xl font-semibold mb-6">Contact Information</h2>
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <Phone className="w-5 h-5 mr-3 text-[#3B82F6] mt-1" />
+                  <div>
+                    <h3 className="font-medium">Phone</h3>
+                    <p className="text-gray-600">847-510-3229</p>
+                    <p className="text-sm text-gray-500 mt-1">Monday-Friday, 9am-5pm EST</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start">
-                <Mail className="w-5 h-5 mr-3 text-[#8A4FFF] mt-1" />
-                <div>
-                  <h3 className="font-medium">Email</h3>
-                  <p>alecgold808@gmail.com</p>
-                  <p className="text-sm text-gray-500 mt-1">Response within 24 hours</p>
+                <div className="flex items-start">
+                  <Mail className="w-5 h-5 mr-3 text-[#8A4FFF] mt-1" />
+                  <div>
+                    <h3 className="font-medium">Email</h3>
+                    <p className="text-gray-600">alecgold808@gmail.com</p>
+                    <p className="text-sm text-gray-500 mt-1">Response within 24 hours</p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="flex items-start">
-                <MapPin className="w-5 h-5 mr-3 text-[#3B82F6] mt-1" />
-                <div>
-                  <h3 className="font-medium">Office</h3>
-                  <p>123 Main Street</p>
-                  <p>Suite 456</p>
-                  <p>Anytown, USA 12345</p>
-                </div>
-              </div>
-
-              <div className="flex items-start">
-                <Clock className="w-5 h-5 mr-3 text-[#8A4FFF] mt-1" />
-                <div>
-                  <h3 className="font-medium">Hours</h3>
-                  <p>Monday-Friday: 9am-5pm EST</p>
-                  <p>Saturday: 10am-2pm EST</p>
-                  <p>Sunday: Closed</p>
+                <div className="flex items-start">
+                  <Clock className="w-5 h-5 mr-3 text-[#3B82F6] mt-1" />
+                  <div>
+                    <h3 className="font-medium">Hours</h3>
+                    <p className="text-gray-600">Monday-Friday: 9am-5pm EST</p>
+                    <p className="text-gray-600">Saturday: 10am-2pm EST</p>
+                    <p className="text-gray-600">Sunday: Closed</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div>
-            {!isSubmitted ? (
-              <>
-                <h2 className="text-2xl font-semibold mb-6 text-[#3B82F6]">Send a Message</h2>
-                {submitResult && !submitResult.success && (
-                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-                    {submitResult.message}
-                  </div>
-                )}
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <Label htmlFor="name">
-                      Name <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="name"
-                      placeholder="Your name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className={formErrors.name ? "border-red-500" : ""}
-                      required
-                    />
-                    {formErrors.name && <ErrorMessage message={formErrors.name} />}
-                  </div>
-
-                  <div>
-                    <Label htmlFor="email">
-                      Email <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="your.email@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className={formErrors.email ? "border-red-500" : ""}
-                      required
-                    />
-                    {formErrors.email && <ErrorMessage message={formErrors.email} />}
-                  </div>
-
-                  <div>
-                    <Label htmlFor="inquiry-type">
-                      Type of Inquiry <span className="text-red-500">*</span>
-                    </Label>
-                    <Select value={inquiryType} onValueChange={setInquiryType} required>
-                      <SelectTrigger id="inquiry-type" className={formErrors.inquiryType ? "border-red-500" : ""}>
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="selling">Question about selling</SelectItem>
-                        <SelectItem value="pickup">Question about pickup</SelectItem>
-                        <SelectItem value="payment">Question about payment</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    {formErrors.inquiryType && <ErrorMessage message={formErrors.inquiryType} />}
-                  </div>
-
-                  <div>
-                    <Label htmlFor="message">
-                      Message <span className="text-red-500">*</span>
-                    </Label>
-                    <Textarea
-                      id="message"
-                      placeholder="How can we help you?"
-                      rows={5}
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      className={formErrors.message ? "border-red-500" : ""}
-                      required
-                    />
-                    {formErrors.message && <ErrorMessage message={formErrors.message} />}
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={!isFormValid || isSubmitting}
-                    className={`w-full ${
-                      isFormValid && !isSubmitting
-                        ? "bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3]"
-                        : "bg-gray-300 cursor-not-allowed"
-                    } text-white rounded-lg`}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      "Send Message"
-                    )}
-                  </Button>
-                  {!isFormValid && (
-                    <p className="text-center text-amber-600 text-sm">Please complete all required fields to submit</p>
+            <div>
+              {!isSubmitted ? (
+                <>
+                  <h2 className="text-2xl font-semibold mb-6">Send a Message</h2>
+                  {submitResult && !submitResult.success && (
+                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+                      {submitResult.message}
+                    </div>
                   )}
-                </form>
-              </>
-            ) : (
-              <div className="text-center py-12">
-                <div className="w-16 h-16 bg-gradient-to-r from-[#EBF5FF] to-[#F3EEFF] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle className="w-8 h-8 text-[#3B82F6]" />
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <Label htmlFor="name" className="text-sm font-medium text-gray-700">
+                        Name <span className="text-red-500">*</span>
+                      </Label>
+                      <Input
+                        id="name"
+                        placeholder="Your name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className={`mt-1 rounded-lg ${formErrors.name ? "border-red-500" : "border-gray-300"}`}
+                        required
+                      />
+                      {formErrors.name && <ErrorMessage message={formErrors.name} />}
+                    </div>
+
+                    <div>
+                      <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                        Email <span className="text-red-500">*</span>
+                      </Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="your.email@example.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className={`mt-1 rounded-lg ${formErrors.email ? "border-red-500" : "border-gray-300"}`}
+                        required
+                      />
+                      {formErrors.email && <ErrorMessage message={formErrors.email} />}
+                    </div>
+
+                    <div>
+                      <Label htmlFor="inquiry-type" className="text-sm font-medium text-gray-700">
+                        Type of Inquiry <span className="text-red-500">*</span>
+                      </Label>
+                      <Select value={inquiryType} onValueChange={setInquiryType} required>
+                        <SelectTrigger
+                          id="inquiry-type"
+                          className={`mt-1 rounded-lg ${formErrors.inquiryType ? "border-red-500" : "border-gray-300"}`}
+                        >
+                          <SelectValue placeholder="Select an option" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="selling">Question about selling</SelectItem>
+                          <SelectItem value="pickup">Question about pickup</SelectItem>
+                          <SelectItem value="payment">Question about payment</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      {formErrors.inquiryType && <ErrorMessage message={formErrors.inquiryType} />}
+                    </div>
+
+                    <div>
+                      <Label htmlFor="message" className="text-sm font-medium text-gray-700">
+                        Message <span className="text-red-500">*</span>
+                      </Label>
+                      <Textarea
+                        id="message"
+                        placeholder="How can we help you?"
+                        rows={5}
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className={`mt-1 rounded-lg ${formErrors.message ? "border-red-500" : "border-gray-300"}`}
+                        required
+                      />
+                      {formErrors.message && <ErrorMessage message={formErrors.message} />}
+                    </div>
+
+                    <Button
+                      type="submit"
+                      disabled={!isFormValid || isSubmitting}
+                      className="apple-button apple-button-primary w-full"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        "Send Message"
+                      )}
+                    </Button>
+                  </form>
+                </>
+              ) : (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 bg-[#F5F5F7] rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle className="w-8 h-8 text-[#3B82F6]" />
+                  </div>
+                  <h2 className="text-2xl font-bold mb-4">Message Sent</h2>
+                  <p className="text-gray-600 mb-6">
+                    Thank you for contacting us. Your message has been sent to alecgold808@gmail.com. We'll respond
+                    within 24 hours.
+                  </p>
+                  <Button onClick={() => setIsSubmitted(false)} className="apple-button apple-button-primary">
+                    Send Another Message
+                  </Button>
                 </div>
-                <h2 className="text-2xl font-bold mb-4 text-[#3B82F6]">Message Sent</h2>
-                <p className="text-lg mb-6">
-                  Thank you for contacting us. Your message has been sent to alecgold808@gmail.com. We'll respond within
-                  24 hours.
-                </p>
-                <Button
-                  onClick={() => setIsSubmitted(false)}
-                  className="bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3] text-white rounded-lg"
-                >
-                  Send Another Message
-                </Button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
+      </section>
 
-        <div className="bg-gradient-to-r from-[#EBF5FF] to-[#F3EEFF] p-8 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4 text-center text-gray-800">Frequently Asked Questions</h2>
-          <div className="space-y-6">
+      {/* FAQ Section */}
+      <section className="apple-section bg-gray-50">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="apple-heading mb-12">Frequently Asked Questions</h2>
+          <div className="space-y-8">
             <div>
-              <h3 className="font-semibold text-lg text-[#3B82F6]">What types of items do you accept?</h3>
-              <p className="mt-2">
+              <h3 className="text-xl font-semibold mb-2">What types of items do you accept?</h3>
+              <p className="text-gray-600">
                 We accept a wide variety of quality used items in good condition, including furniture, electronics,
                 appliances, sporting equipment, musical instruments, tools, and collectibles.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-[#8A4FFF]">How do you determine the price for my item?</h3>
-              <p className="mt-2">
+              <h3 className="text-xl font-semibold mb-2">How do you determine the price for my item?</h3>
+              <p className="text-gray-600">
                 We evaluate factors such as the item's condition, age, brand, current market value, and demand to offer
                 you a competitive price.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-[#3B82F6]">How soon can you pick up my item?</h3>
-              <p className="mt-2">
+              <h3 className="text-xl font-semibold mb-2">How soon can you pick up my item?</h3>
+              <p className="text-gray-600">
                 Upon acceptance of our offer, we typically schedule pickup within 2-3 business days, depending on your
                 location and availability.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-lg text-[#8A4FFF]">What payment methods do you offer?</h3>
-              <p className="mt-2">
+              <h3 className="text-xl font-semibold mb-2">What payment methods do you offer?</h3>
+              <p className="text-gray-600">
                 We provide payment via cash, check, or digital payment methods such as Venmo or PayPal, according to
                 your preference.
               </p>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }

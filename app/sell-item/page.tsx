@@ -394,17 +394,10 @@ export default function SellItemPage() {
                     type="button"
                     onClick={handleContinueStep1}
                     disabled={!step1Valid}
-                    className={`w-full ${
-                      step1Valid ? "bg-[#3B82F6] hover:bg-[#2563EB]" : "bg-gray-300 cursor-not-allowed"
-                    } text-white rounded-lg`}
+                    className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     Continue
                   </Button>
-                  {!step1Valid && (
-                    <p className="text-center text-amber-600 text-sm">
-                      Please complete all required fields to continue
-                    </p>
-                  )}
                 </div>
               )}
 
@@ -493,18 +486,11 @@ export default function SellItemPage() {
                       type="button"
                       onClick={handleContinueStep2}
                       disabled={!step2Valid}
-                      className={`${
-                        step2Valid ? "bg-[#8A4FFF] hover:bg-[#7B46E3]" : "bg-gray-300 cursor-not-allowed"
-                      } text-white rounded-lg`}
+                      className="bg-[#8A4FFF] hover:bg-[#7B46E3] text-white rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       Continue
                     </Button>
                   </div>
-                  {!step2Valid && (
-                    <p className="text-center text-amber-600 text-sm">
-                      Please complete all required fields to continue
-                    </p>
-                  )}
                 </div>
               )}
 
@@ -578,17 +564,13 @@ export default function SellItemPage() {
                     />
                     <div>
                       <Label htmlFor="terms" className="font-medium">
-                        I agree to the terms and conditions <span className="text-red-500">*</span>
+                        I agree to the Privacy Policy <span className="text-red-500">*</span>
                       </Label>
                       <p className="text-sm text-gray-500">
                         By submitting this form, you agree to our{" "}
-                        <a href="#" className="text-[#3B82F6] underline">
-                          Terms of Service
-                        </a>{" "}
-                        and{" "}
-                        <a href="#" className="text-[#8A4FFF] underline">
+                        <Link href="/privacy-policy" className="text-[#3B82F6] underline">
                           Privacy Policy
-                        </a>
+                        </Link>
                         .
                       </p>
                       {formErrors.terms && <ErrorMessage message={formErrors.terms} />}
@@ -602,11 +584,7 @@ export default function SellItemPage() {
                     <Button
                       type="submit"
                       disabled={!step3Valid || isSubmitting}
-                      className={`${
-                        step3Valid && !isSubmitting
-                          ? "bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3]"
-                          : "bg-gray-300 cursor-not-allowed"
-                      } text-white rounded-lg`}
+                      className="bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3] text-white rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
@@ -618,9 +596,6 @@ export default function SellItemPage() {
                       )}
                     </Button>
                   </div>
-                  {!step3Valid && (
-                    <p className="text-center text-amber-600 text-sm">Please complete all required fields to submit</p>
-                  )}
                 </div>
               )}
             </form>
