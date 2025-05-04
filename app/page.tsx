@@ -35,37 +35,37 @@ export default function Home() {
               <div className="w-16 h-16 rounded-full bg-[#3B82F6] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
-              <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
-                <Image src="/placeholder.svg?key=2e143" alt="Submit your item" fill className="object-cover" />
-              </div>
               <h3 className="text-xl font-semibold mb-3 text-center">Submit Your Item</h3>
-              <p className="text-gray-300 text-center">
+              <p className="text-gray-300 text-center mb-6">
                 Complete our simple form with your item details. No complex listings required.
               </p>
+              <div className="relative w-full h-48 rounded-xl overflow-hidden">
+                <Image src="/placeholder.svg?key=2e143" alt="Submit your item" fill className="object-cover" />
+              </div>
             </div>
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-[#8A4FFF] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
-              <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
-                <Image src="/placeholder.svg?key=fghw3" alt="We pick it up" fill className="object-cover" />
-              </div>
               <h3 className="text-xl font-semibold mb-3 text-center">We Pick It Up</h3>
-              <p className="text-gray-300 text-center">
+              <p className="text-gray-300 text-center mb-6">
                 Schedule a convenient time, and our team will collect the item from your location.
               </p>
+              <div className="relative w-full h-48 rounded-xl overflow-hidden">
+                <Image src="/placeholder.svg?key=fghw3" alt="We pick it up" fill className="object-cover" />
+              </div>
             </div>
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
-              <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
-                <Image src="/placeholder.svg?key=efy0w" alt="Get paid instantly" fill className="object-cover" />
-              </div>
               <h3 className="text-xl font-semibold mb-3 text-center">Get Paid Instantly</h3>
-              <p className="text-gray-300 text-center">
+              <p className="text-gray-300 text-center mb-6">
                 Receive your payment immediately upon pickup. No waiting, no complications.
               </p>
+              <div className="relative w-full h-48 rounded-xl overflow-hidden">
+                <Image src="/placeholder.svg?key=efy0w" alt="Get paid instantly" fill className="object-cover" />
+              </div>
             </div>
           </div>
         </div>
