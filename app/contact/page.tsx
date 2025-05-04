@@ -211,7 +211,11 @@ export default function ContactPage() {
                   <Button
                     type="submit"
                     disabled={!isFormValid || isSubmitting}
-                    className="w-full bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3] text-white rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                    className={`w-full ${
+                      isFormValid && !isSubmitting
+                        ? "bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3]"
+                        : "bg-gray-300 cursor-not-allowed"
+                    } text-white rounded-lg`}
                   >
                     {isSubmitting ? (
                       <>
@@ -222,6 +226,9 @@ export default function ContactPage() {
                       "Send Message"
                     )}
                   </Button>
+                  {!isFormValid && (
+                    <p className="text-center text-amber-600 text-sm">Please complete all required fields to submit</p>
+                  )}
                 </form>
               </>
             ) : (
