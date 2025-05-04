@@ -88,16 +88,17 @@ body {
 }
 
 .text-3d {
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.05), 0 4px 4px rgba(0, 0, 0, 0.05);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.05), 2px 2px 0 rgba(0, 0, 0, 0.03);
   transform: translateY(-1px);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   position: relative;
   display: inline-block;
+  padding: 0 4px;
 }
 
 .text-3d:hover {
   transform: translateY(-2px);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 3px 3px rgba(0, 0, 0, 0.1), 0 5px 5px rgba(0, 0, 0, 0.05);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.08), 2px 2px 0 rgba(0, 0, 0, 0.05), 3px 3px 0 rgba(0, 0, 0, 0.03);
 }
 
 @layer components {
