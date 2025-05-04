@@ -50,8 +50,11 @@ export default function ContactPage() {
         formData.append("inquiryType", inquiryType)
         formData.append("message", message)
 
+        console.log("Submitting contact form:", Object.fromEntries(formData.entries()))
+
         // Send the form data to the server action
         const result = await sendContactFormEmail(formData)
+        console.log("Contact form submission result:", result)
 
         setSubmitResult(result)
         if (result.success) {
@@ -91,13 +94,7 @@ export default function ContactPage() {
             Have questions about our services? Our team is available to assist you.
           </p>
           <div className="relative w-full max-w-3xl mx-auto aspect-[16/9] rounded-2xl overflow-hidden">
-            <Image
-              src="/placeholder.svg?height=800&width=1200&query=customer service team in blue shirts, bright minimal office setting"
-              alt="Contact Our Team"
-              fill
-              className="object-cover"
-              priority
-            />
+            <Image src="/placeholder.svg?key=7gr1m" alt="Contact Our Team" fill className="object-cover" priority />
           </div>
         </div>
       </section>
@@ -131,12 +128,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="relative w-full h-48 rounded-xl overflow-hidden mt-4">
-                  <Image
-                    src="/placeholder.svg?height=400&width=600&query=customer service representative on phone, clean minimal style"
-                    alt="Customer Support"
-                    fill
-                    className="object-cover"
-                  />
+                  <Image src="/placeholder.svg?key=sbgcf" alt="Customer Support" fill className="object-cover" />
                 </div>
               </div>
             </div>
@@ -222,7 +214,7 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       disabled={!isFormValid || isSubmitting}
-                      className="apple-button apple-button-primary w-full"
+                      className="apple-button apple-button-primary w-full gradient-button"
                     >
                       {isSubmitting ? (
                         <>
@@ -245,7 +237,10 @@ export default function ContactPage() {
                     Thank you for contacting us. Your message has been sent to alecgold808@gmail.com. We'll respond
                     within 24 hours.
                   </p>
-                  <Button onClick={() => setIsSubmitted(false)} className="apple-button apple-button-primary">
+                  <Button
+                    onClick={() => setIsSubmitted(false)}
+                    className="apple-button apple-button-primary gradient-button"
+                  >
                     Send Another Message
                   </Button>
                 </div>

@@ -47,9 +47,9 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm hover:text-[#3B82F6] transition-colors ${
+                className={`text-sm hover:text-[#3B82F6] transition-all duration-300 ${
                   pathname === link.href ? "text-[#3B82F6]" : "text-gray-600"
-                }`}
+                } hover:translate-y-[-1px]`}
               >
                 {link.label}
               </Link>
@@ -57,16 +57,22 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <button className="text-gray-600 hover:text-[#3B82F6]" aria-label="Search">
+            <button
+              className="text-gray-600 hover:text-[#3B82F6] transition-all duration-300 hover:scale-110"
+              aria-label="Search"
+            >
               <Search size={18} />
             </button>
-            <button className="text-gray-600 hover:text-[#3B82F6]" aria-label="Cart">
+            <button
+              className="text-gray-600 hover:text-[#3B82F6] transition-all duration-300 hover:scale-110"
+              aria-label="Cart"
+            >
               <ShoppingBag size={18} />
             </button>
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden text-gray-600"
+              className="md:hidden text-gray-600 transition-all duration-300 hover:text-[#3B82F6] hover:scale-110"
               onClick={toggleMenu}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
@@ -82,9 +88,9 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm hover:text-[#3B82F6] transition-colors ${
+                className={`text-sm hover:text-[#3B82F6] transition-all duration-300 ${
                   pathname === link.href ? "text-[#3B82F6]" : "text-gray-600"
-                }`}
+                } hover:translate-y-[-1px]`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}

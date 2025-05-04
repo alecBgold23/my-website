@@ -6,9 +6,10 @@ import nodemailer from "nodemailer"
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "alecgold808@gmail.com", // Your actual Gmail address
-    pass: process.env.EMAIL_PASSWORD, // Use an environment variable for security
+    user: "alecgold808@gmail.com", // Your Gmail address
+    pass: process.env.EMAIL_PASSWORD, // Using the environment variable
   },
+  secure: true,
 })
 
 // The recipient email address (your email)
@@ -28,7 +29,7 @@ export async function sendContactFormEmail(formData: FormData) {
 
     // Email content
     const mailOptions = {
-      from: "BluBerry Notifications <bluberry.notifications@gmail.com>",
+      from: `"BluBerry Contact Form" <alecgold808@gmail.com>`,
       to: RECIPIENT_EMAIL,
       subject: `New Contact Form Submission: ${inquiryType}`,
       html: `
@@ -41,11 +42,11 @@ export async function sendContactFormEmail(formData: FormData) {
       `,
     }
 
-    // In a real environment, this would send the email
     console.log("Sending email with:", mailOptions)
 
-    // Uncomment this line to actually send emails
-    await transporter.sendMail(mailOptions)
+    // Send the email - this line is now active
+    const info = await transporter.sendMail(mailOptions)
+    console.log("Email sent:", info.response)
 
     return { success: true, message: "Message sent successfully!" }
   } catch (error) {
@@ -88,7 +89,7 @@ export async function sendItemSubmissionEmail(formData: FormData) {
 
     // Email content
     const mailOptions = {
-      from: "BluBerry Notifications <bluberry.notifications@gmail.com>",
+      from: `"BluBerry Item Submission" <alecgold808@gmail.com>`,
       to: RECIPIENT_EMAIL,
       subject: `New Item Submission: ${itemName}`,
       html: `
@@ -111,11 +112,11 @@ export async function sendItemSubmissionEmail(formData: FormData) {
       `,
     }
 
-    // In a real environment, this would send the email
     console.log("Sending email with:", mailOptions)
 
-    // Uncomment this line to actually send emails
-    await transporter.sendMail(mailOptions)
+    // Send the email - this line is now active
+    const info = await transporter.sendMail(mailOptions)
+    console.log("Email sent:", info.response)
 
     return { success: true, message: "Item submitted successfully!" }
   } catch (error) {
