@@ -45,61 +45,42 @@ export default function SellItemPage() {
 
   // Validate step 1
   useEffect(() => {
-    setStep1Valid(
-      itemCategory !== "" && itemName.trim() !== "" && itemDescription.trim() !== "" && itemPhotos.length >= 3,
-    )
+    // All fields are optional now
+    setStep1Valid(true)
   }, [itemCategory, itemName, itemDescription, itemPhotos])
 
   // Validate step 2
   useEffect(() => {
-    setStep2Valid(itemCondition !== "" && itemIssues.trim() !== "")
+    // All fields are optional now
+    setStep2Valid(true)
   }, [itemCondition, itemIssues])
 
   // Validate step 3
   useEffect(() => {
-    setStep3Valid(
-      fullName.trim() !== "" && email.trim() !== "" && phone.trim() !== "" && zipCode.trim() !== "" && termsAccepted,
-    )
+    // All fields are optional now
+    setStep3Valid(true)
   }, [fullName, email, phone, zipCode, termsAccepted])
 
   const validateStep1 = () => {
-    const errors = {}
-
-    if (!itemCategory) errors.itemCategory = "Please select a category"
-    if (!itemName.trim()) errors.itemName = "Please enter the item name"
-    if (!itemDescription.trim()) errors.itemDescription = "Please provide a description"
-    if (itemPhotos.length < 3) errors.itemPhotos = "Please upload at least 3 photos"
-
-    setFormErrors(errors)
-    return Object.keys(errors).length === 0
+    // All fields are optional now
+    setFormErrors({})
+    return true
   }
 
   const validateStep2 = () => {
-    const errors = {}
-
-    if (!itemCondition) errors.itemCondition = "Please select the item condition"
-    if (!itemIssues.trim()) errors.itemIssues = "Please describe any issues or defects"
-
-    setFormErrors(errors)
-    return Object.keys(errors).length === 0
+    // All fields are optional now
+    setFormErrors({})
+    return true
   }
 
   const validateStep3 = () => {
-    const errors = {}
-
-    if (!fullName.trim()) errors.fullName = "Please enter your full name"
-    if (!email.trim()) errors.email = "Please enter your email address"
-    if (!phone.trim()) errors.phone = "Please enter your phone number"
-    if (!zipCode.trim()) errors.zipCode = "Please enter your ZIP code"
-    if (!termsAccepted) errors.terms = "You must accept the terms and conditions"
-
-    setFormErrors(errors)
-    return Object.keys(errors).length === 0
+    // All fields are optional now
+    setFormErrors({})
+    return true
   }
 
-  // Enhanced scroll to top function - scroll to the very top of the page
+  // Scroll to the top of the page
   const scrollToTop = () => {
-    // Scroll to the absolute top of the page
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -110,7 +91,7 @@ export default function SellItemPage() {
     if (validateStep1()) {
       setFormStep(2)
       setFormErrors({})
-      // Scroll to top after changing step
+      // Scroll to the top of the page after changing step
       setTimeout(scrollToTop, 50) // Small timeout to ensure state has updated
     }
   }
@@ -119,7 +100,7 @@ export default function SellItemPage() {
     if (validateStep2()) {
       setFormStep(3)
       setFormErrors({})
-      // Scroll to top after changing step
+      // Scroll to the top of the page after changing step
       setTimeout(scrollToTop, 50) // Small timeout to ensure state has updated
     }
   }
@@ -291,9 +272,9 @@ export default function SellItemPage() {
                 <div className="space-y-8">
                   <div>
                     <Label htmlFor="item-category" className="text-base font-medium mb-2 block">
-                      Item Category <span className="text-[#ff6b6b]">*</span>
+                      Item Category
                     </Label>
-                    <Select value={itemCategory} onValueChange={setItemCategory} required>
+                    <Select value={itemCategory} onValueChange={setItemCategory}>
                       <SelectTrigger
                         id="item-category"
                         className={`w-full border ${formErrors.itemCategory ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
@@ -316,14 +297,13 @@ export default function SellItemPage() {
 
                   <div>
                     <Label htmlFor="item-name" className="text-base font-medium mb-2 block">
-                      Item Name <span className="text-[#ff6b6b]">*</span>
+                      Item Name
                     </Label>
                     <Input
                       id="item-name"
                       value={itemName}
                       onChange={(e) => setItemName(e.target.value)}
                       placeholder="e.g., Leather Sofa, Samsung TV"
-                      required
                       className={`w-full border ${formErrors.itemName ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.itemName && <ErrorMessage message={formErrors.itemName} />}
@@ -331,7 +311,7 @@ export default function SellItemPage() {
 
                   <div>
                     <Label htmlFor="item-description" className="text-base font-medium mb-2 block">
-                      Brief Description <span className="text-[#ff6b6b]">*</span>
+                      Brief Description
                     </Label>
                     <Textarea
                       id="item-description"
@@ -340,15 +320,13 @@ export default function SellItemPage() {
                       placeholder="Please describe your item (brand, size, color, etc.)"
                       rows={4}
                       className={`w-full border ${formErrors.itemDescription ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
-                      required
                     />
                     {formErrors.itemDescription && <ErrorMessage message={formErrors.itemDescription} />}
                   </div>
 
                   <div>
                     <Label className="text-base font-medium mb-2 block">
-                      Item Photos <span className="text-[#ff6b6b]">*</span>{" "}
-                      <span className="text-sm font-normal">(at least 3)</span>
+                      Item Photos <span className="text-sm font-normal">(at least 3)</span>
                     </Label>
                     <div
                       className={`p-6 border border-dashed rounded-md ${
@@ -450,14 +428,11 @@ export default function SellItemPage() {
               {formStep === 2 && (
                 <div className="space-y-8">
                   <div>
-                    <Label className="text-base font-medium mb-4 block">
-                      Item Condition <span className="text-[#ff6b6b]">*</span>
-                    </Label>
+                    <Label className="text-base font-medium mb-4 block">Item Condition</Label>
                     <RadioGroup
                       value={itemCondition}
                       onValueChange={setItemCondition}
                       className={`space-y-4 ${formErrors.itemCondition ? "border-red-500 border p-4 rounded-md" : ""}`}
-                      required
                     >
                       <div className="flex items-start space-x-3">
                         <RadioGroupItem
@@ -530,7 +505,7 @@ export default function SellItemPage() {
 
                   <div>
                     <Label htmlFor="item-issues" className="text-base font-medium mb-2 block">
-                      Any issues or defects? <span className="text-[#ff6b6b]">*</span>
+                      Any issues or defects?
                     </Label>
                     <Textarea
                       id="item-issues"
@@ -539,7 +514,6 @@ export default function SellItemPage() {
                       placeholder="Please describe any scratches, dents, missing parts, or functional issues"
                       rows={4}
                       className={`w-full border ${formErrors.itemIssues ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
-                      required
                     />
                     {formErrors.itemIssues && <ErrorMessage message={formErrors.itemIssues} />}
                   </div>
@@ -571,14 +545,13 @@ export default function SellItemPage() {
                 <div className="space-y-8">
                   <div>
                     <Label htmlFor="full-name" className="text-base font-medium mb-2 block">
-                      Full Name <span className="text-[#ff6b6b]">*</span>
+                      Full Name
                     </Label>
                     <Input
                       id="full-name"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Your full name"
-                      required
                       className={`w-full border ${formErrors.fullName ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.fullName && <ErrorMessage message={formErrors.fullName} />}
@@ -586,7 +559,7 @@ export default function SellItemPage() {
 
                   <div>
                     <Label htmlFor="email" className="text-base font-medium mb-2 block">
-                      Email Address <span className="text-[#ff6b6b]">*</span>
+                      Email Address
                     </Label>
                     <Input
                       id="email"
@@ -594,7 +567,6 @@ export default function SellItemPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="your.email@example.com"
-                      required
                       className={`w-full border ${formErrors.email ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.email && <ErrorMessage message={formErrors.email} />}
@@ -602,7 +574,7 @@ export default function SellItemPage() {
 
                   <div>
                     <Label htmlFor="phone" className="text-base font-medium mb-2 block">
-                      Phone Number <span className="text-[#ff6b6b]">*</span>
+                      Phone Number
                     </Label>
                     <Input
                       id="phone"
@@ -610,7 +582,6 @@ export default function SellItemPage() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="(123) 456-7890"
-                      required
                       className={`w-full border ${formErrors.phone ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.phone && <ErrorMessage message={formErrors.phone} />}
@@ -618,14 +589,13 @@ export default function SellItemPage() {
 
                   <div>
                     <Label htmlFor="zip" className="text-base font-medium mb-2 block">
-                      ZIP Code <span className="text-[#ff6b6b]">*</span>
+                      ZIP Code
                     </Label>
                     <Input
                       id="zip"
                       value={zipCode}
                       onChange={(e) => setZipCode(e.target.value)}
                       placeholder="12345"
-                      required
                       className={`w-full border ${formErrors.zipCode ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.zipCode && <ErrorMessage message={formErrors.zipCode} />}
@@ -637,12 +607,11 @@ export default function SellItemPage() {
                         id="terms"
                         checked={termsAccepted}
                         onCheckedChange={setTermsAccepted}
-                        required
                         className={`mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff] ${formErrors.terms ? "border-red-500" : ""}`}
                       />
                       <div>
                         <Label htmlFor="terms" className="font-medium">
-                          I agree to the Privacy Policy <span className="text-[#ff6b6b]">*</span>
+                          I agree to the Privacy Policy
                         </Label>
                         <p className="text-sm text-gray-500">
                           By submitting this form, you agree to our{" "}
