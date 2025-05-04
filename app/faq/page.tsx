@@ -4,16 +4,18 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 export default function FAQPage() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="apple-section bg-gradient-to-b from-white to-gray-50">
+      {/* Minimized Hero Section */}
+      <section className="py-8 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
-          <h1 className="apple-heading text-[#3B82F6]">Frequently Asked Questions</h1>
-          <p className="apple-subheading mb-8">Find answers to common questions about BluBerry's services.</p>
+          <h1 className="text-3xl font-semibold text-[#3B82F6] text-center">Frequently Asked Questions</h1>
+          <p className="text-gray-600 text-center mt-2 mb-0">
+            Find answers to common questions about BluBerry's services.
+          </p>
         </div>
       </section>
 
       {/* FAQ Content */}
-      <section className="py-16 bg-white">
+      <section className="py-10 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
           <Accordion type="single" collapsible className="space-y-6">
             <AccordionItem value="item-1" className="border rounded-lg p-2 shadow-sm">
@@ -117,8 +119,8 @@ export default function FAQPage() {
             </AccordionItem>
           </Accordion>
 
-          <div className="mt-12 text-center">
-            <p className="text-gray-600 mb-6">Still have questions? We're here to help!</p>
+          <div className="mt-10 text-center">
+            <p className="text-gray-600 mb-4">Still have questions? We're here to help!</p>
             <Link href="/contact" className="apple-button apple-button-primary">
               Contact Us
             </Link>
