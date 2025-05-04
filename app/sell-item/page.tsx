@@ -393,7 +393,7 @@ export default function SellItemPage() {
                             type="button"
                             variant="outline"
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-blue-50 shadow-sm outline-button"
+                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white shadow-sm outline-button transition-all duration-300"
                           >
                             <Upload className="w-4 h-4" />
                             <span>Add file</span>
@@ -403,7 +403,7 @@ export default function SellItemPage() {
                             type="button"
                             variant="outline"
                             onClick={() => cameraInputRef.current?.click()}
-                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-blue-50 shadow-sm outline-button"
+                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white shadow-sm outline-button transition-all duration-300"
                           >
                             <Camera className="w-4 h-4" />
                             <span>Take photo</span>
@@ -442,7 +442,7 @@ export default function SellItemPage() {
                       type="button"
                       onClick={handleContinueStep1}
                       disabled={!step1Valid}
-                      className="bg-gradient-to-r from-[#0066ff] to-[#0066ff] hover:from-[#0055dd] hover:to-[#0055dd] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm gradient-button"
+                      className="bg-gradient-to-r from-[#0066ff] to-[#0066ff] hover:from-[#0055dd] hover:to-[#0055dd] hover:bg-white hover:text-[#0066ff] hover:border hover:border-[#0066ff] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm gradient-button transition-all duration-300"
                     >
                       Continue
                     </Button>
@@ -554,7 +554,7 @@ export default function SellItemPage() {
                         setFormStep(1)
                         scrollToTop()
                       }}
-                      className="border border-[#0066ff] text-[#0066ff] hover:bg-blue-50 px-6 py-2 rounded-md shadow-sm outline-button"
+                      className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-md shadow-sm outline-button transition-all duration-300"
                     >
                       Back
                     </Button>
@@ -562,7 +562,7 @@ export default function SellItemPage() {
                       type="button"
                       onClick={handleContinueStep2}
                       disabled={!step2Valid}
-                      className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7b46e6] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm gradient-button"
+                      className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-white hover:to-white hover:text-[#0066ff] hover:border hover:border-[#0066ff] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm gradient-button transition-all duration-300"
                     >
                       Continue
                     </Button>
@@ -666,14 +666,14 @@ export default function SellItemPage() {
                         setFormStep(2)
                         scrollToTop()
                       }}
-                      className="border border-[#0066ff] text-[#0066ff] hover:bg-blue-50 px-6 py-2 rounded-md shadow-sm outline-button"
+                      className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-md shadow-sm outline-button transition-all duration-300"
                     >
                       Back
                     </Button>
                     <Button
                       type="submit"
                       disabled={!step3Valid || isSubmitting}
-                      className="bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] hover:from-[#7b46e6] hover:to-[#7b46e6] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm gradient-button"
+                      className="bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] hover:from-white hover:to-white hover:text-[#8c52ff] hover:border hover:border-[#8c52ff] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm gradient-button transition-all duration-300"
                     >
                       {isSubmitting ? (
                         <>
@@ -713,7 +713,7 @@ export default function SellItemPage() {
             <div className="mt-8">
               <Button
                 asChild
-                className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7b46e6] text-white px-6 py-2 rounded-md shadow-sm gradient-button"
+                className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-white hover:to-white hover:text-[#0066ff] hover:border hover:border-[#0066ff] text-white px-6 py-2 rounded-md shadow-sm gradient-button transition-all duration-300"
               >
                 <Link href="/">Return to Home</Link>
               </Button>
