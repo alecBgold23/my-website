@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export default function AboutPage() {
   return (
@@ -10,6 +11,15 @@ export default function AboutPage() {
           <p className="apple-subheading mb-8">
             Our mission is to make selling your unused items simple and efficient.
           </p>
+          <div className="relative w-full max-w-3xl mx-auto aspect-[16/9] rounded-2xl overflow-hidden">
+            <Image
+              src="/placeholder.svg?height=800&width=1200&query=team of professionals in blue shirts handling used items carefully, bright white background"
+              alt="BluBerry Team"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
       </section>
 
@@ -18,6 +28,14 @@ export default function AboutPage() {
           <div className="space-y-12 text-center">
             <div>
               <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">Our Mission</h2>
+              <div className="relative w-full max-w-md mx-auto aspect-[16/9] rounded-xl overflow-hidden mb-6">
+                <Image
+                  src="/placeholder.svg?height=400&width=600&query=person decluttering home with organized items, bright minimal style"
+                  alt="Our Mission"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <p className="text-gray-600">
                 At BluBerry, our mission is clear: <strong>Selling made simpler</strong>. We've created a service that
                 combines professional efficiency with a personal touch, making the selling process straightforward and
@@ -31,6 +49,14 @@ export default function AboutPage() {
 
             <div className="bg-gray-50 p-8 rounded-xl">
               <h2 className="text-2xl font-semibold mb-4 text-[#3B82F6]">Our Approach</h2>
+              <div className="relative w-full max-w-md mx-auto aspect-[16/9] rounded-xl overflow-hidden mb-6">
+                <Image
+                  src="/placeholder.svg?height=400&width=600&query=professional in blue shirt examining used electronics, clean white background"
+                  alt="Our Approach"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <p className="text-gray-600">
                 Unlike traditional online marketplaces that require significant time investment in creating listings,
                 communicating with potential buyers, and arranging meetings, BluBerry offers a comprehensive service
@@ -45,6 +71,14 @@ export default function AboutPage() {
 
             <div>
               <h2 className="text-2xl font-semibold mb-6 text-[#8A4FFF]">Our Core Values</h2>
+              <div className="relative w-full max-w-md mx-auto aspect-[16/9] rounded-xl overflow-hidden mb-6">
+                <Image
+                  src="/placeholder.svg?height=400&width=600&query=team meeting with values written on whiteboard, clean minimal style"
+                  alt="Our Core Values"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <div className="flex flex-col items-center space-y-6">
                 <div className="flex flex-col items-center">
                   <div className="bg-[#3B82F6] w-8 h-8 rounded-full flex items-center justify-center mb-3">
@@ -92,6 +126,14 @@ export default function AboutPage() {
 
             <div className="bg-gray-50 p-8 rounded-xl">
               <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">Who We Serve</h2>
+              <div className="relative w-full max-w-md mx-auto aspect-[16/9] rounded-xl overflow-hidden mb-6">
+                <Image
+                  src="/placeholder.svg?height=400&width=600&query=diverse group of people with used items, clean minimal style"
+                  alt="Who We Serve"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <p className="text-gray-600 mb-4">
                 BluBerry is designed for anyone seeking a convenient selling solution, with particular benefits for:
               </p>

@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { Mail, Phone, Clock, AlertCircle, CheckCircle, Loader2 } from "lucide-react"
 import { sendContactFormEmail } from "@/app/actions/email-actions"
+import Image from "next/image"
 
 export default function ContactPage() {
   const [name, setName] = useState("")
@@ -89,6 +90,15 @@ export default function ContactPage() {
           <p className="apple-subheading mb-8">
             Have questions about our services? Our team is available to assist you.
           </p>
+          <div className="relative w-full max-w-3xl mx-auto aspect-[16/9] rounded-2xl overflow-hidden">
+            <Image
+              src="/placeholder.svg?height=800&width=1200&query=customer service team in blue shirts, bright minimal office setting"
+              alt="Contact Our Team"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
       </section>
 
@@ -118,6 +128,15 @@ export default function ContactPage() {
                   <p className="text-gray-600">Monday-Friday: 9am-5pm EST</p>
                   <p className="text-gray-600">Saturday: 10am-2pm EST</p>
                   <p className="text-gray-600">Sunday: Closed</p>
+                </div>
+
+                <div className="relative w-full h-48 rounded-xl overflow-hidden mt-4">
+                  <Image
+                    src="/placeholder.svg?height=400&width=600&query=customer service representative on phone, clean minimal style"
+                    alt="Customer Support"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </div>
