@@ -25,6 +25,7 @@ export default function Navbar() {
     { href: "/about", label: "About" },
     { href: "/faq", label: "FAQ" },
     { href: "/how-it-works", label: "How It Works" },
+    { href: "/reviews", label: "Reviews" },
     { href: "/sell-item", label: "Sell Your Item" },
     { href: "/contact", label: "Contact" },
   ]
@@ -35,18 +36,15 @@ export default function Navbar() {
         <div className="container mx-auto px-4">
           <nav className="flex justify-between items-center h-12">
             <Link href="/" className="flex items-center">
-              <div className="relative w-8 h-8 mr-2">
+              <div className="relative w-10 h-10">
                 <Image
                   src="/images/blueberry-logo.png"
                   alt="BluBerry Logo"
-                  width={32}
-                  height={32}
+                  width={40}
+                  height={40}
                   className="object-contain"
                 />
               </div>
-              <span className="text-sm font-medium bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
-                BluBerry
-              </span>
             </Link>
 
             {/* Desktop navigation */}

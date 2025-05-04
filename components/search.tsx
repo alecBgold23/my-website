@@ -42,6 +42,12 @@ const searchRoutes = [
     title: "FAQ",
     description: "Frequently asked questions about our services",
   },
+  {
+    path: "/reviews",
+    keywords: ["reviews", "testimonials", "feedback", "ratings", "experiences", "customer reviews"],
+    title: "Reviews",
+    description: "See what our customers are saying",
+  },
 ]
 
 export default function SearchModal({ isOpen, onClose }) {
