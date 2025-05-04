@@ -5,34 +5,22 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section with Apple-style layout */}
-      <section className="apple-section bg-gradient-to-b from-white to-gray-50 relative overflow-hidden pt-12 pb-0">
+      <section className="apple-section bg-gradient-to-b from-white to-gray-50 relative overflow-hidden pt-12 pb-16">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center text-center mb-8">
+          <div className="flex flex-col items-center text-center mb-12">
             <h1 className="apple-heading mb-2">
               <span className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
                 BluBerry
               </span>
             </h1>
-            <p className="apple-subheading mb-6">Selling made simpler.</p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+            <p className="apple-subheading mb-8">Selling made simpler.</p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/sell-item" className="apple-button apple-button-primary">
                 Sell Your Item
               </Link>
               <Link href="/how-it-works" className="apple-button apple-button-secondary">
                 Learn How It Works
               </Link>
-            </div>
-          </div>
-
-          <div className="relative w-full max-w-5xl mx-auto">
-            <div className="aspect-[16/9] rounded-t-2xl overflow-hidden">
-              <Image
-                src="/placeholder.svg?key=7y1az"
-                alt="Person selling items with BluBerry"
-                fill
-                className="object-cover"
-                priority
-              />
             </div>
           </div>
         </div>

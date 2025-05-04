@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X, Search, ShoppingBag } from "lucide-react"
 import { useState } from "react"
@@ -26,9 +27,18 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <nav className="flex justify-between items-center h-12">
           <Link href="/" className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] flex items-center justify-center">
-              <span className="text-white font-bold text-sm">B</span>
+            <div className="relative w-8 h-8 mr-2">
+              <Image
+                src="/images/blueberry-logo.png"
+                alt="BluBerry Logo"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
             </div>
+            <span className="text-sm font-medium bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
+              BluBerry
+            </span>
           </Link>
 
           {/* Desktop navigation */}

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 export default function Footer() {
   return (
@@ -6,10 +7,18 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center text-center">
           <div className="mb-4 flex items-center justify-center">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] flex items-center justify-center mr-1.5">
-              <span className="text-white font-bold text-xs">B</span>
+            <div className="relative w-6 h-6 mr-1.5">
+              <Image
+                src="/images/blueberry-logo.png"
+                alt="BluBerry Logo"
+                width={24}
+                height={24}
+                className="object-contain"
+              />
             </div>
-            <span className="text-sm font-medium text-gray-800">BluBerry</span>
+            <span className="text-sm font-medium bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
+              BluBerry
+            </span>
           </div>
 
           <div className="space-y-1 mb-4">
