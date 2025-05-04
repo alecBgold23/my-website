@@ -36,6 +36,12 @@ const searchRoutes = [
     title: "Privacy Policy",
     description: "Our privacy policy and terms",
   },
+  {
+    path: "/faq",
+    keywords: ["faq", "questions", "answers", "help", "information", "frequently asked questions", "common questions"],
+    title: "FAQ",
+    description: "Frequently asked questions about our services",
+  },
 ]
 
 export default function SearchModal({ isOpen, onClose }) {
