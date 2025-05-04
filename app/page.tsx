@@ -15,11 +15,11 @@ export default function Home() {
             </h1>
             <p className="apple-subheading mb-8 text-black text-3d">Selling made simpler.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/sell-item" className="apple-button apple-button-primary">
-                Sell Your Item
-              </Link>
-              <Link href="/how-it-works" className="apple-button apple-button-secondary">
+              <Link href="/how-it-works" className="apple-button apple-button-primary">
                 Learn How It Works
+              </Link>
+              <Link href="/sell-item" className="apple-button apple-button-secondary">
+                Sell Your Item
               </Link>
             </div>
           </div>
