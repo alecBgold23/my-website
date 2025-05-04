@@ -24,7 +24,7 @@ export default function SellItemPage() {
   const [itemName, setItemName] = useState("")
   const [itemDescription, setItemDescription] = useState("")
   const [itemPhotos, setItemPhotos] = useState([])
-  const [itemCondition, setItemCondition] = useState("good")
+  const [itemCondition, setItemCondition] = useState("")
   const [itemIssues, setItemIssues] = useState("")
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
