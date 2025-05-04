@@ -29,7 +29,9 @@ export default function Home() {
       {/* Process Section */}
       <section className="apple-section bg-black text-white">
         <div className="container mx-auto px-4">
-          <h2 className="apple-product-heading mb-16 text-white">How It Works</h2>
+          <h2 className="sf-pro-display text-4xl md:text-5xl font-semibold tracking-tight mb-16 text-white">
+            How It Works
+          </h2>
           <div className="grid md:grid-cols-3 gap-16">
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-[#3B82F6] flex items-center justify-center mb-6">
