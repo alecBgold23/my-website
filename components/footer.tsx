@@ -13,7 +13,7 @@ export default function Footer() {
                 alt="BluBerry Logo"
                 width={24}
                 height={24}
-                className="object-contain"
+                className="object-contain bg-transparent"
               />
             </div>
             <span className="text-sm font-medium bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">

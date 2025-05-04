@@ -9,7 +9,7 @@ export default function Home() {
       <div className="bg-gradient-to-r from-gray-900 to-red-900 py-3 px-4 text-center flex items-center justify-center shadow-md">
         <AlertTriangle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0" />
         <span className="text-red-500 text-sm">
-          Unfortunately, all services are down right now, we will let you know when services are running.
+          Unfortunately, all services are currently unavailable. We'll notify you once they're back up and running.
         </span>
       </div>
 
