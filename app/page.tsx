@@ -8,7 +8,11 @@ export default function Home() {
       <section className="apple-section bg-gradient-to-b from-white to-gray-50 relative overflow-hidden pt-12 pb-0">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center text-center mb-8">
-            <h1 className="apple-heading text-[#3B82F6]">BluBerry</h1>
+            <h1 className="apple-heading mb-2">
+              <span className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
+                BluBerry
+              </span>
+            </h1>
             <p className="apple-subheading mb-6">Selling made simpler.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
               <Link href="/sell-item" className="apple-button apple-button-primary">
@@ -146,12 +150,7 @@ export default function Home() {
 
             <div className="bg-white p-6 rounded-2xl shadow-sm flex flex-col items-center text-center">
               <div className="relative w-24 h-24 rounded-full overflow-hidden mb-4">
-                <Image
-                  src="/placeholder.svg?height=200&width=200&query=smiling man in 30s portrait, professional headshot, neutral background"
-                  alt="Michael R."
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/placeholder.svg?key=td4qz" alt="Michael R." fill className="object-cover" />
               </div>
               <p className="text-gray-600 mb-4">
                 "BluBerry made selling my old electronics so easy. No haggling, no meetups with strangers. Just simple
@@ -163,12 +162,7 @@ export default function Home() {
 
             <div className="bg-white p-6 rounded-2xl shadow-sm flex flex-col items-center text-center">
               <div className="relative w-24 h-24 rounded-full overflow-hidden mb-4">
-                <Image
-                  src="/placeholder.svg?height=200&width=200&query=smiling senior woman portrait, professional headshot, neutral background"
-                  alt="Patricia L."
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/placeholder.svg?key=p0c26" alt="Patricia L." fill className="object-cover" />
               </div>
               <p className="text-gray-600 mb-4">
                 "As a senior, I appreciated how easy the whole process was. The team was respectful and professional."
@@ -186,12 +180,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2">
               <div className="relative w-full aspect-square max-w-md mx-auto rounded-2xl overflow-hidden">
-                <Image
-                  src="/placeholder.svg?height=600&width=600&query=used electronics with plants and recycling symbols, flat lay on white background, eco-friendly concept"
-                  alt="Environmental Impact"
-                  fill
-                  className="object-cover"
-                />
+                <Image src="/placeholder.svg?key=255yw" alt="Environmental Impact" fill className="object-cover" />
               </div>
             </div>
             <div className="md:w-1/2 text-center md:text-left">
