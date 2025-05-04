@@ -6,8 +6,8 @@ import nodemailer from "nodemailer"
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "bluberry.notifications@gmail.com", // This would be your actual sending email in production
-    pass: "app-password-would-go-here", // You would use an app password in production
+    user: "alecgold808@gmail.com", // Your actual Gmail address
+    pass: process.env.EMAIL_PASSWORD, // Use an environment variable for security
   },
 })
 
@@ -42,11 +42,10 @@ export async function sendContactFormEmail(formData: FormData) {
     }
 
     // In a real environment, this would send the email
-    // For demo purposes, we'll simulate success
-    console.log("Would send email with:", mailOptions)
+    console.log("Sending email with:", mailOptions)
 
-    // In production, uncomment this:
-    // await transporter.sendMail(mailOptions)
+    // Uncomment this line to actually send emails
+    await transporter.sendMail(mailOptions)
 
     return { success: true, message: "Message sent successfully!" }
   } catch (error) {
@@ -113,11 +112,10 @@ export async function sendItemSubmissionEmail(formData: FormData) {
     }
 
     // In a real environment, this would send the email
-    // For demo purposes, we'll simulate success
-    console.log("Would send email with:", mailOptions)
+    console.log("Sending email with:", mailOptions)
 
-    // In production, uncomment this:
-    // await transporter.sendMail(mailOptions)
+    // Uncomment this line to actually send emails
+    await transporter.sendMail(mailOptions)
 
     return { success: true, message: "Item submitted successfully!" }
   } catch (error) {
