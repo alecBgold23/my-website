@@ -28,7 +28,7 @@ export default function Home() {
               <div className="w-16 h-16 rounded-full bg-[#3B82F6] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Submit Your Item</h3>
+              <h3 className="text-xl font-semibold mb-3 text-center">Submit Your Item</h3>
               <p className="text-gray-600 text-center">
                 Complete our simple form with your item details. No complex listings required.
               </p>
@@ -37,7 +37,7 @@ export default function Home() {
               <div className="w-16 h-16 rounded-full bg-[#8A4FFF] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3">We Pick It Up</h3>
+              <h3 className="text-xl font-semibold mb-3 text-center">We Pick It Up</h3>
               <p className="text-gray-600 text-center">
                 Schedule a convenient time, and our team will collect the item from your location.
               </p>
@@ -46,7 +46,7 @@ export default function Home() {
               <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3">Get Paid Instantly</h3>
+              <h3 className="text-xl font-semibold mb-3 text-center">Get Paid Instantly</h3>
               <p className="text-gray-600 text-center">
                 Receive your payment immediately upon pickup. No waiting, no complications.
               </p>
@@ -62,26 +62,26 @@ export default function Home() {
           <p className="apple-subheading text-gray-300 mb-16">The simplest way to sell your unused items</p>
 
           <div className="grid md:grid-cols-2 gap-16 max-w-4xl mx-auto">
-            <div className="text-left">
+            <div className="text-center">
               <h3 className="text-xl font-semibold mb-3 text-[#3B82F6]">Simplified Process</h3>
               <p className="text-gray-300">
                 Our streamlined form takes minutes to complete, eliminating the need for detailed descriptions or
                 photos.
               </p>
             </div>
-            <div className="text-left">
+            <div className="text-center">
               <h3 className="text-xl font-semibold mb-3 text-[#8A4FFF]">Professional Service</h3>
               <p className="text-gray-300">
                 Our vetted team handles pickup, ensuring security and peace of mind throughout the process.
               </p>
             </div>
-            <div className="text-left">
+            <div className="text-center">
               <h3 className="text-xl font-semibold mb-3 text-[#3B82F6]">Market-Based Pricing</h3>
               <p className="text-gray-300">
                 We offer competitive rates based on current market value and item condition.
               </p>
             </div>
-            <div className="text-left">
+            <div className="text-center">
               <h3 className="text-xl font-semibold mb-3 text-[#8A4FFF]">Immediate Payment</h3>
               <p className="text-gray-300">
                 Receive payment at the time of pickup, eliminating waiting periods for transactions to process.

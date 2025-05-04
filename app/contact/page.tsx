@@ -95,40 +95,34 @@ export default function ContactPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="grid md:grid-cols-2 gap-12">
-            <div>
+            <div className="text-center">
               <h2 className="text-2xl font-semibold mb-6">Contact Information</h2>
               <div className="space-y-6">
-                <div className="flex items-start">
-                  <Phone className="w-5 h-5 mr-3 text-[#3B82F6] mt-1" />
-                  <div>
-                    <h3 className="font-medium">Phone</h3>
-                    <p className="text-gray-600">847-510-3229</p>
-                    <p className="text-sm text-gray-500 mt-1">Monday-Friday, 9am-5pm EST</p>
-                  </div>
+                <div className="flex flex-col items-center">
+                  <Phone className="w-5 h-5 text-[#3B82F6] mb-2" />
+                  <h3 className="font-medium">Phone</h3>
+                  <p className="text-gray-600">847-510-3229</p>
+                  <p className="text-sm text-gray-500 mt-1">Monday-Friday, 9am-5pm EST</p>
                 </div>
 
-                <div className="flex items-start">
-                  <Mail className="w-5 h-5 mr-3 text-[#8A4FFF] mt-1" />
-                  <div>
-                    <h3 className="font-medium">Email</h3>
-                    <p className="text-gray-600">alecgold808@gmail.com</p>
-                    <p className="text-sm text-gray-500 mt-1">Response within 24 hours</p>
-                  </div>
+                <div className="flex flex-col items-center">
+                  <Mail className="w-5 h-5 text-[#8A4FFF] mb-2" />
+                  <h3 className="font-medium">Email</h3>
+                  <p className="text-gray-600">alecgold808@gmail.com</p>
+                  <p className="text-sm text-gray-500 mt-1">Response within 24 hours</p>
                 </div>
 
-                <div className="flex items-start">
-                  <Clock className="w-5 h-5 mr-3 text-[#3B82F6] mt-1" />
-                  <div>
-                    <h3 className="font-medium">Hours</h3>
-                    <p className="text-gray-600">Monday-Friday: 9am-5pm EST</p>
-                    <p className="text-gray-600">Saturday: 10am-2pm EST</p>
-                    <p className="text-gray-600">Sunday: Closed</p>
-                  </div>
+                <div className="flex flex-col items-center">
+                  <Clock className="w-5 h-5 text-[#3B82F6] mb-2" />
+                  <h3 className="font-medium">Hours</h3>
+                  <p className="text-gray-600">Monday-Friday: 9am-5pm EST</p>
+                  <p className="text-gray-600">Saturday: 10am-2pm EST</p>
+                  <p className="text-gray-600">Sunday: Closed</p>
                 </div>
               </div>
             </div>
 
-            <div>
+            <div className="text-center">
               {!isSubmitted ? (
                 <>
                   <h2 className="text-2xl font-semibold mb-6">Send a Message</h2>
@@ -247,28 +241,28 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="apple-heading mb-12">Frequently Asked Questions</h2>
           <div className="space-y-8">
-            <div>
+            <div className="text-center">
               <h3 className="text-xl font-semibold mb-2">What types of items do you accept?</h3>
               <p className="text-gray-600">
                 We accept a wide variety of quality used items in good condition, including furniture, electronics,
                 appliances, sporting equipment, musical instruments, tools, and collectibles.
               </p>
             </div>
-            <div>
+            <div className="text-center">
               <h3 className="text-xl font-semibold mb-2">How do you determine the price for my item?</h3>
               <p className="text-gray-600">
                 We evaluate factors such as the item's condition, age, brand, current market value, and demand to offer
                 you a competitive price.
               </p>
             </div>
-            <div>
+            <div className="text-center">
               <h3 className="text-xl font-semibold mb-2">How soon can you pick up my item?</h3>
               <p className="text-gray-600">
                 Upon acceptance of our offer, we typically schedule pickup within 2-3 business days, depending on your
                 location and availability.
               </p>
             </div>
-            <div>
+            <div className="text-center">
               <h3 className="text-xl font-semibold mb-2">What payment methods do you offer?</h3>
               <p className="text-gray-600">
                 We provide payment via cash, check, or digital payment methods such as Venmo or PayPal, according to
