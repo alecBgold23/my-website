@@ -1,11 +1,19 @@
 import type React from "react"
 import "@/app/globals.css"
-import { Inter } from "next/font/google"
+import { Inter, Poppins } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 
 const inter = Inter({ subsets: ["latin"] })
+
+// Properly load Poppins font with Next.js font system
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+})
 
 export const metadata = {
   title: "BluBerry - Selling Made Simpler",
@@ -21,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${poppins.variable} bg-gradient-to-b from-white to-[#f0f7ff]`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <div className="flex flex-col min-h-screen">
             <Navbar />

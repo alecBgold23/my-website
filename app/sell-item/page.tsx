@@ -190,75 +190,94 @@ export default function SellItemPage() {
     </div>
   )
 
+  // Update the return statement to use more vibrant colors and styling
   return (
     <div className="container mx-auto py-12 px-4">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6 text-[#3B82F6]">Sell Your Item</h1>
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-6">
+          <span className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
+            Sell Your Item
+          </span>
+        </h1>
+
+        <p className="text-center text-gray-600 mb-12">
+          Please provide information about the item you wish to sell. This process takes just a few minutes, and we'll
+          respond with an offer within 24 hours.
+        </p>
 
         {!formSubmitted ? (
           <>
-            <p className="text-lg mb-8">
-              Please provide information about the item you wish to sell. This process takes just a few minutes, and
-              we'll respond with an offer within 24 hours.
-            </p>
+            {submitResult && !submitResult.success && (
+              <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6">{submitResult.message}</div>
+            )}
 
-            <div className="mb-8">
-              <div className="flex justify-between mb-2">
-                {[1, 2, 3].map((step) => (
-                  <div
-                    key={step}
-                    className={`flex flex-col items-center ${
-                      formStep >= step ? (step % 2 === 0 ? "text-[#8A4FFF]" : "text-[#3B82F6]") : "text-gray-400"
-                    }`}
-                  >
-                    <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
-                        formStep >= step ? (step % 2 === 0 ? "bg-[#8A4FFF]" : "bg-[#3B82F6]") : "bg-gray-200"
-                      }`}
-                    >
-                      {step}
-                    </div>
-                    <span className="text-sm">
-                      {step === 1 ? "Item Details" : step === 2 ? "Condition" : "Contact Info"}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <div className="w-full bg-gray-200 h-2 rounded-full">
+            {/* Progress Steps */}
+            <div className="flex justify-between items-center mb-12">
+              <div className="flex flex-col items-center">
                 <div
-                  className={`${
+                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
                     formStep === 1
-                      ? "bg-[#3B82F6]"
-                      : formStep === 2
-                        ? "bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF]"
-                        : "bg-[#8A4FFF]"
-                  } h-2 rounded-full transition-all duration-300`}
-                  style={{ width: `${((formStep - 1) / 2) * 100}%` }}
+                      ? "bg-gradient-to-r from-[#0066ff] to-[#0066ff] text-white shadow-md"
+                      : "bg-gray-200 text-gray-600"
+                  }`}
+                >
+                  1
+                </div>
+                <span className="text-sm mt-2 font-medium">Item Details</span>
+              </div>
+              <div className="flex-1 h-1 mx-4 bg-gray-200">
+                <div
+                  className="h-1 bg-gradient-to-r from-[#0066ff] to-[#8c52ff]"
+                  style={{ width: formStep >= 2 ? "100%" : "0%" }}
                 ></div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                    formStep === 2
+                      ? "bg-gradient-to-r from-[#0066ff] to-[#8c52ff] text-white shadow-md"
+                      : "bg-gray-200 text-gray-600"
+                  }`}
+                >
+                  2
+                </div>
+                <span className="text-sm mt-2 font-medium">Condition</span>
+              </div>
+              <div className="flex-1 h-1 mx-4 bg-gray-200">
+                <div
+                  className="h-1 bg-gradient-to-r from-[#0066ff] to-[#8c52ff]"
+                  style={{ width: formStep >= 3 ? "100%" : "0%" }}
+                ></div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div
+                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                    formStep === 3
+                      ? "bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] text-white shadow-md"
+                      : "bg-gray-200 text-gray-600"
+                  }`}
+                >
+                  3
+                </div>
+                <span className="text-sm mt-2 font-medium">Contact Info</span>
               </div>
             </div>
 
-            {submitResult && !submitResult.success && (
-              <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-                {submitResult.message}
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
               {formStep === 1 && (
-                <div className="space-y-6">
+                <div className="space-y-8">
                   <div>
-                    <Label htmlFor="item-category" className="text-lg">
-                      Item Category <span className="text-red-500">*</span>
+                    <Label htmlFor="item-category" className="text-base font-medium mb-2 block">
+                      Item Category <span className="text-[#ff6b6b]">*</span>
                     </Label>
                     <Select value={itemCategory} onValueChange={setItemCategory} required>
                       <SelectTrigger
                         id="item-category"
-                        className={`mt-2 ${formErrors.itemCategory ? "border-red-500" : ""}`}
+                        className={`w-full border ${formErrors.itemCategory ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                       >
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200">
                         <SelectItem value="furniture">Furniture</SelectItem>
                         <SelectItem value="electronics">Electronics</SelectItem>
                         <SelectItem value="appliances">Appliances</SelectItem>
@@ -273,8 +292,8 @@ export default function SellItemPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="item-name" className="text-lg">
-                      Item Name <span className="text-red-500">*</span>
+                    <Label htmlFor="item-name" className="text-base font-medium mb-2 block">
+                      Item Name <span className="text-[#ff6b6b]">*</span>
                     </Label>
                     <Input
                       id="item-name"
@@ -282,14 +301,14 @@ export default function SellItemPage() {
                       onChange={(e) => setItemName(e.target.value)}
                       placeholder="e.g., Leather Sofa, Samsung TV"
                       required
-                      className={`mt-2 ${formErrors.itemName ? "border-red-500" : ""}`}
+                      className={`w-full border ${formErrors.itemName ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.itemName && <ErrorMessage message={formErrors.itemName} />}
                   </div>
 
                   <div>
-                    <Label htmlFor="item-description" className="text-lg">
-                      Brief Description <span className="text-red-500">*</span>
+                    <Label htmlFor="item-description" className="text-base font-medium mb-2 block">
+                      Brief Description <span className="text-[#ff6b6b]">*</span>
                     </Label>
                     <Textarea
                       id="item-description"
@@ -297,26 +316,28 @@ export default function SellItemPage() {
                       onChange={(e) => setItemDescription(e.target.value)}
                       placeholder="Please describe your item (brand, size, color, etc.)"
                       rows={4}
-                      className={`mt-2 ${formErrors.itemDescription ? "border-red-500" : ""}`}
+                      className={`w-full border ${formErrors.itemDescription ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                       required
                     />
                     {formErrors.itemDescription && <ErrorMessage message={formErrors.itemDescription} />}
                   </div>
 
                   <div>
-                    <Label className="text-lg">
-                      Item Photos <span className="text-red-500">*</span>{" "}
+                    <Label className="text-base font-medium mb-2 block">
+                      Item Photos <span className="text-[#ff6b6b]">*</span>{" "}
                       <span className="text-sm font-normal">(at least 3)</span>
                     </Label>
                     <div
-                      className={`mt-2 p-4 border-2 border-dashed rounded-lg ${formErrors.itemPhotos ? "border-red-500" : "border-gray-300"}`}
+                      className={`p-6 border border-dashed rounded-md ${
+                        formErrors.itemPhotos ? "border-red-500" : "border-gray-300"
+                      } bg-[#f8faff]`}
                     >
-                      <div className="flex flex-col items-center justify-center gap-3">
-                        <div className="flex flex-wrap gap-2 w-full mb-4">
+                      <div className="flex flex-col items-center justify-center gap-4">
+                        <div className="flex flex-wrap gap-4 w-full mb-4">
                           {itemPhotos.map((photo, index) => (
                             <div
                               key={index}
-                              className="relative w-24 h-24 rounded-md overflow-hidden border border-gray-200"
+                              className="relative w-24 h-24 rounded-md overflow-hidden border border-gray-200 shadow-sm"
                             >
                               <img
                                 src={photo.preview || "/placeholder.svg"}
@@ -326,7 +347,7 @@ export default function SellItemPage() {
                               <button
                                 type="button"
                                 onClick={() => removePhoto(index)}
-                                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 w-5 h-5 flex items-center justify-center"
+                                className="absolute top-1 right-1 bg-[#ff6b6b] text-white rounded-full p-1 w-5 h-5 flex items-center justify-center shadow-sm"
                                 aria-label="Remove photo"
                               >
                                 <X className="w-3 h-3" />
@@ -334,32 +355,32 @@ export default function SellItemPage() {
                             </div>
                           ))}
                           {itemPhotos.length === 0 && (
-                            <div className="w-full text-center text-gray-500 py-4">
-                              <ImageIcon className="w-12 h-12 mx-auto mb-2 text-gray-400" />
+                            <div className="w-full text-center text-gray-500 py-8">
+                              <ImageIcon className="w-16 h-16 mx-auto mb-4 text-gray-300" />
                               <p>No photos uploaded yet</p>
                             </div>
                           )}
                         </div>
 
-                        <div className="flex flex-wrap gap-3 justify-center">
+                        <div className="flex flex-wrap gap-4 justify-center">
                           <Button
                             type="button"
                             variant="outline"
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex items-center gap-2"
+                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-blue-50 shadow-sm"
                           >
                             <Upload className="w-4 h-4" />
-                            <span>Upload Photos</span>
+                            <span>Add file</span>
                           </Button>
 
                           <Button
                             type="button"
                             variant="outline"
                             onClick={() => cameraInputRef.current?.click()}
-                            className="flex items-center gap-2"
+                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-blue-50 shadow-sm"
                           >
                             <Camera className="w-4 h-4" />
-                            <span>Take Photo</span>
+                            <span>Take photo</span>
                           </Button>
 
                           <input
@@ -390,31 +411,37 @@ export default function SellItemPage() {
                     {formErrors.itemPhotos && <ErrorMessage message={formErrors.itemPhotos} />}
                   </div>
 
-                  <Button
-                    type="button"
-                    onClick={handleContinueStep1}
-                    disabled={!step1Valid}
-                    className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    Continue
-                  </Button>
+                  <div className="flex justify-end mt-8">
+                    <Button
+                      type="button"
+                      onClick={handleContinueStep1}
+                      disabled={!step1Valid}
+                      className="bg-gradient-to-r from-[#0066ff] to-[#0066ff] hover:from-[#0055dd] hover:to-[#0055dd] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+                    >
+                      Continue
+                    </Button>
+                  </div>
                 </div>
               )}
 
               {formStep === 2 && (
-                <div className="space-y-6">
+                <div className="space-y-8">
                   <div>
-                    <Label className="text-lg">
-                      Item Condition <span className="text-red-500">*</span>
+                    <Label className="text-base font-medium mb-4 block">
+                      Item Condition <span className="text-[#ff6b6b]">*</span>
                     </Label>
                     <RadioGroup
                       value={itemCondition}
                       onValueChange={setItemCondition}
-                      className={`mt-3 ${formErrors.itemCondition ? "border-red-500 border p-3 rounded-md" : ""}`}
+                      className={`space-y-4 ${formErrors.itemCondition ? "border-red-500 border p-4 rounded-md" : ""}`}
                       required
                     >
-                      <div className="flex items-start space-x-2 mb-3">
-                        <RadioGroupItem value="like-new" id="like-new" className="mt-1" />
+                      <div className="flex items-start space-x-3">
+                        <RadioGroupItem
+                          value="like-new"
+                          id="like-new"
+                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                        />
                         <div>
                           <Label htmlFor="like-new" className="font-medium">
                             Like New
@@ -422,8 +449,12 @@ export default function SellItemPage() {
                           <p className="text-sm text-gray-500">Appears new and functions perfectly</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-2 mb-3">
-                        <RadioGroupItem value="excellent" id="excellent" className="mt-1" />
+                      <div className="flex items-start space-x-3">
+                        <RadioGroupItem
+                          value="excellent"
+                          id="excellent"
+                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                        />
                         <div>
                           <Label htmlFor="excellent" className="font-medium">
                             Excellent
@@ -431,8 +462,12 @@ export default function SellItemPage() {
                           <p className="text-sm text-gray-500">Minimal signs of use, functions perfectly</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-2 mb-3">
-                        <RadioGroupItem value="good" id="good" className="mt-1" />
+                      <div className="flex items-start space-x-3">
+                        <RadioGroupItem
+                          value="good"
+                          id="good"
+                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                        />
                         <div>
                           <Label htmlFor="good" className="font-medium">
                             Good
@@ -440,8 +475,12 @@ export default function SellItemPage() {
                           <p className="text-sm text-gray-500">Some signs of use, functions well</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-2 mb-3">
-                        <RadioGroupItem value="fair" id="fair" className="mt-1" />
+                      <div className="flex items-start space-x-3">
+                        <RadioGroupItem
+                          value="fair"
+                          id="fair"
+                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                        />
                         <div>
                           <Label htmlFor="fair" className="font-medium">
                             Fair
@@ -449,8 +488,12 @@ export default function SellItemPage() {
                           <p className="text-sm text-gray-500">Visible wear, remains functional</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-2">
-                        <RadioGroupItem value="poor" id="poor" className="mt-1" />
+                      <div className="flex items-start space-x-3">
+                        <RadioGroupItem
+                          value="poor"
+                          id="poor"
+                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                        />
                         <div>
                           <Label htmlFor="poor" className="font-medium">
                             Poor
@@ -463,30 +506,34 @@ export default function SellItemPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="item-issues" className="text-lg">
-                      Any issues or defects? <span className="text-red-500">*</span>
+                    <Label htmlFor="item-issues" className="text-base font-medium mb-2 block">
+                      Any issues or defects? <span className="text-[#ff6b6b]">*</span>
                     </Label>
                     <Textarea
                       id="item-issues"
                       value={itemIssues}
                       onChange={(e) => setItemIssues(e.target.value)}
                       placeholder="Please describe any scratches, dents, missing parts, or functional issues"
-                      rows={3}
-                      className={`mt-2 ${formErrors.itemIssues ? "border-red-500" : ""}`}
+                      rows={4}
+                      className={`w-full border ${formErrors.itemIssues ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                       required
                     />
                     {formErrors.itemIssues && <ErrorMessage message={formErrors.itemIssues} />}
                   </div>
 
-                  <div className="flex justify-between">
-                    <Button type="button" onClick={() => setFormStep(1)} variant="outline">
+                  <div className="flex justify-between mt-8">
+                    <Button
+                      type="button"
+                      onClick={() => setFormStep(1)}
+                      className="border border-[#0066ff] text-[#0066ff] hover:bg-blue-50 px-6 py-2 rounded-md shadow-sm"
+                    >
                       Back
                     </Button>
                     <Button
                       type="button"
                       onClick={handleContinueStep2}
                       disabled={!step2Valid}
-                      className="bg-[#8A4FFF] hover:bg-[#7B46E3] text-white rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7b46e6] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                     >
                       Continue
                     </Button>
@@ -495,96 +542,106 @@ export default function SellItemPage() {
               )}
 
               {formStep === 3 && (
-                <div className="space-y-6">
+                <div className="space-y-8">
                   <div>
-                    <Label htmlFor="full-name" className="text-lg">
-                      Full Name <span className="text-red-500">*</span>
+                    <Label htmlFor="full-name" className="text-base font-medium mb-2 block">
+                      Full Name <span className="text-[#ff6b6b]">*</span>
                     </Label>
                     <Input
                       id="full-name"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
+                      placeholder="Your full name"
                       required
-                      className={`mt-2 ${formErrors.fullName ? "border-red-500" : ""}`}
+                      className={`w-full border ${formErrors.fullName ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.fullName && <ErrorMessage message={formErrors.fullName} />}
                   </div>
 
                   <div>
-                    <Label htmlFor="email" className="text-lg">
-                      Email Address <span className="text-red-500">*</span>
+                    <Label htmlFor="email" className="text-base font-medium mb-2 block">
+                      Email Address <span className="text-[#ff6b6b]">*</span>
                     </Label>
                     <Input
                       id="email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      placeholder="your.email@example.com"
                       required
-                      className={`mt-2 ${formErrors.email ? "border-red-500" : ""}`}
+                      className={`w-full border ${formErrors.email ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.email && <ErrorMessage message={formErrors.email} />}
                   </div>
 
                   <div>
-                    <Label htmlFor="phone" className="text-lg">
-                      Phone Number <span className="text-red-500">*</span>
+                    <Label htmlFor="phone" className="text-base font-medium mb-2 block">
+                      Phone Number <span className="text-[#ff6b6b]">*</span>
                     </Label>
                     <Input
                       id="phone"
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
+                      placeholder="(123) 456-7890"
                       required
-                      className={`mt-2 ${formErrors.phone ? "border-red-500" : ""}`}
+                      className={`w-full border ${formErrors.phone ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.phone && <ErrorMessage message={formErrors.phone} />}
                   </div>
 
                   <div>
-                    <Label htmlFor="zip" className="text-lg">
-                      ZIP Code <span className="text-red-500">*</span>
+                    <Label htmlFor="zip" className="text-base font-medium mb-2 block">
+                      ZIP Code <span className="text-[#ff6b6b]">*</span>
                     </Label>
                     <Input
                       id="zip"
                       value={zipCode}
                       onChange={(e) => setZipCode(e.target.value)}
+                      placeholder="12345"
                       required
-                      className={`mt-2 ${formErrors.zipCode ? "border-red-500" : ""}`}
+                      className={`w-full border ${formErrors.zipCode ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
                     />
                     {formErrors.zipCode && <ErrorMessage message={formErrors.zipCode} />}
                   </div>
 
-                  <div className="flex items-start space-x-2">
-                    <Checkbox
-                      id="terms"
-                      checked={termsAccepted}
-                      onCheckedChange={setTermsAccepted}
-                      required
-                      className={`mt-1 ${formErrors.terms ? "border-red-500" : ""}`}
-                    />
-                    <div>
-                      <Label htmlFor="terms" className="font-medium">
-                        I agree to the Privacy Policy <span className="text-red-500">*</span>
-                      </Label>
-                      <p className="text-sm text-gray-500">
-                        By submitting this form, you agree to our{" "}
-                        <Link href="/privacy-policy" className="text-[#3B82F6] underline">
-                          Privacy Policy
-                        </Link>
-                        .
-                      </p>
-                      {formErrors.terms && <ErrorMessage message={formErrors.terms} />}
+                  <div className="mt-6">
+                    <div className="flex items-start space-x-3">
+                      <Checkbox
+                        id="terms"
+                        checked={termsAccepted}
+                        onCheckedChange={setTermsAccepted}
+                        required
+                        className={`mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff] ${formErrors.terms ? "border-red-500" : ""}`}
+                      />
+                      <div>
+                        <Label htmlFor="terms" className="font-medium">
+                          I agree to the Privacy Policy <span className="text-[#ff6b6b]">*</span>
+                        </Label>
+                        <p className="text-sm text-gray-500">
+                          By submitting this form, you agree to our{" "}
+                          <Link href="/privacy-policy" className="text-[#0066ff] underline">
+                            Privacy Policy
+                          </Link>
+                          .
+                        </p>
+                        {formErrors.terms && <ErrorMessage message={formErrors.terms} />}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex justify-between">
-                    <Button type="button" onClick={() => setFormStep(2)} variant="outline">
+                  <div className="flex justify-between mt-8">
+                    <Button
+                      type="button"
+                      onClick={() => setFormStep(2)}
+                      className="border border-[#0066ff] text-[#0066ff] hover:bg-blue-50 px-6 py-2 rounded-md shadow-sm"
+                    >
                       Back
                     </Button>
                     <Button
                       type="submit"
                       disabled={!step3Valid || isSubmitting}
-                      className="bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3] text-white rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] hover:from-[#7b46e6] hover:to-[#7b46e6] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                     >
                       {isSubmitting ? (
                         <>
@@ -601,18 +658,20 @@ export default function SellItemPage() {
             </form>
           </>
         ) : (
-          <div className="text-center py-12">
-            <div className="w-20 h-20 bg-gradient-to-r from-[#EBF5FF] to-[#F3EEFF] rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle2 className="w-12 h-12 text-[#3B82F6]" />
+          <div className="text-center bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+            <div className="w-20 h-20 bg-gradient-to-r from-[#e6f0ff] to-[#f0e6ff] rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle2 className="w-12 h-12 text-[#0066ff]" />
             </div>
-            <h2 className="text-3xl font-bold mb-4 text-[#3B82F6]">Thank You</h2>
-            <p className="text-xl mb-8">
+            <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
+              Thank You
+            </h2>
+            <p className="text-lg mb-8 text-gray-600">
               We've received your submission and will review your item details. Your information has been sent to
               alecgold808@gmail.com. You can expect to hear from us within 24 hours with a price offer.
             </p>
-            <div className="bg-[#EBF5FF] p-6 rounded-lg inline-block text-left">
-              <h3 className="font-semibold text-lg mb-2 text-[#3B82F6]">Next Steps</h3>
-              <ol className="list-decimal pl-5 space-y-2">
+            <div className="bg-[#f8faff] p-6 rounded-md inline-block text-left border border-gray-200">
+              <h3 className="font-medium text-lg mb-2 text-[#0066ff]">Next Steps</h3>
+              <ol className="list-decimal pl-5 space-y-2 text-gray-600">
                 <li>Our team will evaluate your item details</li>
                 <li>We'll email you a price offer within 24 hours</li>
                 <li>If you accept, we'll schedule a convenient pickup time</li>
@@ -622,7 +681,7 @@ export default function SellItemPage() {
             <div className="mt-8">
               <Button
                 asChild
-                className="bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] hover:from-[#2563EB] hover:to-[#7B46E3] text-white rounded-lg"
+                className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7b46e6] text-white px-6 py-2 rounded-md shadow-sm"
               >
                 <Link href="/">Return to Home</Link>
               </Button>
