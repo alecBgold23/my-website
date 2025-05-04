@@ -40,6 +40,7 @@ export default function SellItemPage() {
   // Refs
   const fileInputRef = useRef(null)
   const cameraInputRef = useRef(null)
+  const formContainerRef = useRef(null)
 
   // Validate step 1
   useEffect(() => {
@@ -95,10 +96,28 @@ export default function SellItemPage() {
     return Object.keys(errors).length === 0
   }
 
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+
+    // Alternative approach using the form container ref
+    if (formContainerRef.current) {
+      formContainerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+  }
+
   const handleContinueStep1 = () => {
     if (validateStep1()) {
       setFormStep(2)
       setFormErrors({})
+      // Scroll to top after changing step
+      scrollToTop()
     }
   }
 
@@ -106,6 +125,8 @@ export default function SellItemPage() {
     if (validateStep2()) {
       setFormStep(3)
       setFormErrors({})
+      // Scroll to top after changing step
+      scrollToTop()
     }
   }
 
@@ -141,6 +162,8 @@ export default function SellItemPage() {
         setSubmitResult(result)
         if (result.success) {
           setFormSubmitted(true)
+          // Scroll to top after submission is successful
+          scrollToTop()
         }
       } catch (error) {
         console.error("Error submitting form:", error)
@@ -195,7 +218,7 @@ export default function SellItemPage() {
 
   // Update the return statement to use more vibrant colors and styling
   return (
-    <div className="container mx-auto py-12 px-4">
+    <div className="container mx-auto py-12 px-4" ref={formContainerRef}>
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold text-center mb-6">
           <span className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
@@ -527,7 +550,10 @@ export default function SellItemPage() {
                   <div className="flex justify-between mt-8">
                     <Button
                       type="button"
-                      onClick={() => setFormStep(1)}
+                      onClick={() => {
+                        setFormStep(1)
+                        scrollToTop()
+                      }}
                       className="border border-[#0066ff] text-[#0066ff] hover:bg-blue-50 px-6 py-2 rounded-md shadow-sm outline-button"
                     >
                       Back
@@ -636,7 +662,10 @@ export default function SellItemPage() {
                   <div className="flex justify-between mt-8">
                     <Button
                       type="button"
-                      onClick={() => setFormStep(2)}
+                      onClick={() => {
+                        setFormStep(2)
+                        scrollToTop()
+                      }}
                       className="border border-[#0066ff] text-[#0066ff] hover:bg-blue-50 px-6 py-2 rounded-md shadow-sm outline-button"
                     >
                       Back
