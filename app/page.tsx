@@ -1,9 +1,18 @@
 import Link from "next/link"
 import Image from "next/image"
+import { AlertTriangle } from "lucide-react"
 
 export default function Home() {
   return (
     <div>
+      {/* Announcement Bar - Sleek warning style */}
+      <div className="bg-gradient-to-r from-gray-900 to-red-900 py-3 px-4 text-center flex items-center justify-center shadow-md">
+        <AlertTriangle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0" />
+        <span className="text-red-500 text-sm">
+          Unfortunately, all services are down right now, we will let you know when services are running.
+        </span>
+      </div>
+
       {/* Hero Section with Apple-style layout */}
       <section className="apple-section bg-gradient-to-b from-white to-gray-50 relative overflow-hidden pt-12 pb-16">
         <div className="container mx-auto px-4">
