@@ -214,7 +214,7 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       disabled={!isFormValid || isSubmitting}
-                      className="apple-button apple-button-primary w-full gradient-button"
+                      className="apple-button apple-button-primary w-full gradient-button hover:bg-white hover:text-[#0071e3] hover:border hover:border-[#0071e3] transition-all duration-300"
                     >
                       {isSubmitting ? (
                         <>
@@ -239,7 +239,7 @@ export default function ContactPage() {
                   </p>
                   <Button
                     onClick={() => setIsSubmitted(false)}
-                    className="apple-button apple-button-primary gradient-button"
+                    className="apple-button apple-button-primary gradient-button hover:bg-white hover:text-[#0071e3] hover:border hover:border-[#0071e3] transition-all duration-300"
                   >
                     Send Another Message
                   </Button>
