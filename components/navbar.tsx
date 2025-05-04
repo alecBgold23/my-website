@@ -3,7 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, X, Search, ShoppingBag } from "lucide-react"
+import { Menu, X, Search } from "lucide-react"
 import { useState } from "react"
 import SearchModal from "./search"
 
@@ -62,7 +62,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center">
               <button
                 className="text-gray-600 hover:text-[#3B82F6] transition-all duration-300 hover:scale-110"
                 aria-label="Search"
@@ -70,16 +70,10 @@ export default function Navbar() {
               >
                 <Search size={18} />
               </button>
-              <button
-                className="text-gray-600 hover:text-[#3B82F6] transition-all duration-300 hover:scale-110"
-                aria-label="Cart"
-              >
-                <ShoppingBag size={18} />
-              </button>
 
               {/* Mobile menu button */}
               <button
-                className="md:hidden text-gray-600 transition-all duration-300 hover:text-[#3B82F6] hover:scale-110"
+                className="md:hidden ml-4 text-gray-600 transition-all duration-300 hover:text-[#3B82F6] hover:scale-110"
                 onClick={toggleMenu}
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               >
