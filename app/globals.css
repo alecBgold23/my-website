@@ -75,11 +75,40 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
   @apply bg-background text-foreground;
   font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.sf-pro-display {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.apple-product-heading {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-size: 48px;
+  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -0.003em;
+  margin-bottom: 0.4em;
+}
+
+@media (max-width: 734px) {
+  .apple-product-heading {
+    font-size: 32px;
+    line-height: 1.125;
+  }
 }
 
 @layer components {
