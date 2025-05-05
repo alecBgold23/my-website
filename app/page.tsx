@@ -13,27 +13,25 @@ export default function Home() {
         </span>
       </div>
 
-      {/* Hero Section with Apple-style layout */}
-      <section className="apple-section bg-gradient-to-b from-white to-gray-50 relative overflow-hidden pt-12 pb-16">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center text-center mb-12">
-            <h1 className="apple-heading mb-2">
-              <span className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
-                BluBerry
-              </span>
-            </h1>
-            <p className="apple-subheading mb-8 text-black text-3d">Selling made simpler.</p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/how-it-works" className="apple-button apple-button-primary">
-                Learn How It Works
-              </Link>
-              <Link href="/sell-item" className="apple-button apple-button-secondary">
-                Sell Your Item
-              </Link>
+      {/* Hero Section as a link to Sell Your Item */}
+      <Link href="/sell-item" className="block">
+        <section className="bg-gradient-to-b from-white to-gray-50 relative overflow-hidden py-16">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col items-center text-center">
+              <h1 className="apple-heading">
+                <span className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
+                  BluBerry
+                </span>
+              </h1>
+              <p className="apple-subheading mb-8">Selling made simpler.</p>
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <span className="apple-button apple-button-primary">Learn How It Works</span>
+                <span className="apple-button apple-button-secondary">Sell Your Item</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Link>
 
       {/* Process Section */}
       <section className="apple-section bg-black text-white">

@@ -35,16 +35,19 @@ export default function Navbar() {
       <header className="apple-nav sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <nav className="flex justify-between items-center h-12">
-            <Link href="/" className="flex items-center">
-              <div className="relative w-10 h-10">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="relative w-8 h-8">
                 <Image
                   src="/images/blueberry-logo.png"
                   alt="BluBerry Logo"
-                  width={40}
-                  height={40}
+                  width={32}
+                  height={32}
                   className="object-contain"
                 />
               </div>
+              <span className="text-sm font-medium bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
+                BluBerry
+              </span>
             </Link>
 
             {/* Desktop navigation */}
