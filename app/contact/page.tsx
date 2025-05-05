@@ -142,7 +142,7 @@ export default function ContactPage() {
                       {submitResult.message}
                     </div>
                   )}
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form action="https://formspree.io/f/xqaqprdw" method="POST" className="space-y-4">
                     <div>
                       <Label htmlFor="name" className="text-sm font-medium text-gray-700">
                         Name <span className="text-red-500">*</span>
@@ -164,6 +164,7 @@ export default function ContactPage() {
                       </Label>
                       <Input
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="your.email@example.com"
                         value={email}
@@ -201,6 +202,7 @@ export default function ContactPage() {
                       </Label>
                       <Textarea
                         id="message"
+                        name="message"
                         placeholder="How can we help you?"
                         rows={5}
                         value={message}
@@ -210,6 +212,9 @@ export default function ContactPage() {
                       />
                       {formErrors.message && <ErrorMessage message={formErrors.message} />}
                     </div>
+
+                    <input type="hidden" name="name" value={name} />
+                    <input type="hidden" name="inquiryType" value={inquiryType} />
 
                     <Button
                       type="submit"
