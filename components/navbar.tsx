@@ -30,12 +30,19 @@ export default function Navbar() {
     { href: "/contact", label: "Contact" },
   ]
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }
+
   return (
     <>
       <header className="apple-nav sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <nav className="flex justify-between items-center h-12">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2" onClick={scrollToTop}>
               <div className="relative w-8 h-8">
                 <Image
                   src="/images/blueberry-logo.png"
@@ -59,6 +66,7 @@ export default function Navbar() {
                   className={`text-sm hover:text-[#3B82F6] transition-all duration-300 ${
                     pathname === link.href ? "text-[#3B82F6]" : "text-gray-600"
                   } hover:translate-y-[-1px]`}
+                  onClick={scrollToTop}
                 >
                   {link.label}
                 </Link>
@@ -95,7 +103,10 @@ export default function Navbar() {
                   className={`text-sm hover:text-[#3B82F6] transition-all duration-300 ${
                     pathname === link.href ? "text-[#3B82F6]" : "text-gray-600"
                   } hover:translate-y-[-1px]`}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false)
+                    scrollToTop()
+                  }}
                 >
                   {link.label}
                 </Link>
