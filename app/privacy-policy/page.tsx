@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 
 export default function PrivacyPolicyPage() {
   return (
@@ -133,9 +132,11 @@ export default function PrivacyPolicyPage() {
         </div>
 
         <div className="mt-12 text-center">
-          <Button asChild className="bg-[#3B82F6] hover:bg-[#2563EB] text-white">
-            <Link href="/">Return to Home</Link>
-          </Button>
+          <div className="inline-block">
+            <Link href="/" className="bg-[#3B82F6] hover:bg-[#2563EB] text-white px-4 py-2 rounded-md">
+              Return to Home
+            </Link>
+          </div>
         </div>
       </div>
     </div>
