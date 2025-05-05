@@ -48,9 +48,7 @@ export default function Navbar() {
                   className="object-contain"
                 />
               </div>
-              <span className="text-sm font-medium bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
-                BluBerry
-              </span>
+              <span className="text-sm font-medium sparkle-text">BluBerry</span>
             </Link>
 
             {/* Desktop navigation */}

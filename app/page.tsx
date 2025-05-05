@@ -49,7 +49,7 @@ export default function Home() {
             className="flex flex-col items-center text-center cursor-pointer group mb-8"
             onClick={navigateToSellItem}
           >
-            <h1 className="text-4xl md:text-5xl font-medium mb-2 bg-gradient-to-r from-[#0066ff] via-[#7b68ee] to-[#9933ff] bg-clip-text text-transparent drop-shadow-sm pb-1 transition-transform duration-300 group-hover:scale-105">
+            <h1 className="text-4xl md:text-5xl font-medium mb-2 sparkle-text drop-shadow-sm pb-1 transition-transform duration-300 group-hover:scale-105">
               BluBerry
             </h1>
             <p className="text-xl md:text-2xl text-black mb-8 transition-all duration-300 group-hover:text-[#0066ff]">
