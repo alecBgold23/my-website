@@ -2,32 +2,12 @@
 
 import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-  CheckCircle2,
-  AlertCircle,
-  Camera,
-  Upload,
-  X,
-  ImageIcon,
-  Loader2,
-  Tag,
-  ListFilter,
-  FileText,
-  Star,
-  AlertTriangle,
-  User,
-  Mail,
-  Phone,
-  MapPin,
-  Shield,
-} from "lucide-react"
+import { CheckCircle2, AlertCircle, Camera, Upload, X, ImageIcon, Loader2 } from "lucide-react"
 import { sendItemSubmissionEmail } from "@/app/actions/email-actions"
 
 export default function SellItemPage() {
@@ -60,6 +40,9 @@ export default function SellItemPage() {
   const cameraInputRef = useRef(null)
   const formContainerRef = useRef(null)
   const formTopRef = useRef(null)
+  const section1Ref = useRef(null)
+  const section2Ref = useRef(null)
+  const section3Ref = useRef(null)
 
   // Validate step 1
   useEffect(() => {
@@ -97,12 +80,19 @@ export default function SellItemPage() {
     return true
   }
 
-  // Scroll to the top of the page
+  // Scroll to the top of the page with smooth animation
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     })
+  }
+
+  // Scroll to specific section
+  const scrollToSection = (ref) => {
+    if (ref && ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" })
+    }
   }
 
   const handleContinueStep1 = () => {
@@ -209,11 +199,6 @@ export default function SellItemPage() {
     </div>
   )
 
-  // Handler for clicking on a condition option
-  const handleConditionClick = (value) => {
-    setItemCondition(value)
-  }
-
   return (
     <div className="container mx-auto py-12 px-4 bg-gradient-to-b from-white to-blue-50" ref={formContainerRef}>
       {/* Add a ref at the top of the form for scrolling */}
@@ -238,15 +223,21 @@ export default function SellItemPage() {
             {/* Progress Steps */}
             <div className="flex justify-between items-center mb-12 px-4">
               <div className="flex flex-col items-center">
-                <div
+                <a
+                  href="#section1"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setFormStep(1)
+                    scrollToSection(section1Ref)
+                  }}
                   className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     formStep === 1
                       ? "bg-gradient-to-r from-[#0066ff] to-[#0066ff] text-white shadow-lg"
-                      : "bg-white text-gray-600 border border-gray-200"
+                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
                   } transition-all duration-300`}
                 >
                   <span className="text-lg font-semibold">1</span>
-                </div>
+                </a>
                 <span className="text-sm mt-2 font-medium">Item Details</span>
               </div>
               <div className="flex-1 h-1 mx-4 bg-gray-100 rounded-full overflow-hidden">
@@ -256,15 +247,21 @@ export default function SellItemPage() {
                 ></div>
               </div>
               <div className="flex flex-col items-center">
-                <div
+                <a
+                  href="#section2"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setFormStep(2)
+                    scrollToSection(section2Ref)
+                  }}
                   className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     formStep === 2
                       ? "bg-gradient-to-r from-[#0066ff] to-[#8c52ff] text-white shadow-lg"
-                      : "bg-white text-gray-600 border border-gray-200"
+                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
                   } transition-all duration-300`}
                 >
                   <span className="text-lg font-semibold">2</span>
-                </div>
+                </a>
                 <span className="text-sm mt-2 font-medium">Condition</span>
               </div>
               <div className="flex-1 h-1 mx-4 bg-gray-100 rounded-full overflow-hidden">
@@ -274,25 +271,33 @@ export default function SellItemPage() {
                 ></div>
               </div>
               <div className="flex flex-col items-center">
-                <div
+                <a
+                  href="#section3"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setFormStep(3)
+                    scrollToSection(section3Ref)
+                  }}
                   className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     formStep === 3
                       ? "bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] text-white shadow-lg"
-                      : "bg-white text-gray-600 border border-gray-200"
+                      : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
                   } transition-all duration-300`}
                 >
                   <span className="text-lg font-semibold">3</span>
-                </div>
+                </a>
                 <span className="text-sm mt-2 font-medium">Contact Info</span>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8 border border-blue-50">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 transform transition-all duration-300 hover:shadow-xl"
+            >
               {formStep === 1 && (
-                <div className="space-y-8">
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label htmlFor="item-category" className="text-base font-medium mb-2 flex items-center gap-2">
-                      <ListFilter className="h-5 w-5 text-[#0066ff]" />
+                <div className="space-y-8" id="section1" ref={section1Ref}>
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="item-category" className="text-base font-medium mb-2 block">
                       Item Category
                     </Label>
                     <Select value={itemCategory} onValueChange={setItemCategory}>
@@ -318,9 +323,8 @@ export default function SellItemPage() {
                     {formErrors.itemCategory && <ErrorMessage message={formErrors.itemCategory} />}
                   </div>
 
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label htmlFor="item-name" className="text-base font-medium mb-2 flex items-center gap-2">
-                      <Tag className="h-5 w-5 text-[#0066ff]" />
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="item-name" className="text-base font-medium mb-2 block">
                       Item Name
                     </Label>
                     <Input
@@ -335,9 +339,8 @@ export default function SellItemPage() {
                     {formErrors.itemName && <ErrorMessage message={formErrors.itemName} />}
                   </div>
 
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label htmlFor="item-description" className="text-base font-medium mb-2 flex items-center gap-2">
-                      <FileText className="h-5 w-5 text-[#0066ff]" />
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="item-description" className="text-base font-medium mb-2 block">
                       Brief Description
                     </Label>
                     <Textarea
@@ -353,9 +356,8 @@ export default function SellItemPage() {
                     {formErrors.itemDescription && <ErrorMessage message={formErrors.itemDescription} />}
                   </div>
 
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label className="text-base font-medium mb-2 flex items-center gap-2">
-                      <Camera className="h-5 w-5 text-[#0066ff]" />
+                  <div className="transition-all duration-300">
+                    <Label className="text-base font-medium mb-2 block">
                       Item Photos <span className="text-sm font-normal">(at least 3)</span>
                     </Label>
                     <div
@@ -395,25 +397,23 @@ export default function SellItemPage() {
                         </div>
 
                         <div className="flex flex-wrap gap-4 justify-center">
-                          <Button
+                          <button
                             type="button"
-                            variant="outline"
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white shadow-sm transition-all duration-300 rounded-full"
+                            className="flex items-center gap-2 border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-4 py-2 rounded-full shadow-sm transition-all duration-300"
                           >
                             <Upload className="w-4 h-4" />
                             <span>Add file</span>
-                          </Button>
+                          </button>
 
-                          <Button
+                          <button
                             type="button"
-                            variant="outline"
                             onClick={() => cameraInputRef.current?.click()}
-                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white shadow-sm transition-all duration-300 rounded-full"
+                            className="flex items-center gap-2 border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-4 py-2 rounded-full shadow-sm transition-all duration-300"
                           >
                             <Camera className="w-4 h-4" />
                             <span>Take photo</span>
-                          </Button>
+                          </button>
 
                           <input
                             ref={fileInputRef}
@@ -444,117 +444,109 @@ export default function SellItemPage() {
                   </div>
 
                   <div className="flex justify-end mt-8">
-                    <Button
+                    <button
                       type="button"
                       onClick={handleContinueStep1}
                       disabled={!step1Valid}
                       className="bg-gradient-to-r from-[#0066ff] to-[#0066ff] hover:from-[#0055dd] hover:to-[#0055dd] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Continue
-                    </Button>
+                    </button>
                   </div>
                 </div>
               )}
 
               {formStep === 2 && (
-                <div className="space-y-8">
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label className="text-base font-medium mb-4 flex items-center gap-2">
-                      <Star className="h-5 w-5 text-[#0066ff]" />
-                      Item Condition
-                    </Label>
-                    <RadioGroup
-                      value={itemCondition}
-                      onValueChange={setItemCondition}
-                      className={`space-y-4 ${formErrors.itemCondition ? "border-red-300 border p-4 rounded-lg" : ""}`}
-                    >
-                      <div
-                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
-                        onClick={() => handleConditionClick("like-new")}
-                      >
-                        <RadioGroupItem
-                          value="like-new"
-                          id="like-new"
-                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
-                        />
+                <div className="space-y-8" id="section2" ref={section2Ref}>
+                  <div className="transition-all duration-300">
+                    <Label className="text-base font-medium mb-4 block">Item Condition</Label>
+                    <div className="space-y-4">
+                      {/* Static condition options */}
+                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                        <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
+                          {itemCondition === "like-new" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                        </div>
                         <div>
-                          <Label htmlFor="like-new" className="font-medium cursor-pointer">
+                          <Label
+                            htmlFor="like-new"
+                            className="font-medium cursor-pointer"
+                            onClick={() => setItemCondition("like-new")}
+                          >
                             Like New
                           </Label>
                           <p className="text-sm text-gray-500">Appears new and functions perfectly</p>
                         </div>
                       </div>
-                      <div
-                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
-                        onClick={() => handleConditionClick("excellent")}
-                      >
-                        <RadioGroupItem
-                          value="excellent"
-                          id="excellent"
-                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
-                        />
+
+                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                        <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
+                          {itemCondition === "excellent" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                        </div>
                         <div>
-                          <Label htmlFor="excellent" className="font-medium cursor-pointer">
+                          <Label
+                            htmlFor="excellent"
+                            className="font-medium cursor-pointer"
+                            onClick={() => setItemCondition("excellent")}
+                          >
                             Excellent
                           </Label>
                           <p className="text-sm text-gray-500">Minimal signs of use, functions perfectly</p>
                         </div>
                       </div>
-                      <div
-                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
-                        onClick={() => handleConditionClick("good")}
-                      >
-                        <RadioGroupItem
-                          value="good"
-                          id="good"
-                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
-                        />
+
+                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                        <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
+                          {itemCondition === "good" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                        </div>
                         <div>
-                          <Label htmlFor="good" className="font-medium cursor-pointer">
+                          <Label
+                            htmlFor="good"
+                            className="font-medium cursor-pointer"
+                            onClick={() => setItemCondition("good")}
+                          >
                             Good
                           </Label>
                           <p className="text-sm text-gray-500">Some signs of use, functions well</p>
                         </div>
                       </div>
-                      <div
-                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
-                        onClick={() => handleConditionClick("fair")}
-                      >
-                        <RadioGroupItem
-                          value="fair"
-                          id="fair"
-                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
-                        />
+
+                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                        <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
+                          {itemCondition === "fair" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                        </div>
                         <div>
-                          <Label htmlFor="fair" className="font-medium cursor-pointer">
+                          <Label
+                            htmlFor="fair"
+                            className="font-medium cursor-pointer"
+                            onClick={() => setItemCondition("fair")}
+                          >
                             Fair
                           </Label>
                           <p className="text-sm text-gray-500">Visible wear, remains functional</p>
                         </div>
                       </div>
-                      <div
-                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
-                        onClick={() => handleConditionClick("poor")}
-                      >
-                        <RadioGroupItem
-                          value="poor"
-                          id="poor"
-                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
-                        />
+
+                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                        <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
+                          {itemCondition === "poor" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                        </div>
                         <div>
-                          <Label htmlFor="poor" className="font-medium cursor-pointer">
+                          <Label
+                            htmlFor="poor"
+                            className="font-medium cursor-pointer"
+                            onClick={() => setItemCondition("poor")}
+                          >
                             Poor
                           </Label>
                           <p className="text-sm text-gray-500">Significant wear, may require repair</p>
                         </div>
                       </div>
-                    </RadioGroup>
+                    </div>
                     {formErrors.itemCondition && <ErrorMessage message={formErrors.itemCondition} />}
                   </div>
 
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label htmlFor="item-issues" className="text-base font-medium mb-2 flex items-center gap-2">
-                      <AlertTriangle className="h-5 w-5 text-[#0066ff]" />
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="item-issues" className="text-base font-medium mb-2 block">
                       Any issues or defects?
                     </Label>
                     <Textarea
@@ -571,34 +563,35 @@ export default function SellItemPage() {
                   </div>
 
                   <div className="flex justify-between mt-8">
-                    <Button
+                    <button
                       type="button"
                       onClick={() => {
-                        setFormStep(1)
-                        setTimeout(scrollToTop, 50)
+                        scrollToTop()
+                        // Change form step after scroll animation starts
+                        setTimeout(() => {
+                          setFormStep(1)
+                        }, 100)
                       }}
-                      variant="secondary"
-                      className="px-6 py-2 rounded-full shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
+                      className="px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Back
-                    </Button>
-                    <Button
+                    </button>
+                    <button
                       type="button"
                       onClick={handleContinueStep2}
                       disabled={!step2Valid}
                       className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Continue
-                    </Button>
+                    </button>
                   </div>
                 </div>
               )}
 
               {formStep === 3 && (
-                <div className="space-y-8">
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label htmlFor="full-name" className="text-base font-medium mb-2 flex items-center gap-2">
-                      <User className="h-5 w-5 text-[#0066ff]" />
+                <div className="space-y-8" id="section3" ref={section3Ref}>
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="full-name" className="text-base font-medium mb-2 block">
                       Full Name
                     </Label>
                     <Input
@@ -613,9 +606,8 @@ export default function SellItemPage() {
                     {formErrors.fullName && <ErrorMessage message={formErrors.fullName} />}
                   </div>
 
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label htmlFor="email" className="text-base font-medium mb-2 flex items-center gap-2">
-                      <Mail className="h-5 w-5 text-[#0066ff]" />
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="email" className="text-base font-medium mb-2 block">
                       Email Address
                     </Label>
                     <Input
@@ -631,9 +623,8 @@ export default function SellItemPage() {
                     {formErrors.email && <ErrorMessage message={formErrors.email} />}
                   </div>
 
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label htmlFor="phone" className="text-base font-medium mb-2 flex items-center gap-2">
-                      <Phone className="h-5 w-5 text-[#0066ff]" />
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="phone" className="text-base font-medium mb-2 block">
                       Phone Number
                     </Label>
                     <Input
@@ -649,9 +640,8 @@ export default function SellItemPage() {
                     {formErrors.phone && <ErrorMessage message={formErrors.phone} />}
                   </div>
 
-                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <Label htmlFor="zip" className="text-base font-medium mb-2 flex items-center gap-2">
-                      <MapPin className="h-5 w-5 text-[#0066ff]" />
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="zip" className="text-base font-medium mb-2 block">
                       ZIP Code
                     </Label>
                     <Input
@@ -666,8 +656,8 @@ export default function SellItemPage() {
                     {formErrors.zipCode && <ErrorMessage message={formErrors.zipCode} />}
                   </div>
 
-                  <div className="mt-6 transition-all duration-300 transform hover:translate-y-[-2px]">
-                    <div className="flex items-start space-x-3 p-4 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors duration-200">
+                  <div className="mt-6 transition-all duration-300">
+                    <div className="flex items-start space-x-3 p-4 rounded-lg bg-blue-50 border border-blue-100">
                       <Checkbox
                         id="terms"
                         checked={termsAccepted}
@@ -675,8 +665,8 @@ export default function SellItemPage() {
                         className={`mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff] ${formErrors.terms ? "border-red-300" : ""}`}
                       />
                       <div>
-                        <Label htmlFor="terms" className="font-medium flex items-center gap-2">
-                          <Shield className="h-5 w-5 text-[#0066ff]" />I agree to the Privacy Policy
+                        <Label htmlFor="terms" className="font-medium">
+                          I agree to the Privacy Policy
                         </Label>
                         <p className="text-sm text-gray-500">
                           By submitting this form, you agree to our{" "}
@@ -694,18 +684,20 @@ export default function SellItemPage() {
                   </div>
 
                   <div className="flex justify-between mt-8">
-                    <Button
+                    <button
                       type="button"
                       onClick={() => {
-                        setFormStep(2)
-                        setTimeout(scrollToTop, 50)
+                        scrollToTop()
+                        // Change form step after scroll animation starts
+                        setTimeout(() => {
+                          setFormStep(2)
+                        }, 100)
                       }}
-                      variant="secondary"
-                      className="px-6 py-2 rounded-full shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
+                      className="px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Back
-                    </Button>
-                    <Button
+                    </button>
+                    <button
                       type="submit"
                       disabled={!step3Valid || isSubmitting}
                       className="bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] hover:from-[#7a47e6] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
@@ -718,14 +710,14 @@ export default function SellItemPage() {
                       ) : (
                         "Submit"
                       )}
-                    </Button>
+                    </button>
                   </div>
                 </div>
               )}
             </form>
           </>
         ) : (
-          <div className="text-center bg-white p-8 rounded-2xl shadow-md border border-blue-100">
+          <div className="text-center bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
             <div className="w-20 h-20 bg-gradient-to-r from-[#e6f0ff] to-[#f0e6ff] rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="w-12 h-12 text-[#0066ff]" />
             </div>
@@ -746,12 +738,12 @@ export default function SellItemPage() {
               </ol>
             </div>
             <div className="mt-8">
-              <Button
-                asChild
-                className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7a47e6] text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+              <Link
+                href="/"
+                className="inline-block bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7a47e6] text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               >
-                <Link href="/">Return to Home</Link>
-              </Button>
+                Return to Home
+              </Link>
             </div>
           </div>
         )}
