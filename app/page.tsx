@@ -17,7 +17,7 @@ export default function Home() {
       <section className="bg-white pt-10 pb-24 md:pt-12 md:pb-32">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#3B82F6] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent drop-shadow-sm pb-1">
+            <h1 className="text-4xl md:text-5xl font-medium mb-2 bg-gradient-to-r from-[#0066ff] via-[#7b68ee] to-[#9933ff] bg-clip-text text-transparent drop-shadow-sm pb-1">
               BluBerry
             </h1>
             <p className="text-xl md:text-2xl text-black mb-8">Selling made simpler.</p>
