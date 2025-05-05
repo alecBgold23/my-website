@@ -13,35 +13,39 @@ export default function Home() {
         </span>
       </div>
 
-      {/* Hero Section as a link to Sell Your Item */}
-      <Link href="/sell-item" className="block">
-        <section className="bg-gradient-to-b from-white to-gray-50 relative overflow-hidden py-16">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col items-center text-center">
-              <h1 className="apple-heading">
-                <span className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
-                  BluBerry
-                </span>
-              </h1>
-              <p className="apple-subheading mb-8">Selling made simpler.</p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <span className="apple-button apple-button-primary">Learn How It Works</span>
-                <span className="apple-button apple-button-secondary">Sell Your Item</span>
-              </div>
+      {/* Hero Section */}
+      <section className="bg-white pt-10 pb-24 md:pt-12 md:pb-32">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#3B82F6] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent drop-shadow-sm pb-1">
+              BluBerry
+            </h1>
+            <p className="text-xl md:text-2xl text-black mb-8">Selling made simpler.</p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link
+                href="/how-it-works"
+                className="bg-gradient-to-r from-[#3B82F6] to-[#8c52ff] text-white px-5 py-2 rounded-full font-medium hover:shadow-md hover:translate-y-[-1px] transition-all"
+              >
+                Learn How It Works
+              </Link>
+              <Link
+                href="/sell-item"
+                className="border-2 border-[#6a5acd] text-[#6a5acd] px-5 py-2 rounded-full font-medium hover:bg-gradient-to-r hover:from-[#3B82F6] hover:to-[#8c52ff] hover:text-white hover:border-transparent hover:shadow-md hover:translate-y-[-1px] transition-all"
+              >
+                Sell Your Item
+              </Link>
             </div>
           </div>
-        </section>
-      </Link>
+        </div>
+      </section>
 
-      {/* Process Section */}
-      <section className="apple-section bg-black text-white">
+      {/* How It Works Section */}
+      <section className="bg-black text-white py-24">
         <div className="container mx-auto px-4">
-          <h2 className="sf-pro-display text-4xl md:text-5xl font-semibold tracking-tight mb-16 text-white">
-            How It Works
-          </h2>
+          <h2 className="text-5xl font-bold mb-16 text-center">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-16">
             <div className="flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-[#3B82F6] flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-full bg-[#0066ff] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">1</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-center">Submit Your Item</h3>
@@ -53,7 +57,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-[#8A4FFF] flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-full bg-[#8c52ff] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-center">We Pick It Up</h3>
@@ -65,7 +69,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#3B82F6] to-[#8A4FFF] flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff] flex items-center justify-center mb-6">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
               <h3 className="text-xl font-semibold mb-3 text-center">Get Paid Instantly</h3>
@@ -81,17 +85,19 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="apple-section bg-white">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="apple-heading mb-4 text-[#3B82F6]">Why Choose BluBerry</h2>
-          <p className="apple-subheading text-gray-600 mb-16">The simplest way to sell your unused items</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center text-[#0066ff]">Why Choose BluBerry</h2>
+          <p className="text-xl md:text-2xl text-gray-600 mb-16 text-center">
+            The simplest way to sell your unused items
+          </p>
 
           <div className="grid md:grid-cols-2 gap-16 max-w-4xl mx-auto">
             <div className="text-center flex flex-col items-center">
               <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
                 <Image src="/placeholder.svg?key=6ot0q" alt="Simplified Process" fill className="object-cover" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-[#3B82F6]">Simplified Process</h3>
+              <h3 className="text-xl font-semibold mb-3 text-[#0066ff]">Simplified Process</h3>
               <p className="text-gray-600">
                 Our streamlined form takes minutes to complete, eliminating the need for detailed descriptions or
                 photos.
@@ -101,7 +107,7 @@ export default function Home() {
               <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
                 <Image src="/placeholder.svg?key=p10r0" alt="Professional Service" fill className="object-cover" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-[#8A4FFF]">Professional Service</h3>
+              <h3 className="text-xl font-semibold mb-3 text-[#8c52ff]">Professional Service</h3>
               <p className="text-gray-600">
                 Our vetted team handles pickup, ensuring security and peace of mind throughout the process.
               </p>
@@ -110,7 +116,7 @@ export default function Home() {
               <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
                 <Image src="/placeholder.svg?key=8toch" alt="Market-Based Pricing" fill className="object-cover" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-[#3B82F6]">Market-Based Pricing</h3>
+              <h3 className="text-xl font-semibold mb-3 text-[#0066ff]">Market-Based Pricing</h3>
               <p className="text-gray-600">
                 We offer competitive rates based on current market value and item condition.
               </p>
@@ -119,7 +125,7 @@ export default function Home() {
               <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
                 <Image src="/placeholder.svg?key=y08aa" alt="Immediate Payment" fill className="object-cover" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-[#8A4FFF]">Immediate Payment</h3>
+              <h3 className="text-xl font-semibold mb-3 text-[#8c52ff]">Immediate Payment</h3>
               <p className="text-gray-600">
                 Receive payment at the time of pickup, eliminating waiting periods for transactions to process.
               </p>
@@ -129,9 +135,9 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="apple-section bg-gray-50">
+      <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="apple-heading mb-12">What Our Customers Say</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">What Our Customers Say</h2>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-white p-6 rounded-2xl shadow-sm flex flex-col items-center text-center">
@@ -172,7 +178,7 @@ export default function Home() {
       </section>
 
       {/* Environmental Mission Section */}
-      <section className="apple-section bg-white">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2">
@@ -181,7 +187,7 @@ export default function Home() {
               </div>
             </div>
             <div className="md:w-1/2 text-center md:text-left">
-              <h2 className="apple-heading mb-4 text-[#3B82F6]">Reducing Waste, Creating Value</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#0066ff]">Reducing Waste, Creating Value</h2>
               <p className="text-gray-600 mb-4">
                 At BluBerry, we're committed to extending the lifecycle of quality items. By facilitating the resale of
                 used goods, we help reduce waste and environmental impact.
@@ -196,11 +202,16 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="apple-section bg-gradient-to-b from-white to-gray-50">
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50 text-center">
         <div className="container mx-auto px-4">
-          <h2 className="apple-heading mb-4">Ready to Declutter and Get Paid?</h2>
-          <p className="apple-subheading mb-8">Start the simple process today and turn your unused items into cash.</p>
-          <Link href="/sell-item" className="apple-button apple-button-primary">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Declutter and Get Paid?</h2>
+          <p className="text-xl md:text-2xl text-gray-600 mb-8">
+            Start the simple process today and turn your unused items into cash.
+          </p>
+          <Link
+            href="/sell-item"
+            className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] text-white px-6 py-3 rounded-full font-medium hover:shadow-md hover:translate-y-[-1px] transition-all"
+          >
             Sell Your Item Now
           </Link>
         </div>
