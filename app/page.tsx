@@ -1,8 +1,17 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { AlertTriangle } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export default function Home() {
+  const router = useRouter()
+
+  const navigateToSellItem = () => {
+    router.push("/sell-item")
+  }
+
   return (
     <div>
       {/* Announcement Bar - Sleek warning style */}
@@ -16,25 +25,34 @@ export default function Home() {
       {/* Hero Section */}
       <section className="bg-white pt-10 pb-24 md:pt-12 md:pb-32">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center text-center">
-            <h1 className="text-4xl md:text-5xl font-medium mb-2 bg-gradient-to-r from-[#0066ff] via-[#7b68ee] to-[#9933ff] bg-clip-text text-transparent drop-shadow-sm pb-1">
+          {/* Clickable hero content */}
+          <div
+            className="flex flex-col items-center text-center cursor-pointer group mb-8"
+            onClick={navigateToSellItem}
+          >
+            <h1 className="text-4xl md:text-5xl font-medium mb-2 bg-gradient-to-r from-[#0066ff] via-[#7b68ee] to-[#9933ff] bg-clip-text text-transparent drop-shadow-sm pb-1 transition-transform duration-300 group-hover:scale-105">
               BluBerry
             </h1>
-            <p className="text-xl md:text-2xl text-black mb-8">Selling made simpler.</p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link
-                href="/how-it-works"
-                className="bg-gradient-to-r from-[#3B82F6] to-[#8c52ff] text-white px-5 py-2 rounded-full font-medium hover:shadow-md hover:translate-y-[-1px] transition-all"
-              >
-                Learn How It Works
-              </Link>
-              <Link
-                href="/sell-item"
-                className="border-2 border-[#6a5acd] text-[#6a5acd] px-5 py-2 rounded-full font-medium hover:bg-gradient-to-r hover:from-[#3B82F6] hover:to-[#8c52ff] hover:text-white hover:border-transparent hover:shadow-md hover:translate-y-[-1px] transition-all"
-              >
-                Sell Your Item
-              </Link>
-            </div>
+            <p className="text-xl md:text-2xl text-black mb-8 transition-all duration-300 group-hover:text-[#0066ff]">
+              Selling made simpler.
+            </p>
+            <div className="w-full max-w-md h-1 bg-gradient-to-r from-transparent via-[#0066ff] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+          </div>
+
+          {/* Separate buttons section */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link
+              href="/how-it-works"
+              className="bg-gradient-to-r from-[#3B82F6] to-[#8c52ff] text-white px-5 py-2 rounded-full font-medium hover:shadow-md hover:translate-y-[-1px] transition-all"
+            >
+              Learn How It Works
+            </Link>
+            <Link
+              href="/sell-item"
+              className="border-2 border-[#6a5acd] text-[#6a5acd] px-5 py-2 rounded-full font-medium hover:bg-gradient-to-r hover:from-[#3B82F6] hover:to-[#8c52ff] hover:text-white hover:border-transparent hover:shadow-md hover:translate-y-[-1px] transition-all"
+            >
+              Sell Your Item
+            </Link>
           </div>
         </div>
       </section>
