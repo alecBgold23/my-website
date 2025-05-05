@@ -9,7 +9,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
-import { CheckCircle2, AlertCircle, Camera, Upload, X, ImageIcon, Loader2 } from "lucide-react"
+import {
+  CheckCircle2,
+  AlertCircle,
+  Camera,
+  Upload,
+  X,
+  ImageIcon,
+  Loader2,
+  Tag,
+  ListFilter,
+  FileText,
+  Star,
+  AlertTriangle,
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Shield,
+} from "lucide-react"
 import { sendItemSubmissionEmail } from "@/app/actions/email-actions"
 
 export default function SellItemPage() {
@@ -191,9 +209,8 @@ export default function SellItemPage() {
     </div>
   )
 
-  // Update the return statement to use more vibrant colors and styling
   return (
-    <div className="container mx-auto py-12 px-4" ref={formContainerRef}>
+    <div className="container mx-auto py-12 px-4 bg-gradient-to-b from-white to-blue-50" ref={formContainerRef}>
       {/* Add a ref at the top of the form for scrolling */}
       <div ref={formTopRef} className="scroll-target"></div>
 
@@ -212,76 +229,81 @@ export default function SellItemPage() {
         {!formSubmitted ? (
           <>
             {submitResult && !submitResult.success && (
-              <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6">{submitResult.message}</div>
+              <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg shadow-sm">
+                {submitResult.message}
+              </div>
             )}
 
             {/* Progress Steps */}
-            <div className="flex justify-between items-center mb-12">
+            <div className="flex justify-between items-center mb-12 px-4">
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                  className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     formStep === 1
-                      ? "bg-gradient-to-r from-[#0066ff] to-[#0066ff] text-white shadow-md"
-                      : "bg-gray-200 text-gray-600"
-                  }`}
+                      ? "bg-gradient-to-r from-[#0066ff] to-[#0066ff] text-white shadow-lg"
+                      : "bg-white text-gray-600 border border-gray-200"
+                  } transition-all duration-300`}
                 >
-                  1
+                  <span className="text-lg font-semibold">1</span>
                 </div>
                 <span className="text-sm mt-2 font-medium">Item Details</span>
               </div>
-              <div className="flex-1 h-1 mx-4 bg-gray-200">
+              <div className="flex-1 h-1 mx-4 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className="h-1 bg-gradient-to-r from-[#0066ff] to-[#8c52ff]"
+                  className="h-1 bg-gradient-to-r from-[#0066ff] to-[#8c52ff] transition-all duration-500 ease-out"
                   style={{ width: formStep >= 2 ? "100%" : "0%" }}
                 ></div>
               </div>
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                  className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     formStep === 2
-                      ? "bg-gradient-to-r from-[#0066ff] to-[#8c52ff] text-white shadow-md"
-                      : "bg-gray-200 text-gray-600"
-                  }`}
+                      ? "bg-gradient-to-r from-[#0066ff] to-[#8c52ff] text-white shadow-lg"
+                      : "bg-white text-gray-600 border border-gray-200"
+                  } transition-all duration-300`}
                 >
-                  2
+                  <span className="text-lg font-semibold">2</span>
                 </div>
                 <span className="text-sm mt-2 font-medium">Condition</span>
               </div>
-              <div className="flex-1 h-1 mx-4 bg-gray-200">
+              <div className="flex-1 h-1 mx-4 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className="h-1 bg-gradient-to-r from-[#0066ff] to-[#8c52ff]"
+                  className="h-1 bg-gradient-to-r from-[#0066ff] to-[#8c52ff] transition-all duration-500 ease-out"
                   style={{ width: formStep >= 3 ? "100%" : "0%" }}
                 ></div>
               </div>
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                  className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     formStep === 3
-                      ? "bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] text-white shadow-md"
-                      : "bg-gray-200 text-gray-600"
-                  }`}
+                      ? "bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] text-white shadow-lg"
+                      : "bg-white text-gray-600 border border-gray-200"
+                  } transition-all duration-300`}
                 >
-                  3
+                  <span className="text-lg font-semibold">3</span>
                 </div>
                 <span className="text-sm mt-2 font-medium">Contact Info</span>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+            <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-md p-8 border border-blue-50">
               {formStep === 1 && (
                 <div className="space-y-8">
-                  <div>
-                    <Label htmlFor="item-category" className="text-base font-medium mb-2 block">
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label htmlFor="item-category" className="text-base font-medium mb-2 flex items-center gap-2">
+                      <ListFilter className="h-5 w-5 text-[#0066ff]" />
                       Item Category
                     </Label>
                     <Select value={itemCategory} onValueChange={setItemCategory}>
                       <SelectTrigger
                         id="item-category"
-                        className={`w-full border ${formErrors.itemCategory ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
+                        className={`w-full border ${
+                          formErrors.itemCategory ? "border-red-300" : "border-blue-100"
+                        } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
                       >
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
-                      <SelectContent className="bg-white border border-gray-200">
+                      <SelectContent className="bg-white border border-blue-100 rounded-lg shadow-md">
                         <SelectItem value="furniture">Furniture</SelectItem>
                         <SelectItem value="electronics">Electronics</SelectItem>
                         <SelectItem value="appliances">Appliances</SelectItem>
@@ -295,8 +317,9 @@ export default function SellItemPage() {
                     {formErrors.itemCategory && <ErrorMessage message={formErrors.itemCategory} />}
                   </div>
 
-                  <div>
-                    <Label htmlFor="item-name" className="text-base font-medium mb-2 block">
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label htmlFor="item-name" className="text-base font-medium mb-2 flex items-center gap-2">
+                      <Tag className="h-5 w-5 text-[#0066ff]" />
                       Item Name
                     </Label>
                     <Input
@@ -304,13 +327,16 @@ export default function SellItemPage() {
                       value={itemName}
                       onChange={(e) => setItemName(e.target.value)}
                       placeholder="e.g., Leather Sofa, Samsung TV"
-                      className={`w-full border ${formErrors.itemName ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
+                      className={`w-full border ${
+                        formErrors.itemName ? "border-red-300" : "border-blue-100"
+                      } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
                     />
                     {formErrors.itemName && <ErrorMessage message={formErrors.itemName} />}
                   </div>
 
-                  <div>
-                    <Label htmlFor="item-description" className="text-base font-medium mb-2 block">
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label htmlFor="item-description" className="text-base font-medium mb-2 flex items-center gap-2">
+                      <FileText className="h-5 w-5 text-[#0066ff]" />
                       Brief Description
                     </Label>
                     <Textarea
@@ -319,45 +345,49 @@ export default function SellItemPage() {
                       onChange={(e) => setItemDescription(e.target.value)}
                       placeholder="Please describe your item (brand, size, color, etc.)"
                       rows={4}
-                      className={`w-full border ${formErrors.itemDescription ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
+                      className={`w-full border ${
+                        formErrors.itemDescription ? "border-red-300" : "border-blue-100"
+                      } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
                     />
                     {formErrors.itemDescription && <ErrorMessage message={formErrors.itemDescription} />}
                   </div>
 
-                  <div>
-                    <Label className="text-base font-medium mb-2 block">
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label className="text-base font-medium mb-2 flex items-center gap-2">
+                      <Camera className="h-5 w-5 text-[#0066ff]" />
                       Item Photos <span className="text-sm font-normal">(at least 3)</span>
                     </Label>
                     <div
-                      className={`p-6 border border-dashed rounded-md ${
-                        formErrors.itemPhotos ? "border-red-500" : "border-gray-300"
-                      } bg-[#f8faff]`}
+                      className={`p-6 border border-dashed rounded-lg ${
+                        formErrors.itemPhotos ? "border-red-300" : "border-blue-200"
+                      } bg-blue-50 hover:bg-blue-100 transition-colors duration-200`}
                     >
                       <div className="flex flex-col items-center justify-center gap-4">
                         <div className="flex flex-wrap gap-4 w-full mb-4">
                           {itemPhotos.map((photo, index) => (
                             <div
                               key={index}
-                              className="relative w-24 h-24 rounded-md overflow-hidden border border-gray-200 shadow-sm"
+                              className="relative w-24 h-24 rounded-lg overflow-hidden border border-blue-100 shadow-sm group"
                             >
                               <img
                                 src={photo.preview || "/placeholder.svg"}
                                 alt={`Item photo ${index + 1}`}
                                 className="w-full h-full object-cover"
                               />
+                              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200"></div>
                               <button
                                 type="button"
                                 onClick={() => removePhoto(index)}
-                                className="absolute top-1 right-1 bg-[#ff6b6b] text-white rounded-full p-1 w-5 h-5 flex items-center justify-center shadow-sm"
+                                className="absolute top-1 right-1 bg-white text-red-500 rounded-full p-1 w-6 h-6 flex items-center justify-center shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                                 aria-label="Remove photo"
                               >
-                                <X className="w-3 h-3" />
+                                <X className="w-4 h-4" />
                               </button>
                             </div>
                           ))}
                           {itemPhotos.length === 0 && (
                             <div className="w-full text-center text-gray-500 py-8">
-                              <ImageIcon className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+                              <ImageIcon className="w-16 h-16 mx-auto mb-4 text-blue-200" />
                               <p>No photos uploaded yet</p>
                             </div>
                           )}
@@ -368,7 +398,7 @@ export default function SellItemPage() {
                             type="button"
                             variant="outline"
                             onClick={() => fileInputRef.current?.click()}
-                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white shadow-sm outline-button transition-all duration-300"
+                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white shadow-sm transition-all duration-300 rounded-full"
                           >
                             <Upload className="w-4 h-4" />
                             <span>Add file</span>
@@ -378,7 +408,7 @@ export default function SellItemPage() {
                             type="button"
                             variant="outline"
                             onClick={() => cameraInputRef.current?.click()}
-                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white shadow-sm outline-button transition-all duration-300"
+                            className="flex items-center gap-2 border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white shadow-sm transition-all duration-300 rounded-full"
                           >
                             <Camera className="w-4 h-4" />
                             <span>Take photo</span>
@@ -417,7 +447,7 @@ export default function SellItemPage() {
                       type="button"
                       onClick={handleContinueStep1}
                       disabled={!step1Valid}
-                      className="bg-gradient-to-r from-[#0066ff] to-[#0066ff] hover:from-[#0055dd] hover:to-[#0055dd] hover:bg-white hover:text-[#0066ff] hover:border hover:border-[#0066ff] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm gradient-button transition-all duration-300"
+                      className="bg-gradient-to-r from-[#0066ff] to-[#0066ff] hover:from-[#0055dd] hover:to-[#0055dd] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Continue
                     </Button>
@@ -427,18 +457,21 @@ export default function SellItemPage() {
 
               {formStep === 2 && (
                 <div className="space-y-8">
-                  <div>
-                    <Label className="text-base font-medium mb-4 block">Item Condition</Label>
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label className="text-base font-medium mb-4 flex items-center gap-2">
+                      <Star className="h-5 w-5 text-[#0066ff]" />
+                      Item Condition
+                    </Label>
                     <RadioGroup
                       value={itemCondition}
                       onValueChange={setItemCondition}
-                      className={`space-y-4 ${formErrors.itemCondition ? "border-red-500 border p-4 rounded-md" : ""}`}
+                      className={`space-y-4 ${formErrors.itemCondition ? "border-red-300 border p-4 rounded-lg" : ""}`}
                     >
-                      <div className="flex items-start space-x-3">
+                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
                         <RadioGroupItem
                           value="like-new"
                           id="like-new"
-                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
                           <Label htmlFor="like-new" className="font-medium">
@@ -447,11 +480,11 @@ export default function SellItemPage() {
                           <p className="text-sm text-gray-500">Appears new and functions perfectly</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-3">
+                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
                         <RadioGroupItem
                           value="excellent"
                           id="excellent"
-                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
                           <Label htmlFor="excellent" className="font-medium">
@@ -460,11 +493,11 @@ export default function SellItemPage() {
                           <p className="text-sm text-gray-500">Minimal signs of use, functions perfectly</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-3">
+                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
                         <RadioGroupItem
                           value="good"
                           id="good"
-                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
                           <Label htmlFor="good" className="font-medium">
@@ -473,11 +506,11 @@ export default function SellItemPage() {
                           <p className="text-sm text-gray-500">Some signs of use, functions well</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-3">
+                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
                         <RadioGroupItem
                           value="fair"
                           id="fair"
-                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
                           <Label htmlFor="fair" className="font-medium">
@@ -486,11 +519,11 @@ export default function SellItemPage() {
                           <p className="text-sm text-gray-500">Visible wear, remains functional</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-3">
+                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
                         <RadioGroupItem
                           value="poor"
                           id="poor"
-                          className="mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff]"
+                          className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
                           <Label htmlFor="poor" className="font-medium">
@@ -503,8 +536,9 @@ export default function SellItemPage() {
                     {formErrors.itemCondition && <ErrorMessage message={formErrors.itemCondition} />}
                   </div>
 
-                  <div>
-                    <Label htmlFor="item-issues" className="text-base font-medium mb-2 block">
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label htmlFor="item-issues" className="text-base font-medium mb-2 flex items-center gap-2">
+                      <AlertTriangle className="h-5 w-5 text-[#0066ff]" />
                       Any issues or defects?
                     </Label>
                     <Textarea
@@ -513,7 +547,9 @@ export default function SellItemPage() {
                       onChange={(e) => setItemIssues(e.target.value)}
                       placeholder="Please describe any scratches, dents, missing parts, or functional issues"
                       rows={4}
-                      className={`w-full border ${formErrors.itemIssues ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
+                      className={`w-full border ${
+                        formErrors.itemIssues ? "border-red-300" : "border-blue-100"
+                      } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
                     />
                     {formErrors.itemIssues && <ErrorMessage message={formErrors.itemIssues} />}
                   </div>
@@ -525,7 +561,7 @@ export default function SellItemPage() {
                         setFormStep(1)
                         setTimeout(scrollToTop, 50)
                       }}
-                      className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-md shadow-sm outline-button transition-all duration-300"
+                      className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-full shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Back
                     </Button>
@@ -533,7 +569,7 @@ export default function SellItemPage() {
                       type="button"
                       onClick={handleContinueStep2}
                       disabled={!step2Valid}
-                      className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-white hover:to-white hover:text-[#0066ff] hover:border hover:border-[#0066ff] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm gradient-button transition-all duration-300"
+                      className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Continue
                     </Button>
@@ -543,8 +579,9 @@ export default function SellItemPage() {
 
               {formStep === 3 && (
                 <div className="space-y-8">
-                  <div>
-                    <Label htmlFor="full-name" className="text-base font-medium mb-2 block">
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label htmlFor="full-name" className="text-base font-medium mb-2 flex items-center gap-2">
+                      <User className="h-5 w-5 text-[#0066ff]" />
                       Full Name
                     </Label>
                     <Input
@@ -552,13 +589,16 @@ export default function SellItemPage() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Your full name"
-                      className={`w-full border ${formErrors.fullName ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
+                      className={`w-full border ${
+                        formErrors.fullName ? "border-red-300" : "border-blue-100"
+                      } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
                     />
                     {formErrors.fullName && <ErrorMessage message={formErrors.fullName} />}
                   </div>
 
-                  <div>
-                    <Label htmlFor="email" className="text-base font-medium mb-2 block">
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label htmlFor="email" className="text-base font-medium mb-2 flex items-center gap-2">
+                      <Mail className="h-5 w-5 text-[#0066ff]" />
                       Email Address
                     </Label>
                     <Input
@@ -567,13 +607,16 @@ export default function SellItemPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="your.email@example.com"
-                      className={`w-full border ${formErrors.email ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
+                      className={`w-full border ${
+                        formErrors.email ? "border-red-300" : "border-blue-100"
+                      } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
                     />
                     {formErrors.email && <ErrorMessage message={formErrors.email} />}
                   </div>
 
-                  <div>
-                    <Label htmlFor="phone" className="text-base font-medium mb-2 block">
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label htmlFor="phone" className="text-base font-medium mb-2 flex items-center gap-2">
+                      <Phone className="h-5 w-5 text-[#0066ff]" />
                       Phone Number
                     </Label>
                     <Input
@@ -582,13 +625,16 @@ export default function SellItemPage() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="(123) 456-7890"
-                      className={`w-full border ${formErrors.phone ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
+                      className={`w-full border ${
+                        formErrors.phone ? "border-red-300" : "border-blue-100"
+                      } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
                     />
                     {formErrors.phone && <ErrorMessage message={formErrors.phone} />}
                   </div>
 
-                  <div>
-                    <Label htmlFor="zip" className="text-base font-medium mb-2 block">
+                  <div className="transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <Label htmlFor="zip" className="text-base font-medium mb-2 flex items-center gap-2">
+                      <MapPin className="h-5 w-5 text-[#0066ff]" />
                       ZIP Code
                     </Label>
                     <Input
@@ -596,26 +642,31 @@ export default function SellItemPage() {
                       value={zipCode}
                       onChange={(e) => setZipCode(e.target.value)}
                       placeholder="12345"
-                      className={`w-full border ${formErrors.zipCode ? "border-red-500" : "border-gray-300"} rounded-md focus:ring-[#0066ff] focus:border-[#0066ff]`}
+                      className={`w-full border ${
+                        formErrors.zipCode ? "border-red-300" : "border-blue-100"
+                      } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
                     />
                     {formErrors.zipCode && <ErrorMessage message={formErrors.zipCode} />}
                   </div>
 
-                  <div className="mt-6">
-                    <div className="flex items-start space-x-3">
+                  <div className="mt-6 transition-all duration-300 transform hover:translate-y-[-2px]">
+                    <div className="flex items-start space-x-3 p-4 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors duration-200">
                       <Checkbox
                         id="terms"
                         checked={termsAccepted}
                         onCheckedChange={setTermsAccepted}
-                        className={`mt-1 border-gray-400 text-[#0066ff] focus:ring-[#0066ff] ${formErrors.terms ? "border-red-500" : ""}`}
+                        className={`mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff] ${formErrors.terms ? "border-red-300" : ""}`}
                       />
                       <div>
-                        <Label htmlFor="terms" className="font-medium">
-                          I agree to the Privacy Policy
+                        <Label htmlFor="terms" className="font-medium flex items-center gap-2">
+                          <Shield className="h-5 w-5 text-[#0066ff]" />I agree to the Privacy Policy
                         </Label>
                         <p className="text-sm text-gray-500">
                           By submitting this form, you agree to our{" "}
-                          <Link href="/privacy-policy" className="text-[#0066ff] underline">
+                          <Link
+                            href="/privacy-policy"
+                            className="text-[#0066ff] underline hover:text-[#0055dd] transition-colors"
+                          >
                             Privacy Policy
                           </Link>
                           .
@@ -632,14 +683,14 @@ export default function SellItemPage() {
                         setFormStep(2)
                         setTimeout(scrollToTop, 50)
                       }}
-                      className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-md shadow-sm outline-button transition-all duration-300"
+                      className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-full shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Back
                     </Button>
                     <Button
                       type="submit"
                       disabled={!step3Valid || isSubmitting}
-                      className="bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] hover:from-white hover:to-white hover:text-[#8c52ff] hover:border hover:border-[#8c52ff] text-white px-6 py-2 rounded-md disabled:opacity-50 disabled:cursor-not-allowed shadow-sm gradient-button transition-all duration-300"
+                      className="bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] hover:from-[#7a47e6] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
                     >
                       {isSubmitting ? (
                         <>
@@ -656,7 +707,7 @@ export default function SellItemPage() {
             </form>
           </>
         ) : (
-          <div className="text-center bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+          <div className="text-center bg-white p-8 rounded-2xl shadow-md border border-blue-100">
             <div className="w-20 h-20 bg-gradient-to-r from-[#e6f0ff] to-[#f0e6ff] rounded-full flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="w-12 h-12 text-[#0066ff]" />
             </div>
@@ -667,7 +718,7 @@ export default function SellItemPage() {
               We've received your submission and will review your item details. Your information has been sent to
               alecgold808@gmail.com. You can expect to hear from us within 24 hours with a price offer.
             </p>
-            <div className="bg-[#f8faff] p-6 rounded-md inline-block text-left border border-gray-200">
+            <div className="bg-blue-50 p-6 rounded-lg inline-block text-left border border-blue-100 shadow-sm">
               <h3 className="font-medium text-lg mb-2 text-[#0066ff]">Next Steps</h3>
               <ol className="list-decimal pl-5 space-y-2 text-gray-600">
                 <li>Our team will evaluate your item details</li>
@@ -679,7 +730,7 @@ export default function SellItemPage() {
             <div className="mt-8">
               <Button
                 asChild
-                className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-white hover:to-white hover:text-[#0066ff] hover:border hover:border-[#0066ff] text-white px-6 py-2 rounded-md shadow-sm gradient-button transition-all duration-300"
+                className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7a47e6] text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               >
                 <Link href="/">Return to Home</Link>
               </Button>
