@@ -82,17 +82,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="bg-black text-white py-24">
+      {/* How It Works Section - Changed back to black with professional Roboto font */}
+      <section className="bg-black text-white py-24 font-[var(--font-roboto)]">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-bold mb-16 text-center">How It Works</h2>
+          <h2 className="text-5xl font-normal mb-16 text-center tracking-tight">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-16">
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-[#0066ff] flex items-center justify-center mb-6">
-                <span className="text-2xl font-bold text-white">1</span>
+                <span className="text-2xl font-normal text-white">1</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-center">Submit Your Item</h3>
-              <p className="text-gray-300 text-center mb-6">
+              <h3 className="text-xl font-medium mb-3 text-center">Submit Your Item</h3>
+              <p className="text-gray-300 text-center mb-6 font-normal leading-relaxed">
                 Complete our simple form with your item details. No complex listings required.
               </p>
               <div className="relative w-full h-48 rounded-xl overflow-hidden">
@@ -101,10 +101,10 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-[#8c52ff] flex items-center justify-center mb-6">
-                <span className="text-2xl font-bold text-white">2</span>
+                <span className="text-2xl font-normal text-white">2</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-center">We Pick It Up</h3>
-              <p className="text-gray-300 text-center mb-6">
+              <h3 className="text-xl font-medium mb-3 text-center">We Pick It Up</h3>
+              <p className="text-gray-300 text-center mb-6 font-normal leading-relaxed">
                 Schedule a convenient time, and our team will collect the item from your location.
               </p>
               <div className="relative w-full h-48 rounded-xl overflow-hidden">
@@ -113,10 +113,10 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff] flex items-center justify-center mb-6">
-                <span className="text-2xl font-bold text-white">3</span>
+                <span className="text-2xl font-normal text-white">3</span>
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-center">Get Paid Instantly</h3>
-              <p className="text-gray-300 text-center mb-6">
+              <h3 className="text-xl font-medium mb-3 text-center">Get Paid Instantly</h3>
+              <p className="text-gray-300 text-center mb-6 font-normal leading-relaxed">
                 Receive your payment immediately upon pickup. No waiting, no complications.
               </p>
               <div className="relative w-full h-48 rounded-xl overflow-hidden">
