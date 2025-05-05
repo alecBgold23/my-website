@@ -5,12 +5,12 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="container mx-auto py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6 text-[#3B82F6]">Privacy Policy</h1>
+        <h1 className="page-header mb-6">Privacy Policy</h1>
         <p className="text-lg mb-8">Last Updated: May 4, 2025</p>
 
         <div className="space-y-8">
           <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">1. Introduction</h2>
+            <h2 className="section-header mb-4">1. Introduction</h2>
             <p>
               Welcome to BluBerry ("we," "our," or "us"). We are committed to protecting your privacy and handling your
               personal information with transparency and care. This Privacy Policy explains how we collect, use,
@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">2. Information We Collect</h2>
+            <h2 className="section-header mb-4">2. Information We Collect</h2>
             <h3 className="text-xl font-medium mb-2 text-[#3B82F6]">2.1 Personal Information</h3>
             <p>We may collect personal information that you provide directly to us, including:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
@@ -43,7 +43,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">3. How We Use Your Information</h2>
+            <h2 className="section-header mb-4">3. How We Use Your Information</h2>
             <p>We use the information we collect for various purposes, including to:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>Provide, maintain, and improve our services</li>
@@ -57,7 +57,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">4. Sharing of Information</h2>
+            <h2 className="section-header mb-4">4. Sharing of Information</h2>
             <p>We may share your personal information in the following circumstances:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>With service providers who perform services on our behalf</li>
@@ -75,7 +75,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">5. Your Choices</h2>
+            <h2 className="section-header mb-4">5. Your Choices</h2>
             <p>You have several choices regarding the information you provide to us:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>You can access, update, or delete your account information by contacting us</li>
@@ -91,7 +91,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">6. Data Security</h2>
+            <h2 className="section-header mb-4">6. Data Security</h2>
             <p>
               We take reasonable measures to help protect your personal information from loss, theft, misuse,
               unauthorized access, disclosure, alteration, and destruction. However, no method of transmission over the
@@ -100,7 +100,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">7. Children's Privacy</h2>
+            <h2 className="section-header mb-4">7. Children's Privacy</h2>
             <p>
               Our services are not directed to children under 13, and we do not knowingly collect personal information
               from children under 13. If we learn we have collected personal information from a child under 13, we will
@@ -109,7 +109,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">8. Changes to This Privacy Policy</h2>
+            <h2 className="section-header mb-4">8. Changes to This Privacy Policy</h2>
             <p>
               We may update this Privacy Policy from time to time. If we make material changes, we will notify you by
               email or through a notice on our website prior to the change becoming effective. We encourage you to
@@ -118,7 +118,7 @@ export default function PrivacyPolicyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#8A4FFF]">9. Contact Us</h2>
+            <h2 className="section-header mb-4">9. Contact Us</h2>
             <p>If you have any questions about this Privacy Policy, please contact us at:</p>
             <p className="mt-2">
               <strong>Email:</strong>{" "}

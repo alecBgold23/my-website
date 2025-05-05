@@ -105,7 +105,7 @@ export default function Home() {
       {/* Features Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center text-[#0066ff]">Why Choose BluBerry</h2>
+          <h2 className="page-header text-center">Why Choose BluBerry</h2>
           <p className="text-xl md:text-2xl text-gray-600 mb-16 text-center">
             The simplest way to sell your unused items
           </p>
@@ -155,7 +155,7 @@ export default function Home() {
       {/* Testimonials Section */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">What Our Customers Say</h2>
+          <h2 className="page-header text-center">What Our Customers Say</h2>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-white p-6 rounded-2xl shadow-sm flex flex-col items-center text-center">
@@ -205,7 +205,7 @@ export default function Home() {
               </div>
             </div>
             <div className="md:w-1/2 text-center md:text-left">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#0066ff]">Reducing Waste, Creating Value</h2>
+              <h2 className="page-header md:text-left">Reducing Waste, Creating Value</h2>
               <p className="text-gray-600 mb-4">
                 At BluBerry, we're committed to extending the lifecycle of quality items. By facilitating the resale of
                 used goods, we help reduce waste and environmental impact.
@@ -222,7 +222,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-b from-white to-gray-50 text-center">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Declutter and Get Paid?</h2>
+          <h2 className="page-header">Ready to Declutter and Get Paid?</h2>
           <p className="text-xl md:text-2xl text-gray-600 mb-8">
             Start the simple process today and turn your unused items into cash.
           </p>

@@ -89,7 +89,7 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="apple-section bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
-          <h1 className="apple-heading">Contact Us</h1>
+          <h1 className="page-header">Contact Us</h1>
           <p className="apple-subheading mb-8">
             Have questions about our services? Our team is available to assist you.
           </p>
@@ -103,7 +103,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="text-center">
-              <h2 className="text-2xl font-semibold mb-6">Contact Information</h2>
+              <h2 className="section-header mb-6">Contact Information</h2>
               <div className="space-y-6">
                 <div className="flex flex-col items-center">
                   <Phone className="w-5 h-5 text-[#3B82F6] mb-2" />
@@ -136,7 +136,7 @@ export default function ContactPage() {
             <div className="text-center">
               {!isSubmitted ? (
                 <>
-                  <h2 className="text-2xl font-semibold mb-6">Send a Message</h2>
+                  <h2 className="section-header mb-6">Send a Message</h2>
                   {submitResult && !submitResult.success && (
                     <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
                       {submitResult.message}
@@ -253,7 +253,7 @@ export default function ContactPage() {
       {/* FAQ Section */}
       <section className="apple-section bg-gray-50">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="apple-heading mb-12">Frequently Asked Questions</h2>
+          <h2 className="page-header mb-12">Frequently Asked Questions</h2>
           <div className="space-y-8">
             <div className="text-center">
               <h3 className="text-xl font-semibold mb-2">What types of items do you accept?</h3>

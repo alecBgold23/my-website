@@ -118,7 +118,7 @@ export default function ReviewsPage() {
       {/* Header Section */}
       <section className="py-8 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-semibold text-[#3B82F6] text-center">Customer Reviews</h1>
+          <h1 className="page-header text-center">Customer Reviews</h1>
           <p className="text-gray-600 text-center mt-2">
             See what our customers are saying about their BluBerry experience.
           </p>
@@ -131,7 +131,7 @@ export default function ReviewsPage() {
             {/* Submit Review Form */}
             <div>
               <div className="bg-gray-50 p-6 rounded-xl shadow-sm">
-                <h2 className="text-2xl font-semibold mb-6 text-[#3B82F6]">Share Your Experience</h2>
+                <h2 className="section-header mb-6">Share Your Experience</h2>
 
                 {submitSuccess ? (
                   <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-start mb-6">
@@ -230,7 +230,7 @@ export default function ReviewsPage() {
 
             {/* Reviews List */}
             <div>
-              <h2 className="text-2xl font-semibold mb-6 text-[#3B82F6]">Customer Feedback</h2>
+              <h2 className="section-header mb-6">Customer Feedback</h2>
 
               <div className="space-y-6">
                 {reviews.map((review) => (

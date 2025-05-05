@@ -7,7 +7,7 @@ export default function FAQPage() {
       {/* Minimized Hero Section */}
       <section className="py-8 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-semibold text-[#3B82F6] text-center">Frequently Asked Questions</h1>
+          <h1 className="page-header text-center">Frequently Asked Questions</h1>
           <p className="text-gray-600 text-center mt-2 mb-0">
             Find answers to common questions about BluBerry's services.
           </p>

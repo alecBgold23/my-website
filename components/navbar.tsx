@@ -1,5 +1,4 @@
 "use client"
-
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -31,15 +30,12 @@ export default function Navbar() {
   ]
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    })
+    window.scrollTo({ top: 0, behavior: "auto" })
   }
 
   return (
     <>
-      <header className="apple-nav sticky top-0 z-50">
+      <header className="apple-nav sticky top-0 z-50 backdrop-blur-lg bg-white/90">
         <div className="container mx-auto px-4">
           <nav className="flex justify-between items-center h-12">
             <Link href="/" className="flex items-center gap-2" onClick={scrollToTop}>
@@ -63,7 +59,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm hover:text-[#3B82F6] transition-all duration-300 ${
+                  className={`text-sm hover:text-[#3B82F6] transition-all duration-200 ${
                     pathname === link.href ? "text-[#3B82F6]" : "text-gray-600"
                   } hover:translate-y-[-1px]`}
                   onClick={scrollToTop}
@@ -75,7 +71,7 @@ export default function Navbar() {
 
             <div className="flex items-center">
               <button
-                className="text-gray-600 hover:text-[#3B82F6] transition-all duration-300 hover:scale-110"
+                className="text-gray-600 hover:text-[#3B82F6] transition-all duration-200 hover:scale-110"
                 aria-label="Search"
                 onClick={toggleSearch}
               >
@@ -84,7 +80,7 @@ export default function Navbar() {
 
               {/* Mobile menu button */}
               <button
-                className="md:hidden ml-4 text-gray-600 transition-all duration-300 hover:text-[#3B82F6] hover:scale-110"
+                className="md:hidden ml-4 text-gray-600 transition-all duration-200 hover:text-[#3B82F6] hover:scale-110"
                 onClick={toggleMenu}
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               >
@@ -100,7 +96,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm hover:text-[#3B82F6] transition-all duration-300 ${
+                  className={`text-sm hover:text-[#3B82F6] transition-all duration-200 ${
                     pathname === link.href ? "text-[#3B82F6]" : "text-gray-600"
                   } hover:translate-y-[-1px]`}
                   onClick={() => {

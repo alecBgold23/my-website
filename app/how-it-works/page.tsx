@@ -7,7 +7,7 @@ export default function HowItWorksPage() {
       {/* Hero Section */}
       <section className="apple-section bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
-          <h1 className="apple-heading">How BluBerry Works</h1>
+          <h1 className="page-header">How BluBerry Works</h1>
           <p className="apple-subheading mb-8">
             Our streamlined process makes selling your items efficient and hassle-free.
           </p>
@@ -147,7 +147,7 @@ export default function HowItWorksPage() {
       {/* Items We Accept */}
       <section className="apple-section bg-black text-white">
         <div className="container mx-auto px-4">
-          <h2 className="apple-heading mb-8 text-white">Items We Accept</h2>
+          <h2 className="page-header mb-8 text-white">Items We Accept</h2>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="text-center">
@@ -195,7 +195,7 @@ export default function HowItWorksPage() {
       {/* CTA Section */}
       <section className="apple-section bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="apple-heading mb-4">Ready to Convert Items to Cash?</h2>
+          <h2 className="page-header mb-4">Ready to Convert Items to Cash?</h2>
           <p className="apple-subheading mb-8">Begin our efficient process today and experience hassle-free selling.</p>
           <Link href="/sell-item" className="apple-button apple-button-primary">
             Sell Your Item Now

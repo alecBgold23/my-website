@@ -215,11 +215,7 @@ export default function SellItemPage() {
       <div ref={formTopRef} className="scroll-target"></div>
 
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-6">
-          <span className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] bg-clip-text text-transparent">
-            Sell Your Item
-          </span>
-        </h1>
+        <h1 className="page-header text-center mb-6">Sell Your Item</h1>
 
         <p className="text-center text-gray-600 mb-12">
           Please provide information about the item you wish to sell. This process takes just a few minutes, and we'll
