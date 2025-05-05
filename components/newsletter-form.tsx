@@ -20,7 +20,7 @@ export default function NewsletterForm() {
     setIsSubmitting(true)
 
     // Form will be submitted to Formspree
-    // This is just to show loading state and success message
+    // This is just to show loading state
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSubmitted(true)

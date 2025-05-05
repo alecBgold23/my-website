@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { CheckCircle2, AlertCircle, Camera, Upload, X, ImageIcon, Loader2 } from "lucide-react"
-import { sendItemSubmissionEmail } from "@/app/actions/email-actions"
 
 export default function SellItemPage() {
   const [formStep, setFormStep] = useState(1)
@@ -29,6 +28,43 @@ export default function SellItemPage() {
   const [phone, setPhone] = useState("")
   const [zipCode, setZipCode] = useState("")
   const [termsAccepted, setTermsAccepted] = useState(false)
+
+  // Address autocomplete
+  const [address, setAddress] = useState("")
+  const [addressSuggestions, setAddressSuggestions] = useState([])
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const [pickupDate, setPickupDate] = useState("")
+
+  // Mock address suggestions - in a real app, this would come from an API
+  const mockAddresses = [
+    "123 Main St, Chicago, IL 60601",
+    "456 Oak Ave, Chicago, IL 60602",
+    "789 Pine Blvd, Chicago, IL 60603",
+    "101 Lake Shore Dr, Chicago, IL 60604",
+    "202 Michigan Ave, Chicago, IL 60605",
+    "303 State St, Chicago, IL 60606",
+    "404 Madison St, Chicago, IL 60607",
+    "505 Washington Blvd, Chicago, IL 60608",
+    "606 Adams St, Chicago, IL 60609",
+    "707 Jefferson Ave, Chicago, IL 60610",
+  ]
+
+  // Filter addresses based on input
+  useEffect(() => {
+    if (address.trim() === "") {
+      setAddressSuggestions([])
+      return
+    }
+
+    const filteredAddresses = mockAddresses.filter((addr) => addr.toLowerCase().includes(address.toLowerCase()))
+    setAddressSuggestions(filteredAddresses)
+  }, [address])
+
+  // Handle address selection
+  const handleAddressSelect = (selectedAddress) => {
+    setAddress(selectedAddress)
+    setShowSuggestions(false)
+  }
 
   // Validation states
   const [step1Valid, setStep1Valid] = useState(false)
@@ -60,7 +96,7 @@ export default function SellItemPage() {
   useEffect(() => {
     // All fields are optional now
     setStep3Valid(true)
-  }, [fullName, email, phone, zipCode, termsAccepted])
+  }, [fullName, email, phone, zipCode, address, pickupDate, termsAccepted])
 
   const validateStep1 = () => {
     // All fields are optional now
@@ -130,6 +166,8 @@ export default function SellItemPage() {
         formData.append("email", email)
         formData.append("phone", phone)
         formData.append("zipCode", zipCode)
+        formData.append("address", address)
+        formData.append("pickupDate", pickupDate)
 
         // Add photos to FormData
         itemPhotos.forEach((photo, index) => {
@@ -138,23 +176,20 @@ export default function SellItemPage() {
 
         console.log("Submitting form data:", Object.fromEntries(formData.entries()))
 
-        // Send the form data to the server action
-        const result = await sendItemSubmissionEmail(formData)
-        console.log("Submission result:", result)
-
-        setSubmitResult(result)
-        if (result.success) {
+        // In a real implementation, you would send this to your backend
+        // For now, we'll simulate a successful submission
+        setTimeout(() => {
           setFormSubmitted(true)
           // Scroll to top after submission is successful
           setTimeout(scrollToTop, 50)
-        }
+          setIsSubmitting(false)
+        }, 1500)
       } catch (error) {
         console.error("Error submitting form:", error)
         setSubmitResult({
           success: false,
           message: "An unexpected error occurred. Please try again later.",
         })
-      } finally {
         setIsSubmitting(false)
       }
     }
@@ -291,6 +326,9 @@ export default function SellItemPage() {
             </div>
 
             <form
+              action="https://formspree.io/f/xqaqprdw"
+              method="POST"
+              encType="multipart/form-data"
               onSubmit={handleSubmit}
               className="bg-white rounded-2xl shadow-lg p-8 border border-gray-200 transform transition-all duration-300 hover:shadow-xl"
             >
@@ -300,7 +338,7 @@ export default function SellItemPage() {
                     <Label htmlFor="item-category" className="text-base font-medium mb-2 block">
                       Item Category
                     </Label>
-                    <Select value={itemCategory} onValueChange={setItemCategory}>
+                    <Select value={itemCategory} onValueChange={setItemCategory} name="category">
                       <SelectTrigger
                         id="item-category"
                         className={`w-full border ${
@@ -310,13 +348,9 @@ export default function SellItemPage() {
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
                       <SelectContent className="bg-white border border-blue-100 rounded-lg shadow-md">
-                        <SelectItem value="furniture">Furniture</SelectItem>
                         <SelectItem value="electronics">Electronics</SelectItem>
-                        <SelectItem value="appliances">Appliances</SelectItem>
-                        <SelectItem value="sporting">Sporting Equipment</SelectItem>
-                        <SelectItem value="musical">Musical Instruments</SelectItem>
-                        <SelectItem value="tools">Tools</SelectItem>
-                        <SelectItem value="collectibles">Collectibles</SelectItem>
+                        <SelectItem value="furniture">Furniture</SelectItem>
+                        <SelectItem value="clothing">Clothing</SelectItem>
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
@@ -329,6 +363,7 @@ export default function SellItemPage() {
                     </Label>
                     <Input
                       id="item-name"
+                      name="name"
                       value={itemName}
                       onChange={(e) => setItemName(e.target.value)}
                       placeholder="e.g., Leather Sofa, Samsung TV"
@@ -345,6 +380,7 @@ export default function SellItemPage() {
                     </Label>
                     <Textarea
                       id="item-description"
+                      name="description"
                       value={itemDescription}
                       onChange={(e) => setItemDescription(e.target.value)}
                       placeholder="Please describe your item (brand, size, color, etc.)"
@@ -418,6 +454,7 @@ export default function SellItemPage() {
                           <input
                             ref={fileInputRef}
                             type="file"
+                            name="item_photo"
                             accept="image/*"
                             multiple
                             onChange={handleFileChange}
@@ -551,6 +588,7 @@ export default function SellItemPage() {
                     </Label>
                     <Textarea
                       id="item-issues"
+                      name="issues"
                       value={itemIssues}
                       onChange={(e) => setItemIssues(e.target.value)}
                       placeholder="Please describe any scratches, dents, missing parts, or functional issues"
@@ -596,6 +634,7 @@ export default function SellItemPage() {
                     </Label>
                     <Input
                       id="full-name"
+                      name="name"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Your full name"
@@ -612,6 +651,7 @@ export default function SellItemPage() {
                     </Label>
                     <Input
                       id="email"
+                      name="email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -629,6 +669,7 @@ export default function SellItemPage() {
                     </Label>
                     <Input
                       id="phone"
+                      name="phone"
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
@@ -646,6 +687,7 @@ export default function SellItemPage() {
                     </Label>
                     <Input
                       id="zip"
+                      name="zipCode"
                       value={zipCode}
                       onChange={(e) => setZipCode(e.target.value)}
                       placeholder="12345"
@@ -656,17 +698,75 @@ export default function SellItemPage() {
                     {formErrors.zipCode && <ErrorMessage message={formErrors.zipCode} />}
                   </div>
 
+                  {/* Address Autocomplete */}
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="pickup_address" className="text-base font-medium mb-2 block">
+                      Pickup Address
+                    </Label>
+                    <div className="relative">
+                      <Input
+                        id="pickup_address"
+                        name="pickup_address"
+                        value={address}
+                        onChange={(e) => {
+                          setAddress(e.target.value)
+                          setShowSuggestions(true)
+                        }}
+                        onFocus={() => setShowSuggestions(true)}
+                        placeholder="Start typing your address..."
+                        className={`w-full border ${
+                          formErrors.address ? "border-red-300" : "border-blue-100"
+                        } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
+                      />
+
+                      {/* Address suggestions dropdown */}
+                      {showSuggestions && addressSuggestions.length > 0 && (
+                        <div className="absolute z-10 w-full mt-1 bg-white border border-blue-100 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                          {addressSuggestions.map((suggestion, index) => (
+                            <div
+                              key={index}
+                              className="px-4 py-2 hover:bg-blue-50 cursor-pointer text-gray-700 text-sm"
+                              onClick={() => handleAddressSelect(suggestion)}
+                            >
+                              {suggestion}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    {formErrors.address && <ErrorMessage message={formErrors.address} />}
+                  </div>
+
+                  {/* Pickup Date */}
+                  <div className="transition-all duration-300">
+                    <Label htmlFor="pickup_date" className="text-base font-medium mb-2 block">
+                      Preferred Pickup Date
+                    </Label>
+                    <Input
+                      id="pickup_date"
+                      name="pickup_date"
+                      type="date"
+                      value={pickupDate}
+                      onChange={(e) => setPickupDate(e.target.value)}
+                      className={`w-full border ${
+                        formErrors.pickupDate ? "border-red-300" : "border-blue-100"
+                      } rounded-lg focus:ring-[#0066ff] focus:border-[#0066ff] bg-white shadow-sm hover:border-blue-300 transition-all duration-200`}
+                    />
+                    {formErrors.pickupDate && <ErrorMessage message={formErrors.pickupDate} />}
+                  </div>
+
                   <div className="mt-6 transition-all duration-300">
                     <div className="flex items-start space-x-3 p-4 rounded-lg bg-blue-50 border border-blue-100">
                       <Checkbox
-                        id="terms"
+                        id="consent"
+                        name="consent"
                         checked={termsAccepted}
                         onCheckedChange={setTermsAccepted}
                         className={`mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff] ${formErrors.terms ? "border-red-300" : ""}`}
                       />
                       <div>
-                        <Label htmlFor="terms" className="font-medium">
-                          I agree to the Privacy Policy
+                        <Label htmlFor="consent" className="font-medium">
+                          I consent to being contacted by BluBerry
                         </Label>
                         <p className="text-sm text-gray-500">
                           By submitting this form, you agree to our{" "}
@@ -683,7 +783,25 @@ export default function SellItemPage() {
                     </div>
                   </div>
 
-                  <div className="flex justify-between mt-8">
+                  <div className="space-y-4 mt-8">
+                    <button
+                      type="submit"
+                      disabled={!step3Valid || isSubmitting}
+                      className="w-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
+                    >
+                      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#0066ff]/10 to-[#8c52ff]/10 group-hover:opacity-0 transition-opacity duration-300"></span>
+                      <span className="relative flex items-center justify-center">
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            <span>Submitting...</span>
+                          </>
+                        ) : (
+                          <span>Submit</span>
+                        )}
+                      </span>
+                    </button>
+
                     <button
                       type="button"
                       onClick={() => {
@@ -693,23 +811,9 @@ export default function SellItemPage() {
                           setFormStep(2)
                         }, 100)
                       }}
-                      className="px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
+                      className="w-full px-6 py-2 rounded-full border border-gray-300 bg-white text-gray-700 shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Back
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={!step3Valid || isSubmitting}
-                      className="bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] hover:from-[#7a47e6] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        "Submit"
-                      )}
                     </button>
                   </div>
                 </div>
@@ -725,8 +829,8 @@ export default function SellItemPage() {
               Thank You
             </h2>
             <p className="text-lg mb-8 text-gray-600">
-              We've received your submission and will review your item details. Your information has been sent to
-              alecgold808@gmail.com. You can expect to hear from us within 24 hours with a price offer.
+              We've received your submission and will review your item details. You can expect to hear from us within 24
+              hours with a price offer.
             </p>
             <div className="bg-blue-50 p-6 rounded-lg inline-block text-left border border-blue-100 shadow-sm">
               <h3 className="font-medium text-lg mb-2 text-[#0066ff]">Next Steps</h3>

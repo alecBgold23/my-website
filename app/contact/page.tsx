@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { Mail, Phone, Clock, AlertCircle, CheckCircle, Loader2 } from "lucide-react"
-import { sendContactFormEmail } from "@/app/actions/email-actions"
 import Image from "next/image"
 
 export default function ContactPage() {
@@ -19,7 +18,6 @@ export default function ContactPage() {
   const [isFormValid, setIsFormValid] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitResult, setSubmitResult] = useState(null)
 
   useEffect(() => {
     setIsFormValid(name.trim() !== "" && email.trim() !== "" && inquiryType !== "" && message.trim() !== "")
@@ -37,43 +35,23 @@ export default function ContactPage() {
     return Object.keys(errors).length === 0
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = (e) => {
     if (validateForm()) {
       setIsSubmitting(true)
 
-      try {
-        // Create FormData object
-        const formData = new FormData()
-        formData.append("name", name)
-        formData.append("email", email)
-        formData.append("inquiryType", inquiryType)
-        formData.append("message", message)
-
-        console.log("Submitting contact form:", Object.fromEntries(formData.entries()))
-
-        // Send the form data to the server action
-        const result = await sendContactFormEmail(formData)
-        console.log("Contact form submission result:", result)
-
-        setSubmitResult(result)
-        if (result.success) {
-          setIsSubmitted(true)
-          // Reset form
-          setName("")
-          setEmail("")
-          setInquiryType("")
-          setMessage("")
-        }
-      } catch (error) {
-        console.error("Error submitting form:", error)
-        setSubmitResult({
-          success: false,
-          message: "An unexpected error occurred. Please try again later.",
-        })
-      } finally {
+      // Form will be submitted to Formspree
+      // This is just to show loading state
+      setTimeout(() => {
         setIsSubmitting(false)
-      }
+        setIsSubmitted(true)
+        // Reset form
+        setName("")
+        setEmail("")
+        setInquiryType("")
+        setMessage("")
+      }, 1000)
+    } else {
+      e.preventDefault()
     }
   }
 
@@ -137,18 +115,19 @@ export default function ContactPage() {
               {!isSubmitted ? (
                 <>
                   <h2 className="section-header mb-6">Send a Message</h2>
-                  {submitResult && !submitResult.success && (
-                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-                      {submitResult.message}
-                    </div>
-                  )}
-                  <form action="https://formspree.io/f/xqaqprdw" method="POST" className="space-y-4">
+                  <form
+                    action="https://formspree.io/f/xqaqprdw"
+                    method="POST"
+                    className="space-y-4"
+                    onSubmit={handleSubmit}
+                  >
                     <div>
                       <Label htmlFor="name" className="text-sm font-medium text-gray-700">
                         Name <span className="text-red-500">*</span>
                       </Label>
                       <Input
                         id="name"
+                        name="name"
                         placeholder="Your name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -179,7 +158,7 @@ export default function ContactPage() {
                       <Label htmlFor="inquiry-type" className="text-sm font-medium text-gray-700">
                         Type of Inquiry <span className="text-red-500">*</span>
                       </Label>
-                      <Select value={inquiryType} onValueChange={setInquiryType} required>
+                      <Select value={inquiryType} onValueChange={setInquiryType} name="inquiryType" required>
                         <SelectTrigger
                           id="inquiry-type"
                           className={`mt-1 rounded-lg ${formErrors.inquiryType ? "border-red-500" : "border-gray-300"}`}
@@ -212,9 +191,6 @@ export default function ContactPage() {
                       />
                       {formErrors.message && <ErrorMessage message={formErrors.message} />}
                     </div>
-
-                    <input type="hidden" name="name" value={name} />
-                    <input type="hidden" name="inquiryType" value={inquiryType} />
 
                     <Button
                       type="submit"
