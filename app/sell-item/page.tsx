@@ -209,6 +209,11 @@ export default function SellItemPage() {
     </div>
   )
 
+  // Handler for clicking on a condition option
+  const handleConditionClick = (value) => {
+    setItemCondition(value)
+  }
+
   return (
     <div className="container mx-auto py-12 px-4 bg-gradient-to-b from-white to-blue-50" ref={formContainerRef}>
       {/* Add a ref at the top of the form for scrolling */}
@@ -463,66 +468,81 @@ export default function SellItemPage() {
                       onValueChange={setItemCondition}
                       className={`space-y-4 ${formErrors.itemCondition ? "border-red-300 border p-4 rounded-lg" : ""}`}
                     >
-                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
+                      <div
+                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
+                        onClick={() => handleConditionClick("like-new")}
+                      >
                         <RadioGroupItem
                           value="like-new"
                           id="like-new"
                           className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
-                          <Label htmlFor="like-new" className="font-medium">
+                          <Label htmlFor="like-new" className="font-medium cursor-pointer">
                             Like New
                           </Label>
                           <p className="text-sm text-gray-500">Appears new and functions perfectly</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
+                      <div
+                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
+                        onClick={() => handleConditionClick("excellent")}
+                      >
                         <RadioGroupItem
                           value="excellent"
                           id="excellent"
                           className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
-                          <Label htmlFor="excellent" className="font-medium">
+                          <Label htmlFor="excellent" className="font-medium cursor-pointer">
                             Excellent
                           </Label>
                           <p className="text-sm text-gray-500">Minimal signs of use, functions perfectly</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
+                      <div
+                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
+                        onClick={() => handleConditionClick("good")}
+                      >
                         <RadioGroupItem
                           value="good"
                           id="good"
                           className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
-                          <Label htmlFor="good" className="font-medium">
+                          <Label htmlFor="good" className="font-medium cursor-pointer">
                             Good
                           </Label>
                           <p className="text-sm text-gray-500">Some signs of use, functions well</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
+                      <div
+                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
+                        onClick={() => handleConditionClick("fair")}
+                      >
                         <RadioGroupItem
                           value="fair"
                           id="fair"
                           className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
-                          <Label htmlFor="fair" className="font-medium">
+                          <Label htmlFor="fair" className="font-medium cursor-pointer">
                             Fair
                           </Label>
                           <p className="text-sm text-gray-500">Visible wear, remains functional</p>
                         </div>
                       </div>
-                      <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200">
+                      <div
+                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
+                        onClick={() => handleConditionClick("poor")}
+                      >
                         <RadioGroupItem
                           value="poor"
                           id="poor"
                           className="mt-1 border-blue-300 text-[#0066ff] focus:ring-[#0066ff]"
                         />
                         <div>
-                          <Label htmlFor="poor" className="font-medium">
+                          <Label htmlFor="poor" className="font-medium cursor-pointer">
                             Poor
                           </Label>
                           <p className="text-sm text-gray-500">Significant wear, may require repair</p>
@@ -557,7 +577,8 @@ export default function SellItemPage() {
                         setFormStep(1)
                         setTimeout(scrollToTop, 50)
                       }}
-                      className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-full shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
+                      variant="secondary"
+                      className="px-6 py-2 rounded-full shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Back
                     </Button>
@@ -679,7 +700,8 @@ export default function SellItemPage() {
                         setFormStep(2)
                         setTimeout(scrollToTop, 50)
                       }}
-                      className="border border-[#0066ff] text-[#0066ff] hover:bg-[#0066ff] hover:text-white px-6 py-2 rounded-full shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
+                      variant="secondary"
+                      className="px-6 py-2 rounded-full shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Back
                     </Button>
