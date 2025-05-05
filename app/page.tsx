@@ -4,13 +4,32 @@ import Link from "next/link"
 import Image from "next/image"
 import { AlertTriangle } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 
 export default function Home() {
   const router = useRouter()
+  const [showInitialLine, setShowInitialLine] = useState(false)
 
+  // Function to navigate to sell item page
   const navigateToSellItem = () => {
     router.push("/sell-item")
   }
+
+  // Effect to show and hide the line on initial load
+  useEffect(() => {
+    // Show the line immediately
+    setShowInitialLine(true)
+
+    // Hide the line after just 200ms
+    const hideTimer = setTimeout(() => {
+      setShowInitialLine(false)
+    }, 200) // 0ms delay + 200ms visibility = 200ms total
+
+    // Clean up timer
+    return () => {
+      clearTimeout(hideTimer)
+    }
+  }, [])
 
   return (
     <div>
@@ -36,7 +55,13 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-black mb-8 transition-all duration-300 group-hover:text-[#0066ff]">
               Selling made simpler.
             </p>
-            <div className="w-full max-w-md h-1 bg-gradient-to-r from-transparent via-[#0066ff] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+            <div
+              className={`w-full max-w-md h-1 bg-gradient-to-r from-transparent via-[#0066ff] to-transparent rounded-full ${
+                showInitialLine
+                  ? "opacity-100 transition-opacity duration-50"
+                  : "opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              }`}
+            ></div>
           </div>
 
           {/* Separate buttons section */}
