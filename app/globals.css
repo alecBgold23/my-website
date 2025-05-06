@@ -369,3 +369,15 @@ body {
   position: relative;
   z-index: 10;
 }
+
+/* Ensure content transitions properly beneath the fixed navbar */
+.page-content-wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Ensure the content animation doesn't cause layout shifts */
+.content-animation-wrapper {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}

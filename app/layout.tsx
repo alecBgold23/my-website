@@ -46,7 +46,7 @@ export default function RootLayout({
           <Navbar />
 
           <div className="flex flex-col min-h-screen">
-            <div className="flex-grow">
+            <div className="flex-grow relative">
               <PageTransition>{children}</PageTransition>
             </div>
             <Footer />

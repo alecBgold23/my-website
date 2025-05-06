@@ -5,6 +5,7 @@ import Image from "next/image"
 import { AlertTriangle } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import ContentAnimation from "@/components/content-animation"
 
 export default function Home() {
   const router = useRouter()
@@ -34,95 +35,109 @@ export default function Home() {
   return (
     <div>
       {/* Announcement Bar - Sleek warning style */}
-      <div className="bg-gradient-to-r from-gray-900 to-red-900 py-3 px-4 text-center flex items-center justify-center shadow-md">
-        <AlertTriangle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0" />
-        <span className="text-red-500 text-sm">
-          Unfortunately, all services are currently unavailable. We'll notify you once they're back up and running.
-        </span>
-      </div>
+      <ContentAnimation>
+        <div className="bg-gradient-to-r from-gray-900 to-red-900 py-3 px-4 text-center flex items-center justify-center shadow-md">
+          <AlertTriangle className="h-5 w-5 text-red-500 mr-2 flex-shrink-0" />
+          <span className="text-red-500 text-sm">
+            Unfortunately, all services are currently unavailable. We'll notify you once they're back up and running.
+          </span>
+        </div>
+      </ContentAnimation>
 
       {/* Hero Section */}
       <section className="bg-white pt-10 pb-24 md:pt-12 md:pb-32">
         <div className="container mx-auto px-4">
           {/* Clickable hero content */}
-          <div
-            className="flex flex-col items-center text-center cursor-pointer group mb-8"
-            onClick={navigateToSellItem}
-          >
-            <h1 className="text-4xl md:text-5xl font-medium mb-2 sparkle-text drop-shadow-sm pb-1 transition-transform duration-300 group-hover:scale-105 gradient-header">
-              BluBerry
-            </h1>
-            <p className="text-xl md:text-2xl text-black mb-8 transition-all duration-300 group-hover:text-[#0066ff]">
-              Selling made simpler.
-            </p>
+          <ContentAnimation>
             <div
-              className={`w-full max-w-md h-1 bg-gradient-to-r from-transparent via-[#0066ff] to-transparent rounded-full ${
-                showInitialLine
-                  ? "opacity-100 transition-opacity duration-50"
-                  : "opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-              }`}
-            ></div>
-          </div>
+              className="flex flex-col items-center text-center cursor-pointer group mb-8"
+              onClick={navigateToSellItem}
+            >
+              <h1 className="text-4xl md:text-5xl font-medium mb-2 sparkle-text drop-shadow-sm pb-1 transition-transform duration-300 group-hover:scale-105 gradient-header">
+                BluBerry
+              </h1>
+              <p className="text-xl md:text-2xl text-black mb-8 transition-all duration-300 group-hover:text-[#0066ff]">
+                Selling made simpler.
+              </p>
+              <div
+                className={`w-full max-w-md h-1 bg-gradient-to-r from-transparent via-[#0066ff] to-transparent rounded-full ${
+                  showInitialLine
+                    ? "opacity-100 transition-opacity duration-50"
+                    : "opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                }`}
+              ></div>
+            </div>
+          </ContentAnimation>
 
           {/* Separate buttons section */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href="/how-it-works"
-              className="bg-gradient-to-r from-[#3B82F6] to-[#8c52ff] text-white px-5 py-2 rounded-full font-medium hover:shadow-md hover:translate-y-[-1px] transition-all"
-            >
-              Learn How It Works
-            </Link>
-            <Link
-              href="/sell-item"
-              className="border-2 border-[#6a5acd] text-[#6a5acd] px-5 py-2 rounded-full font-medium hover:bg-gradient-to-r hover:from-[#3B82F6] hover:to-[#8c52ff] hover:text-white hover:border-transparent hover:shadow-md hover:translate-y-[-1px] transition-all"
-            >
-              Sell Your Item
-            </Link>
-          </div>
+          <ContentAnimation delay={0.1}>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link
+                href="/how-it-works"
+                className="bg-gradient-to-r from-[#3B82F6] to-[#8c52ff] text-white px-5 py-2 rounded-full font-medium hover:shadow-md hover:translate-y-[-1px] transition-all"
+              >
+                Learn How It Works
+              </Link>
+              <Link
+                href="/sell-item"
+                className="border-2 border-[#6a5acd] text-[#6a5acd] px-5 py-2 rounded-full font-medium hover:bg-gradient-to-r hover:from-[#3B82F6] hover:to-[#8c52ff] hover:text-white hover:border-transparent hover:shadow-md hover:translate-y-[-1px] transition-all"
+              >
+                Sell Your Item
+              </Link>
+            </div>
+          </ContentAnimation>
         </div>
       </section>
 
       {/* How It Works Section - Changed back to black with professional Roboto font */}
       <section className="bg-black text-white py-24 font-[var(--font-roboto)]">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-normal mb-16 text-center tracking-tight white-header">How It Works</h2>
+          <ContentAnimation>
+            <h2 className="text-5xl font-normal mb-16 text-center tracking-tight white-header">How It Works</h2>
+          </ContentAnimation>
           <div className="grid md:grid-cols-3 gap-16">
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-[#0066ff] flex items-center justify-center mb-6">
-                <span className="text-2xl font-normal text-white">1</span>
+            <ContentAnimation delay={0.1}>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-[#0066ff] flex items-center justify-center mb-6">
+                  <span className="text-2xl font-normal text-white">1</span>
+                </div>
+                <h3 className="text-xl font-medium mb-3 text-center">Submit Your Item</h3>
+                <p className="text-gray-300 text-center mb-6 font-normal leading-relaxed">
+                  Complete our simple form with your item details. No complex listings required.
+                </p>
+                <div className="relative w-full h-48 rounded-xl overflow-hidden">
+                  <Image src="/placeholder.svg?key=2e143" alt="Submit your item" fill className="object-cover" />
+                </div>
               </div>
-              <h3 className="text-xl font-medium mb-3 text-center">Submit Your Item</h3>
-              <p className="text-gray-300 text-center mb-6 font-normal leading-relaxed">
-                Complete our simple form with your item details. No complex listings required.
-              </p>
-              <div className="relative w-full h-48 rounded-xl overflow-hidden">
-                <Image src="/placeholder.svg?key=2e143" alt="Submit your item" fill className="object-cover" />
+            </ContentAnimation>
+            <ContentAnimation delay={0.2}>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-[#8c52ff] flex items-center justify-center mb-6">
+                  <span className="text-2xl font-normal text-white">2</span>
+                </div>
+                <h3 className="text-xl font-medium mb-3 text-center">We Pick It Up</h3>
+                <p className="text-gray-300 text-center mb-6 font-normal leading-relaxed">
+                  Schedule a convenient time, and our team will collect the item from your location.
+                </p>
+                <div className="relative w-full h-48 rounded-xl overflow-hidden">
+                  <Image src="/placeholder.svg?key=fghw3" alt="We pick it up" fill className="object-cover" />
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-[#8c52ff] flex items-center justify-center mb-6">
-                <span className="text-2xl font-normal text-white">2</span>
+            </ContentAnimation>
+            <ContentAnimation delay={0.3}>
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff] flex items-center justify-center mb-6">
+                  <span className="text-2xl font-normal text-white">3</span>
+                </div>
+                <h3 className="text-xl font-medium mb-3 text-center">Get Paid Instantly</h3>
+                <p className="text-gray-300 text-center mb-6 font-normal leading-relaxed">
+                  Receive your payment immediately upon pickup. No waiting, no complications.
+                </p>
+                <div className="relative w-full h-48 rounded-xl overflow-hidden">
+                  <Image src="/placeholder.svg?key=efy0w" alt="Get paid instantly" fill className="object-cover" />
+                </div>
               </div>
-              <h3 className="text-xl font-medium mb-3 text-center">We Pick It Up</h3>
-              <p className="text-gray-300 text-center mb-6 font-normal leading-relaxed">
-                Schedule a convenient time, and our team will collect the item from your location.
-              </p>
-              <div className="relative w-full h-48 rounded-xl overflow-hidden">
-                <Image src="/placeholder.svg?key=fghw3" alt="We pick it up" fill className="object-cover" />
-              </div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff] flex items-center justify-center mb-6">
-                <span className="text-2xl font-normal text-white">3</span>
-              </div>
-              <h3 className="text-xl font-medium mb-3 text-center">Get Paid Instantly</h3>
-              <p className="text-gray-300 text-center mb-6 font-normal leading-relaxed">
-                Receive your payment immediately upon pickup. No waiting, no complications.
-              </p>
-              <div className="relative w-full h-48 rounded-xl overflow-hidden">
-                <Image src="/placeholder.svg?key=efy0w" alt="Get paid instantly" fill className="object-cover" />
-              </div>
-            </div>
+            </ContentAnimation>
           </div>
         </div>
       </section>

@@ -11,18 +11,25 @@ interface PageTransitionProps {
 export default function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname()
 
+  // Main page transition - slide horizontally
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="sync">
       <motion.div
         key={pathname}
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -20 }}
+        initial={{ x: 20 }}
+        animate={{ x: 0 }}
+        exit={{ x: -20 }}
         transition={{
           type: "tween",
           ease: "easeInOut",
-          duration: 0.15, // 150ms duration as requested
+          duration: 0.15, // 150ms duration
         }}
+        style={{
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+        }}
+        className="page-content-wrapper"
       >
         {children}
       </motion.div>
