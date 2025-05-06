@@ -4,6 +4,7 @@ import { Inter, Poppins, Roboto } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import PageTransition from "@/components/page-transition"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -41,9 +42,13 @@ export default function RootLayout({
         className={`${inter.className} ${poppins.variable} ${roboto.variable} bg-gradient-to-b from-white to-[#f0f7ff]`}
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          {/* Navbar is completely outside the transition area */}
+          <Navbar />
+
           <div className="flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow">{children}</main>
+            <div className="flex-grow">
+              <PageTransition>{children}</PageTransition>
+            </div>
             <Footer />
           </div>
         </ThemeProvider>

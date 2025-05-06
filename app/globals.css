@@ -256,6 +256,29 @@ body {
   filter: blur(1px);
 }
 
+/* Page transition styles */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 100ms, transform 100ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 100ms, transform 100ms;
+}
+
 @layer components {
   .apple-button {
     @apply rounded-full px-5 py-2 text-sm font-medium transition-all duration-300 transform;
@@ -319,7 +342,7 @@ body {
   }
 
   .apple-nav {
-    @apply backdrop-blur-md bg-white bg-opacity-80 border-b border-gray-200 border-opacity-50;
+    @apply backdrop-blur-md bg-white bg-opacity-90 border-b border-gray-200 border-opacity-50;
   }
 
   .apple-footer {
@@ -337,4 +360,12 @@ body {
   .apple-subheading {
     @apply text-xl md:text-2xl font-normal text-gray-600 mt-2;
   }
+}
+
+/* Add these styles to ensure the navbar stays fixed during transitions */
+
+/* Ensure content transitions properly beneath the fixed navbar */
+.page-content {
+  position: relative;
+  z-index: 10;
 }
