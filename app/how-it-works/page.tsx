@@ -37,7 +37,7 @@ export default function HowItWorksPage() {
                 <div className="w-16 h-16 rounded-full bg-[#3B82F6] flex items-center justify-center mb-6 mx-auto md:mx-0">
                   <span className="text-2xl font-normal text-white">1</span>
                 </div>
-                <h2 className="text-2xl font-medium mb-4 tracking-tight">Submit Your Item</h2>
+                <h2 className="text-2xl font-medium mb-4 tracking-tight white-header">Submit Your Item</h2>
                 <p className="text-gray-300 mb-4 font-normal leading-relaxed">
                   Complete our straightforward form with basic information about your item. We've simplified this step
                   to eliminate the need for extensive photography or detailed descriptions.
@@ -61,7 +61,7 @@ export default function HowItWorksPage() {
                 <div className="w-16 h-16 rounded-full bg-[#8A4FFF] flex items-center justify-center mb-6 mx-auto md:mx-0">
                   <span className="text-2xl font-normal text-white">2</span>
                 </div>
-                <h2 className="text-2xl font-medium mb-4 tracking-tight">Receive a Fair Offer</h2>
+                <h2 className="text-2xl font-medium mb-4 tracking-tight white-header">Receive a Fair Offer</h2>
                 <p className="text-gray-300 mb-4 font-normal leading-relaxed">
                   Within 24 hours, our team evaluates your submission and provides a competitive offer based on the
                   item's condition and current market value, eliminating the need for negotiation.
@@ -84,7 +84,7 @@ export default function HowItWorksPage() {
                 <div className="w-16 h-16 rounded-full bg-[#3B82F6] flex items-center justify-center mb-6 mx-auto md:mx-0">
                   <span className="text-2xl font-normal text-white">3</span>
                 </div>
-                <h2 className="text-2xl font-medium mb-4 tracking-tight">Schedule a Pickup</h2>
+                <h2 className="text-2xl font-medium mb-4 tracking-tight white-header">Schedule a Pickup</h2>
                 <p className="text-gray-300 mb-4 font-normal leading-relaxed">
                   Upon accepting our offer, we arrange a convenient pickup time. Our professional team comes to your
                   location, eliminating transportation concerns on your part.
@@ -108,7 +108,7 @@ export default function HowItWorksPage() {
                 <div className="w-16 h-16 rounded-full bg-[#8A4FFF] flex items-center justify-center mb-6 mx-auto md:mx-0">
                   <span className="text-2xl font-normal text-white">4</span>
                 </div>
-                <h2 className="text-2xl font-medium mb-4 tracking-tight">Immediate Payment</h2>
+                <h2 className="text-2xl font-medium mb-4 tracking-tight white-header">Immediate Payment</h2>
                 <p className="text-gray-300 mb-4 font-normal leading-relaxed">
                   At the time of pickup, you receive immediate payment via your preferred method—cash, check, or digital
                   transfer—eliminating waiting periods for funds to clear.
@@ -127,7 +127,7 @@ export default function HowItWorksPage() {
       {/* Items We Accept - Updated to match black theme */}
       <section className="apple-section bg-black text-white">
         <div className="container mx-auto px-4">
-          <h2 className="page-header mb-8 text-white">Items We Accept</h2>
+          <h2 className="page-header white-header mb-8">Items We Accept</h2>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="text-center">

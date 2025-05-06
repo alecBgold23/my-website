@@ -49,7 +49,7 @@ export default function Home() {
             className="flex flex-col items-center text-center cursor-pointer group mb-8"
             onClick={navigateToSellItem}
           >
-            <h1 className="text-4xl md:text-5xl font-medium mb-2 sparkle-text drop-shadow-sm pb-1 transition-transform duration-300 group-hover:scale-105">
+            <h1 className="text-4xl md:text-5xl font-medium mb-2 sparkle-text drop-shadow-sm pb-1 transition-transform duration-300 group-hover:scale-105 gradient-header">
               BluBerry
             </h1>
             <p className="text-xl md:text-2xl text-black mb-8 transition-all duration-300 group-hover:text-[#0066ff]">
@@ -85,7 +85,7 @@ export default function Home() {
       {/* How It Works Section - Changed back to black with professional Roboto font */}
       <section className="bg-black text-white py-24 font-[var(--font-roboto)]">
         <div className="container mx-auto px-4">
-          <h2 className="text-5xl font-normal mb-16 text-center tracking-tight">How It Works</h2>
+          <h2 className="text-5xl font-normal mb-16 text-center tracking-tight white-header">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-16">
             <div className="flex flex-col items-center">
               <div className="w-16 h-16 rounded-full bg-[#0066ff] flex items-center justify-center mb-6">

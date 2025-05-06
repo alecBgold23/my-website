@@ -29,6 +29,10 @@ export default function SellItemPage() {
   const [zipCode, setZipCode] = useState("")
   const [termsAccepted, setTermsAccepted] = useState(false)
 
+  // Animation states
+  const [animatingFiles, setAnimatingFiles] = useState([])
+  const photosContainerRef = useRef(null)
+
   // Address autocomplete
   const [address, setAddress] = useState("")
   const [addressSuggestions, setAddressSuggestions] = useState([])
@@ -149,6 +153,69 @@ export default function SellItemPage() {
     }
   }
 
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files)
+    if (files.length > 0) {
+      // Reset the input value to prevent duplicate uploads
+      e.target.value = null
+
+      // Create file objects with preview URLs
+      const newPhotos = files.map((file) => ({
+        file,
+        preview: URL.createObjectURL(file),
+        name: file.name,
+        id: `file-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      }))
+
+      // Filter out duplicates based on file name
+      const filteredPhotos = newPhotos.filter(
+        (newPhoto) =>
+          !itemPhotos.some((existingPhoto) => existingPhoto.name === newPhoto.name) &&
+          !animatingFiles.some((animatingFile) => animatingFile.name === newPhoto.name),
+      )
+
+      // Add directly to itemPhotos with no animation
+      if (filteredPhotos.length > 0) {
+        setItemPhotos((prev) => [...prev, ...filteredPhotos])
+      }
+    }
+  }
+
+  const handleCameraCapture = (e) => {
+    const files = Array.from(e.target.files)
+    if (files.length > 0) {
+      // Reset the input value to prevent duplicate uploads
+      e.target.value = null
+
+      const newPhotos = files.map((file) => ({
+        file,
+        preview: URL.createObjectURL(file),
+        name: `Camera_${new Date().toISOString()}.jpg`,
+        id: `file-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      }))
+
+      // Filter out duplicates based on file name
+      const filteredPhotos = newPhotos.filter(
+        (newPhoto) =>
+          !itemPhotos.some((existingPhoto) => existingPhoto.name === newPhoto.name) &&
+          !animatingFiles.some((animatingFile) => animatingFile.name === newPhoto.name),
+      )
+
+      // Add directly to itemPhotos with no animation
+      if (filteredPhotos.length > 0) {
+        setItemPhotos((prev) => [...prev, ...filteredPhotos])
+      }
+    }
+  }
+
+  const removePhoto = (index) => {
+    const newPhotos = [...itemPhotos]
+    // Revoke the object URL to avoid memory leaks
+    URL.revokeObjectURL(newPhotos[index].preview)
+    newPhotos.splice(index, 1)
+    setItemPhotos(newPhotos)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (validateStep3()) {
@@ -169,9 +236,12 @@ export default function SellItemPage() {
         formData.append("address", address)
         formData.append("pickupDate", pickupDate)
 
-        // Add photos to FormData
+        // Add photos to FormData - ensure all photos are included
         itemPhotos.forEach((photo, index) => {
-          formData.append(`photo${index}`, photo.file)
+          if (photo.file) {
+            formData.append(`photos`, photo.file)
+            console.log(`Adding photo ${index} to form submission: ${photo.name}`)
+          }
         })
 
         console.log("Submitting form data:", Object.fromEntries(formData.entries()))
@@ -195,38 +265,6 @@ export default function SellItemPage() {
     }
   }
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files)
-    if (files.length > 0) {
-      const newPhotos = files.map((file) => ({
-        file,
-        preview: URL.createObjectURL(file),
-        name: file.name,
-      }))
-      setItemPhotos((prev) => [...prev, ...newPhotos])
-    }
-  }
-
-  const handleCameraCapture = (e) => {
-    const files = Array.from(e.target.files)
-    if (files.length > 0) {
-      const newPhotos = files.map((file) => ({
-        file,
-        preview: URL.createObjectURL(file),
-        name: `Camera_${new Date().toISOString()}.jpg`,
-      }))
-      setItemPhotos((prev) => [...prev, ...newPhotos])
-    }
-  }
-
-  const removePhoto = (index) => {
-    const newPhotos = [...itemPhotos]
-    // Revoke the object URL to avoid memory leaks
-    URL.revokeObjectURL(newPhotos[index].preview)
-    newPhotos.splice(index, 1)
-    setItemPhotos(newPhotos)
-  }
-
   const ErrorMessage = ({ message }) => (
     <div className="flex items-center gap-1 text-red-500 text-sm mt-1">
       <AlertCircle className="h-4 w-4" />
@@ -240,7 +278,7 @@ export default function SellItemPage() {
       <div ref={formTopRef} className="scroll-target"></div>
 
       <div className="max-w-3xl mx-auto">
-        <h1 className="page-header text-center mb-6">Sell Your Item</h1>
+        <h1 className="page-header text-center mb-6 font-bold gradient-header">Sell Your Item</h1>
 
         <p className="text-center text-gray-600 mb-12">
           Please provide information about the item you wish to sell. This process takes just a few minutes, and we'll
@@ -267,7 +305,7 @@ export default function SellItemPage() {
                   }}
                   className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     formStep === 1
-                      ? "bg-gradient-to-r from-[#0066ff] to-[#0066ff] text-white shadow-lg"
+                      ? "bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] text-white shadow-lg"
                       : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
                   } transition-all duration-300`}
                 >
@@ -277,7 +315,7 @@ export default function SellItemPage() {
               </div>
               <div className="flex-1 h-1 mx-4 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className="h-1 bg-gradient-to-r from-[#0066ff] to-[#8c52ff] transition-all duration-500 ease-out"
+                  className="h-1 bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] transition-all duration-500 ease-out"
                   style={{ width: formStep >= 2 ? "100%" : "0%" }}
                 ></div>
               </div>
@@ -291,7 +329,7 @@ export default function SellItemPage() {
                   }}
                   className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     formStep === 2
-                      ? "bg-gradient-to-r from-[#0066ff] to-[#8c52ff] text-white shadow-lg"
+                      ? "bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] text-white shadow-lg"
                       : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
                   } transition-all duration-300`}
                 >
@@ -301,7 +339,7 @@ export default function SellItemPage() {
               </div>
               <div className="flex-1 h-1 mx-4 bg-gray-100 rounded-full overflow-hidden">
                 <div
-                  className="h-1 bg-gradient-to-r from-[#0066ff] to-[#8c52ff] transition-all duration-500 ease-out"
+                  className="h-1 bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] transition-all duration-500 ease-out"
                   style={{ width: formStep >= 3 ? "100%" : "0%" }}
                 ></div>
               </div>
@@ -315,7 +353,7 @@ export default function SellItemPage() {
                   }}
                   className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     formStep === 3
-                      ? "bg-gradient-to-r from-[#8c52ff] to-[#8c52ff] text-white shadow-lg"
+                      ? "bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] text-white shadow-lg"
                       : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
                   } transition-all duration-300`}
                 >
@@ -399,13 +437,13 @@ export default function SellItemPage() {
                     <div
                       className={`p-6 border border-dashed rounded-lg ${
                         formErrors.itemPhotos ? "border-red-300" : "border-blue-200"
-                      } bg-blue-50 hover:bg-blue-100 transition-colors duration-200`}
+                      } bg-blue-50 hover:bg-blue-100 transition-colors duration-200 relative`}
                     >
                       <div className="flex flex-col items-center justify-center gap-4">
-                        <div className="flex flex-wrap gap-4 w-full mb-4">
+                        <div className="flex flex-wrap gap-4 w-full mb-4 min-h-[100px]" ref={photosContainerRef}>
                           {itemPhotos.map((photo, index) => (
                             <div
-                              key={index}
+                              key={photo.id || index}
                               className="relative w-24 h-24 rounded-lg overflow-hidden border border-blue-100 shadow-sm group"
                             >
                               <img
@@ -485,7 +523,7 @@ export default function SellItemPage() {
                       type="button"
                       onClick={handleContinueStep1}
                       disabled={!step1Valid}
-                      className="bg-gradient-to-r from-[#0066ff] to-[#0066ff] hover:from-[#0055dd] hover:to-[#0055dd] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+                      className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] hover:from-[#0055dd] hover:via-[#5a4ab8] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Continue
                     </button>
@@ -506,7 +544,9 @@ export default function SellItemPage() {
                         onClick={() => setItemCondition("like-new")}
                       >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
-                          {itemCondition === "like-new" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                          {itemCondition === "like-new" && (
+                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff]"></div>
+                          )}
                         </div>
                         <div>
                           <Label htmlFor="like-new" className="font-medium cursor-pointer">
@@ -523,7 +563,9 @@ export default function SellItemPage() {
                         onClick={() => setItemCondition("excellent")}
                       >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
-                          {itemCondition === "excellent" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                          {itemCondition === "excellent" && (
+                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff]"></div>
+                          )}
                         </div>
                         <div>
                           <Label htmlFor="excellent" className="font-medium cursor-pointer">
@@ -540,7 +582,9 @@ export default function SellItemPage() {
                         onClick={() => setItemCondition("good")}
                       >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
-                          {itemCondition === "good" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                          {itemCondition === "good" && (
+                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff]"></div>
+                          )}
                         </div>
                         <div>
                           <Label htmlFor="good" className="font-medium cursor-pointer">
@@ -557,7 +601,9 @@ export default function SellItemPage() {
                         onClick={() => setItemCondition("fair")}
                       >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
-                          {itemCondition === "fair" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                          {itemCondition === "fair" && (
+                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff]"></div>
+                          )}
                         </div>
                         <div>
                           <Label htmlFor="fair" className="font-medium cursor-pointer">
@@ -574,7 +620,9 @@ export default function SellItemPage() {
                         onClick={() => setItemCondition("poor")}
                       >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
-                          {itemCondition === "poor" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
+                          {itemCondition === "poor" && (
+                            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff]"></div>
+                          )}
                         </div>
                         <div>
                           <Label htmlFor="poor" className="font-medium cursor-pointer">
@@ -623,7 +671,7 @@ export default function SellItemPage() {
                       type="button"
                       onClick={handleContinueStep2}
                       disabled={!step2Valid}
-                      className="bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+                      className="bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] hover:from-[#0055dd] hover:via-[#5a4ab8] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
                     >
                       Continue
                     </button>
@@ -792,9 +840,9 @@ export default function SellItemPage() {
                     <button
                       type="submit"
                       disabled={!step3Valid || isSubmitting}
-                      className="w-full bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
+                      className="w-full bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] hover:from-[#0055dd] hover:via-[#5a4ab8] hover:to-[#7a47e6] text-white px-8 py-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
                     >
-                      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#0066ff]/10 to-[#8c52ff]/10 group-hover:opacity-0 transition-opacity duration-300"></span>
+                      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#0066ff]/10 via-[#6a5acd]/10 to-[#8c52ff]/10 group-hover:opacity-0 transition-opacity duration-300"></span>
                       <span className="relative flex items-center justify-center">
                         {isSubmitting ? (
                           <>
@@ -849,7 +897,7 @@ export default function SellItemPage() {
             <div className="mt-8">
               <Link
                 href="/"
-                className="inline-block bg-gradient-to-r from-[#0066ff] to-[#8c52ff] hover:from-[#0055dd] hover:to-[#7a47e6] text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
+                className="inline-block bg-gradient-to-r from-[#0066ff] via-[#6a5acd] to-[#8c52ff] hover:from-[#0055dd] hover:via-[#5a4ab8] hover:to-[#7a47e6] text-white px-8 py-3 rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
               >
                 Return to Home
               </Link>
