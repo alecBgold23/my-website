@@ -1,7 +1,18 @@
-import Link from "next/link"
+"use client"
+
+import type React from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 
 export default function Footer() {
+  const router = useRouter()
+
+  // Handle navigation for consistent transitions
+  const handleNavigation = (href: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    router.push(href)
+  }
+
   return (
     <footer className="apple-footer">
       <div className="container mx-auto px-4">
@@ -33,9 +44,13 @@ export default function Footer() {
 
           <div className="text-center text-xs text-gray-400">
             <p className="mb-1">Copyright © {new Date().getFullYear()} BluBerry. All rights reserved.</p>
-            <Link href="/privacy-policy" className="text-gray-500 hover:text-[#3B82F6] transition-colors">
+            <a
+              href="/privacy-policy"
+              onClick={(e) => handleNavigation("/privacy-policy", e)}
+              className="text-gray-500 hover:text-[#3B82F6] transition-colors"
+            >
               Privacy Policy
-            </Link>
+            </a>
           </div>
         </div>
       </div>

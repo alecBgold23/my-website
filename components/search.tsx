@@ -105,7 +105,7 @@ export default function SearchModal({ isOpen, onClose }) {
     setSearchResults(results)
   }
 
-  // Handle result click
+  // Handle result click - use router.push for consistent transitions
   const handleResultClick = (path) => {
     router.push(path)
     onClose()
