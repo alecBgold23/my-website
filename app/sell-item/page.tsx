@@ -498,81 +498,86 @@ export default function SellItemPage() {
                   <div className="transition-all duration-300">
                     <Label className="text-base font-medium mb-4 block">Item Condition</Label>
                     <div className="space-y-4">
-                      {/* Static condition options */}
-                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                      {/* Clickable condition options */}
+                      <div
+                        className={`flex items-start space-x-3 p-3 rounded-lg border ${
+                          itemCondition === "like-new" ? "border-blue-300 bg-blue-50" : "border-gray-200"
+                        } cursor-pointer hover:bg-blue-50 transition-all duration-200`}
+                        onClick={() => setItemCondition("like-new")}
+                      >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
                           {itemCondition === "like-new" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
                         </div>
                         <div>
-                          <Label
-                            htmlFor="like-new"
-                            className="font-medium cursor-pointer"
-                            onClick={() => setItemCondition("like-new")}
-                          >
+                          <Label htmlFor="like-new" className="font-medium cursor-pointer">
                             Like New
                           </Label>
                           <p className="text-sm text-gray-500">Appears new and functions perfectly</p>
                         </div>
                       </div>
 
-                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                      <div
+                        className={`flex items-start space-x-3 p-3 rounded-lg border ${
+                          itemCondition === "excellent" ? "border-blue-300 bg-blue-50" : "border-gray-200"
+                        } cursor-pointer hover:bg-blue-50 transition-all duration-200`}
+                        onClick={() => setItemCondition("excellent")}
+                      >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
                           {itemCondition === "excellent" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
                         </div>
                         <div>
-                          <Label
-                            htmlFor="excellent"
-                            className="font-medium cursor-pointer"
-                            onClick={() => setItemCondition("excellent")}
-                          >
+                          <Label htmlFor="excellent" className="font-medium cursor-pointer">
                             Excellent
                           </Label>
                           <p className="text-sm text-gray-500">Minimal signs of use, functions perfectly</p>
                         </div>
                       </div>
 
-                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                      <div
+                        className={`flex items-start space-x-3 p-3 rounded-lg border ${
+                          itemCondition === "good" ? "border-blue-300 bg-blue-50" : "border-gray-200"
+                        } cursor-pointer hover:bg-blue-50 transition-all duration-200`}
+                        onClick={() => setItemCondition("good")}
+                      >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
                           {itemCondition === "good" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
                         </div>
                         <div>
-                          <Label
-                            htmlFor="good"
-                            className="font-medium cursor-pointer"
-                            onClick={() => setItemCondition("good")}
-                          >
+                          <Label htmlFor="good" className="font-medium cursor-pointer">
                             Good
                           </Label>
                           <p className="text-sm text-gray-500">Some signs of use, functions well</p>
                         </div>
                       </div>
 
-                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                      <div
+                        className={`flex items-start space-x-3 p-3 rounded-lg border ${
+                          itemCondition === "fair" ? "border-blue-300 bg-blue-50" : "border-gray-200"
+                        } cursor-pointer hover:bg-blue-50 transition-all duration-200`}
+                        onClick={() => setItemCondition("fair")}
+                      >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
                           {itemCondition === "fair" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
                         </div>
                         <div>
-                          <Label
-                            htmlFor="fair"
-                            className="font-medium cursor-pointer"
-                            onClick={() => setItemCondition("fair")}
-                          >
+                          <Label htmlFor="fair" className="font-medium cursor-pointer">
                             Fair
                           </Label>
                           <p className="text-sm text-gray-500">Visible wear, remains functional</p>
                         </div>
                       </div>
 
-                      <div className="flex items-start space-x-3 p-3 rounded-lg border border-gray-200">
+                      <div
+                        className={`flex items-start space-x-3 p-3 rounded-lg border ${
+                          itemCondition === "poor" ? "border-blue-300 bg-blue-50" : "border-gray-200"
+                        } cursor-pointer hover:bg-blue-50 transition-all duration-200`}
+                        onClick={() => setItemCondition("poor")}
+                      >
                         <div className="w-5 h-5 mt-1 rounded-full border border-blue-300 flex items-center justify-center">
                           {itemCondition === "poor" && <div className="w-3 h-3 rounded-full bg-[#0066ff]"></div>}
                         </div>
                         <div>
-                          <Label
-                            htmlFor="poor"
-                            className="font-medium cursor-pointer"
-                            onClick={() => setItemCondition("poor")}
-                          >
+                          <Label htmlFor="poor" className="font-medium cursor-pointer">
                             Poor
                           </Label>
                           <p className="text-sm text-gray-500">Significant wear, may require repair</p>
