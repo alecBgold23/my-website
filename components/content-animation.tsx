@@ -1,29 +1,40 @@
 "use client"
 
-import { motion } from "framer-motion"
-import type { ReactNode } from "react"
+import { useRef, useEffect } from "react"
 
-interface ContentAnimationProps {
-  children: ReactNode
-  delay?: number
-  className?: string
-}
+export default function ContentAnimation({ children, delay = 0 }) {
+  const elementRef = useRef(null)
 
-// This component will be used to wrap text content that should animate in
-export default function ContentAnimation({ children, delay = 0, className = "" }: ContentAnimationProps) {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-fade-in")
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+      },
+    )
+
+    if (elementRef.current) {
+      elementRef.current.style.transitionDelay = `${delay}s`
+      observer.observe(elementRef.current)
+    }
+
+    return () => {
+      if (elementRef.current) {
+        observer.unobserve(elementRef.current)
+      }
+    }
+  }, [delay])
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        type: "tween",
-        ease: "easeOut",
-        duration: 0.3,
-        delay: delay,
-      }}
-      className={className}
-    >
+    <div ref={elementRef} className="content-animation opacity-0">
       {children}
-    </motion.div>
+    </div>
   )
 }
